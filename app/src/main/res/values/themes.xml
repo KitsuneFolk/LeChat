@@ -1,9 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.TogetherAIChat" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+    <style name="BaseTheme" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:statusBarColor">?toolbarColor</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:navigationBarColor">?colorPrimary</item>
+        <item name="rippleColor">@android:color/white</item>
+        <item name="colorSurface">?colorPrimaryDark</item>
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="strokeColor">@android:color/darker_gray</item>
+        <item name="toolbarColor">?colorPrimary</item>
+        <item name="android:editTextColor">?android:textColor</item>
     </style>
 
-    <style name="Theme.TogetherAIChat" parent="Base.Theme.TogetherAIChat" />
+    <style name="BlueTheme" parent="BaseTheme">
+        <item name="android:colorBackground">@color/BlueTheme_colorBackground</item>
+        <item name="colorPrimary">@color/BlueTheme_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/BlueTheme_colorPrimaryDark</item>
+        <item name="colorAccent">@color/BlueTheme_colorAccent</item>
+        <item name="android:textColorSecondary">@color/BlueTheme_textColorSecondary</item>
+    </style>
+
+    <style name="DarkTheme" parent="BaseTheme">
+        <item name="android:colorBackground">@color/DarkTheme_colorBackground</item>
+        <item name="colorPrimary">@color/DarkTheme_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/DarkTheme_colorPrimaryDark</item>
+        <item name="colorAccent">@color/DarkTheme_colorAccent</item>
+        <item name="android:textColorSecondary">@color/DarkTheme_textColorSecondary</item>
+    </style>
+
+    <style name="PurpleTheme" parent="BaseTheme">
+        <item name="android:colorBackground">@color/PurpleTheme_colorBackground</item>
+        <item name="colorPrimary">@color/PurpleTheme_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/PurpleTheme_colorPrimaryDark</item>
+        <item name="colorAccent">@color/PurpleTheme_colorAccent</item>
+        <item name="android:textColorSecondary">@color/PurpleTheme_textColorSecondary</item>
+    </style>
+
 </resources>
