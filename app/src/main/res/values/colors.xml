@@ -20,4 +20,7 @@
     <color name="PurpleTheme_colorBackground">#9966CC</color>
     <color name="PurpleTheme_colorAccent">#8C9EFF</color>
     <color name="PurpleTheme_textColorSecondary">#EFB3FF</color>
+
+    <!--  Other  -->
+    <color name="ic_launcher_background">#3F48CC</color>
 </resources>
