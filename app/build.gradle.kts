@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.pandacorp.togetheraichat"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.pandacorp.togetheraichat"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
     }
