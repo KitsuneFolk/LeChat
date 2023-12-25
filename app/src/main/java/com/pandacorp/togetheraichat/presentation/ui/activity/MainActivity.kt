@@ -1,8 +1,9 @@
-package com.pandacorp.togetheraichat
+package com.pandacorp.togetheraichat.presentation.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.pandacorp.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
