@@ -8,4 +8,7 @@
     <string name="theme">Theme</string>
     <string name="another">Another</string>
     <string name="version">Version %1$s</string>
+
+    <string name="settings_theme_summary">Blue</string>
+    <string name="settings_language_default_value">en</string>
 </resources>

@@ -3,8 +3,8 @@ package com.pandacorp.togetheraichat.presentation.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.pandacorp.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.ActivityMainBinding
+import com.pandacorp.togetheraichat.presentation.utils.PreferenceHandler
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
@@ -12,8 +12,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
+        PreferenceHandler.setLanguage(this)
+        PreferenceHandler.setTheme(this)
         super.onCreate(savedInstanceState)
-        setTheme(R.style.BlueTheme)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }

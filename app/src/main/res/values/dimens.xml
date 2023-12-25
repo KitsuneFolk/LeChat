@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="dialog_minHeight">350dp</dimen>
+    <dimen name="dialog_minWidth">300dp</dimen>
+
     <dimen name="stroke">1dp</dimen>
 </resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Settings  -->
+    <string name="settings">Налаштування</string>
+    <string name="appearance">Зовнiшний вигляд</string>
+    <string name="language">Мова</string>
+    <string name="theme">Тема</string>
+    <string name="another">Iнше</string>
+    <string name="version">Версія %1$s</string>
+
+    <string name="settings_theme_summary">Синя</string>
+    <string name="settings_language_default_value">uk</string>
+</resources>
