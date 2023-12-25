@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/nav_main_screen">
+
+    <swipeable
+        android:id="@+id/nav_main_screen"
+        android:name="com.pandacorp.togetheraichat.presentation.ui.screen.MainScreen"
+        tools:layout="@layout/screen_main" />
+
+    <swipeable
+        android:id="@+id/nav_settings_screen"
+        android:name="com.pandacorp.togetheraichat.presentation.ui.screen.SettingsScreen"
+        tools:layout="@layout/screen_settings" />
+
+</navigation>

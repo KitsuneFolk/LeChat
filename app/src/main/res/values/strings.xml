@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">TogetherAIChat</string>
+    <string name="app_name" translatable="false">TogetherAIChat</string>
+    <string name="settings">Settings</string>
 </resources>
