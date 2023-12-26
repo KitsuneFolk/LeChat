@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">TogetherAIChat</string>
+    <!-- MainScreen -->
+    <string name="message">Message…</string>
 
     <!--  Settings  -->
     <string name="settings">Settings</string>

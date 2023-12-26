@@ -8,12 +8,23 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.ScreenMainBinding
+import com.pandacorp.togetheraichat.domain.model.MessageItem
+import com.pandacorp.togetheraichat.presentation.ui.adapter.messages.MessagesAdapter
 
 class MainScreen : Fragment() {
     private var _binding: ScreenMainBinding? = null
     private val binding get() = _binding!!
 
     private val navController by lazy { findNavController() }
+
+    private val messagesAdapter by lazy {
+        MessagesAdapter().apply {
+            val listOfMessages = List(10) {
+                MessageItem(id = it.toLong(), message = "Example Test Message", role = MessageItem.USER)
+            }
+            submitList(listOfMessages)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = ScreenMainBinding.inflate(inflater)
@@ -39,5 +50,6 @@ class MainScreen : Fragment() {
             }
             true
         }
+        binding.recyclerView.adapter = messagesAdapter
     }
 }

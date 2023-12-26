@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- MainScreen -->
+    <string name="message">Сообщение…</string>
+
     <!--  Settings  -->
     <string name="settings">Настройки</string>
     <string name="appearance">Внешний вид</string>
