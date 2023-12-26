@@ -23,4 +23,5 @@
 
     <!--  Other  -->
     <color name="ic_launcher_background">#3F48CC</color>
+    <color name="light_gray">#BABABA</color>
 </resources>

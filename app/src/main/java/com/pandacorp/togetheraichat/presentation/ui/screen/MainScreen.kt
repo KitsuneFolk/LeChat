@@ -19,7 +19,7 @@ class MainScreen : Fragment() {
 
     private val messagesAdapter by lazy {
         MessagesAdapter().apply {
-            val listOfMessages = List(10) {
+            val listOfMessages = List(1) {
                 MessageItem(id = it.toLong(), message = "Example Test Message", role = MessageItem.USER)
             }
             submitList(listOfMessages)
@@ -51,5 +51,14 @@ class MainScreen : Fragment() {
             true
         }
         binding.recyclerView.adapter = messagesAdapter
+        binding.sendButton.setOnClickListener {
+            val message = binding.editText.text.toString()
+            if (message.isNotBlank()) {
+                val list = messagesAdapter.currentList.toMutableList()
+                list.add(MessageItem(message = message, role = MessageItem.USER))
+                messagesAdapter.submitList(list)
+                binding.editText.setText("")
+            }
+        }
     }
 }
