@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.ScreenMainBinding
 import com.pandacorp.togetheraichat.domain.model.MessageItem
 import com.pandacorp.togetheraichat.presentation.ui.adapter.messages.MessagesAdapter
+import com.pandacorp.togetheraichat.presentation.vm.MessagesViewModel
 
 class MainScreen : Fragment() {
     private var _binding: ScreenMainBinding? = null
@@ -17,14 +19,9 @@ class MainScreen : Fragment() {
 
     private val navController by lazy { findNavController() }
 
-    private val messagesAdapter by lazy {
-        MessagesAdapter().apply {
-            val listOfMessages = List(1) {
-                MessageItem(id = it.toLong(), message = "Example Test Message", role = MessageItem.USER)
-            }
-            submitList(listOfMessages)
-        }
-    }
+    private val viewModel: MessagesViewModel by viewModels()
+
+    private val messagesAdapter = MessagesAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = ScreenMainBinding.inflate(inflater)
@@ -54,11 +51,13 @@ class MainScreen : Fragment() {
         binding.sendButton.setOnClickListener {
             val message = binding.editText.text.toString().trim()
             if (message.isNotBlank()) {
-                val list = messagesAdapter.currentList.toMutableList()
-                list.add(MessageItem(message = message, role = MessageItem.USER))
-                messagesAdapter.submitList(list)
+                viewModel.addMessage(MessageItem(message = message, role = MessageItem.USER))
                 binding.editText.setText("")
             }
+        }
+
+        viewModel.messagesList.observe(viewLifecycleOwner) {
+            messagesAdapter.submitList(it)
         }
     }
 }
