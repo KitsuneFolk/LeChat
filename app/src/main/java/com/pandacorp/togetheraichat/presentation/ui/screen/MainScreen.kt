@@ -52,7 +52,7 @@ class MainScreen : Fragment() {
         }
         binding.recyclerView.adapter = messagesAdapter
         binding.sendButton.setOnClickListener {
-            val message = binding.editText.text.toString()
+            val message = binding.editText.text.toString().trim()
             if (message.isNotBlank()) {
                 val list = messagesAdapter.currentList.toMutableList()
                 list.add(MessageItem(message = message, role = MessageItem.USER))
