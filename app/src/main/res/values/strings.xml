@@ -8,6 +8,8 @@
     <string name="appearance">Appearance</string>
     <string name="language">Language</string>
     <string name="theme">Theme</string>
+    <string name="api" translatable="false">API</string>
+    <string name="togetherAPIKey">TogetherAI API Key</string>
     <string name="another">Another</string>
     <string name="version">Version %1$s</string>
 

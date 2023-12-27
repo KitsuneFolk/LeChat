@@ -5,6 +5,7 @@ class Constants {
         object Key {
             const val LANGUAGE = "Languages"
             const val THEME = "Themes"
+            const val API = "TogetherAPIKey"
         }
     }
 

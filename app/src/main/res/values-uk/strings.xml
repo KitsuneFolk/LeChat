@@ -8,6 +8,7 @@
     <string name="appearance">Зовнiшний вигляд</string>
     <string name="language">Мова</string>
     <string name="theme">Тема</string>
+    <string name="togetherAPIKey">TogetherAI API Ключ</string>
     <string name="another">Iнше</string>
     <string name="version">Версія %1$s</string>
 

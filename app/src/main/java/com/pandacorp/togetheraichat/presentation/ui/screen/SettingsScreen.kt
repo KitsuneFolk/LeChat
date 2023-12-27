@@ -108,6 +108,11 @@ class SettingsScreen : Fragment() {
             }
         }
 
+        binding.apiEditText.setText(sp.getString(Constants.Preferences.Key.API, ""))
+        binding.saveApiKeyButton.setOnClickListener {
+            sp.edit().putString(Constants.Preferences.Key.API, binding.apiEditText.text.toString()).apply()
+        }
+
         // Retrieve the version from build.gradle and assign it to the TextView
         binding.versionTextView.apply {
             val version =
