@@ -1,17 +1,22 @@
 package com.pandacorp.togetheraichat.presentation.ui.screen
 
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.ScreenMainBinding
 import com.pandacorp.togetheraichat.domain.model.MessageItem
 import com.pandacorp.togetheraichat.presentation.ui.adapter.messages.MessagesAdapter
+import com.pandacorp.togetheraichat.presentation.utils.Constants
 import com.pandacorp.togetheraichat.presentation.vm.MessagesViewModel
+import com.pandacorp.togetheraichat.presentation.vm.ViewModelFactory
 
 class MainScreen : Fragment() {
     private var _binding: ScreenMainBinding? = null
@@ -19,7 +24,10 @@ class MainScreen : Fragment() {
 
     private val navController by lazy { findNavController() }
 
-    private val viewModel: MessagesViewModel by viewModels()
+    private val viewModel: MessagesViewModel by viewModels {
+        val sp: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        ViewModelFactory(sp.getString(Constants.Preferences.Key.API, "") ?: "")
+    }
 
     private val messagesAdapter = MessagesAdapter()
 
@@ -53,6 +61,9 @@ class MainScreen : Fragment() {
             if (message.isNotBlank()) {
                 viewModel.addMessage(MessageItem(message = message, role = MessageItem.USER))
                 binding.editText.setText("")
+            }
+            viewModel.getResponse {
+                Log.d("TAG", it ?: "Null token")
             }
         }
 
