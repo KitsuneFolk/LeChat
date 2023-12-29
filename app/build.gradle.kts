@@ -45,4 +45,7 @@ dependencies {
     // Custom
     implementation("com.github.MrRuslanYT:SplashScreen:1.0.1")
     implementation("com.fragula2:fragula-core:2.10.1")
+    // Fork of github.com/aallam/openai-kotlin with fixed a few properties not being null by default
+    implementation("com.github.MrRuslanYT.openai-kotlin:openai-client:db57b563b4")
+    implementation("io.ktor:ktor-client-okhttp:2.3.7")
 }
