@@ -2,8 +2,6 @@ package com.pandacorp.togetheraichat.presentation.utils
 
 import android.content.Context
 import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
 import androidx.preference.PreferenceManager
 import com.pandacorp.togetheraichat.R
 
@@ -18,18 +16,6 @@ object PreferenceHandler {
 
     private fun isDeviceDarkMode(context: Context): Boolean =
         (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
-
-    fun setLanguage(
-        context: Context,
-        language: String =
-            PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(
-                    Constants.Preferences.Key.LANGUAGE,
-                    context.resources.getString(R.string.settings_language_default_value)
-                )!!,
-    ) {
-        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(language))
-    }
 
     fun setTheme(context: Context, theme: Int = getThemeRes(context)) {
         context.setTheme(theme)

@@ -7,16 +7,13 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.pandacorp.togetheraichat.R
-import com.pandacorp.togetheraichat.presentation.utils.Constants
 
 class SettingsAdapter(
     context: Context,
-    languagesList: MutableList<SettingsItem>,
-    private val preferenceKey: String
-) : ArrayAdapter<SettingsItem>(context, 0, languagesList) {
+    items: MutableList<SettingsItem>
+) : ArrayAdapter<SettingsItem>(context, 0, items) {
     private var onListItemClickListener: OnListItemClickListener? = null
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -34,9 +31,6 @@ class SettingsAdapter(
             }
             findViewById<TextView>(R.id.ListItemTextView).apply {
                 text = listItem.title
-            }
-            findViewById<CardView>(R.id.ListItemCardView).apply {
-                if (preferenceKey == Constants.Preferences.Key.LANGUAGE) radius = 0f
             }
         }
         return view

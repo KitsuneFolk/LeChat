@@ -23,22 +23,4 @@
         <item>@color/PurpleTheme_colorBackground</item>
     </string-array>
 
-    <string-array name="Languages" translatable="false">
-        <item>English</item>
-        <item>Русский</item>
-        <item>Українська</item>
-    </string-array>
-
-    <string-array name="Languages_values" translatable="false">
-        <item>en</item>
-        <item>ru</item>
-        <item>uk</item>
-    </string-array>
-
-    <string-array name="Languages_drawables" translatable="false">
-        <item>@drawable/flag_uk</item>
-        <item>@drawable/flag_russia</item>
-        <item>@drawable/flag_ukraine</item>
-    </string-array>
-
 </resources>

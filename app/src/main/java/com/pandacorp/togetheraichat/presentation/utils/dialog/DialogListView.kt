@@ -8,7 +8,7 @@ import com.pandacorp.togetheraichat.presentation.ui.adapter.settings.SettingsAda
 import com.pandacorp.togetheraichat.presentation.ui.adapter.settings.SettingsItem
 import com.pandacorp.togetheraichat.presentation.utils.Constants
 
-class DialogListView(private val context: Context, private val preferenceKey: String) : CustomDialog(context) {
+class DialogListView(private val context: Context) : CustomDialog(context) {
     private lateinit var binding: DialogListViewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,25 +22,14 @@ class DialogListView(private val context: Context, private val preferenceKey: St
     }
 
     private fun initViews() {
-        binding.title.setText(
-            when (preferenceKey) {
-                Constants.Preferences.Key.THEME -> R.string.theme
-                Constants.Preferences.Key.LANGUAGE -> R.string.language
-                else -> throw IllegalArgumentException("PreferenceKey = $preferenceKey")
-            }
-        )
+        binding.title.setText(R.string.theme)
 
-        val itemsList: MutableList<SettingsItem> = when (preferenceKey) {
-            Constants.Preferences.Key.THEME -> fillThemesList()
-            Constants.Preferences.Key.LANGUAGE -> fillLanguagesList()
-            else -> throw IllegalArgumentException()
-        }
-        binding.listView.adapter = SettingsAdapter(context, itemsList, preferenceKey).apply {
+        binding.listView.adapter = SettingsAdapter(context, fillThemesList()).apply {
             setOnClickListener { listItem ->
                 cancel()
                 val value = listItem.value
-                if (sp.getString(preferenceKey, "") == value) return@setOnClickListener
-                sp.edit().putString(preferenceKey, value).apply()
+                if (sp.getString(Constants.Preferences.Key.THEME, "") == value) return@setOnClickListener
+                sp.edit().putString(Constants.Preferences.Key.THEME, value).apply()
                 onValueAppliedListener(value)
             }
         }
@@ -62,23 +51,5 @@ class DialogListView(private val context: Context, private val preferenceKey: St
         }
         drawablesList.recycle()
         return themesList
-    }
-
-    private fun fillLanguagesList(): MutableList<SettingsItem> {
-        val valuesList = context.resources.getStringArray(R.array.Languages_values)
-        val drawablesList = context.resources.obtainTypedArray(R.array.Languages_drawables)
-        val titlesList = context.resources.getStringArray(R.array.Languages)
-        val languagesList: MutableList<SettingsItem> = mutableListOf()
-        repeat(valuesList.size) { i ->
-            languagesList.add(
-                SettingsItem(
-                    valuesList[i],
-                    titlesList[i],
-                    drawablesList.getDrawable(i)!!
-                )
-            )
-        }
-        drawablesList.recycle()
-        return languagesList
     }
 }
