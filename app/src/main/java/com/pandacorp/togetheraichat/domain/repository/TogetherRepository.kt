@@ -4,5 +4,5 @@ import com.aallam.openai.api.chat.ChatCompletionChunk
 import kotlinx.coroutines.flow.Flow
 
 interface TogetherRepository {
-    fun getResponse(): Flow<ChatCompletionChunk>
+    fun getResponse(message: String): Flow<ChatCompletionChunk>
 }

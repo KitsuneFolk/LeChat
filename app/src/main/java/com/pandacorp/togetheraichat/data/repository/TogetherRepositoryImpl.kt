@@ -12,7 +12,7 @@ import com.pandacorp.togetheraichat.domain.repository.TogetherRepository
 import kotlinx.coroutines.flow.Flow
 
 class TogetherRepositoryImpl(private val apiKey: String) : TogetherRepository {
-    override fun getResponse(): Flow<ChatCompletionChunk> {
+    override fun getResponse(message: String): Flow<ChatCompletionChunk> {
         val host = OpenAIHost(
             baseUrl = "https://api.together.xyz",
         )
@@ -31,7 +31,7 @@ class TogetherRepositoryImpl(private val apiKey: String) : TogetherRepository {
                 ),
                 ChatMessage(
                     role = ChatRole.User,
-                    content = "Hello!"
+                    content = message
                 )
             )
         )

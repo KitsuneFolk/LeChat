@@ -2,7 +2,6 @@ package com.pandacorp.togetheraichat.presentation.ui.screen
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,9 +60,14 @@ class MainScreen : Fragment() {
             if (message.isNotBlank()) {
                 viewModel.addMessage(MessageItem(message = message, role = MessageItem.USER))
                 binding.editText.setText("")
-            }
-            viewModel.getResponse {
-                Log.d("TAG", it ?: "Null token")
+                val response = MessageItem(message = "", role = MessageItem.AI)
+                viewModel.addMessage(response)
+                val copiedResponse = response.copy()
+                viewModel.getResponse {
+                    copiedResponse.message += it
+                    viewModel.replaceAt(response.id.toInt(), copiedResponse)
+                    messagesAdapter.notifyItemChanged(response.id.toInt())
+                }
             }
         }
 
