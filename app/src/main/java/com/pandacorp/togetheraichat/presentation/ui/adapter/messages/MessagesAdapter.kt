@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.ItemMessageBinding
 import com.pandacorp.togetheraichat.domain.model.MessageItem
 
@@ -19,11 +20,17 @@ class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(Dif
     inner class ViewHolder(private val binding: ItemMessageBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MessageItem) {
-            binding.textView.text = item.message
+            val resources = binding.root.context.resources
             when (item.role) {
-                MessageItem.USER -> {}
-                MessageItem.AI -> {}
+                MessageItem.AI -> {
+                    binding.roleTextView.text = resources.getText(R.string.AI)
+                }
+
+                MessageItem.USER -> {
+                    binding.roleTextView.text = resources.getText(R.string.you)
+                }
             }
+            binding.messageTextView.text = item.message
         }
     }
 
