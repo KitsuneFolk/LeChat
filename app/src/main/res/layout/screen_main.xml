@@ -27,43 +27,36 @@
         app:layout_constraintTop_toBottomOf="@id/toolbarInclude"
         tools:listitem="@layout/item_message" />
 
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/message_input_bg"
         android:orientation="horizontal"
-        app:boxBackgroundColor="?colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:hint="@string/message"
+            android:imeOptions="actionDone"
+            android:textColorHint="@color/light_gray" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/message"
-                android:imeOptions="actionDone"
-                android:textColorHint="@color/light_gray" />
+        <ImageButton
+            android:id="@+id/sendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/send"
+            android:src="@drawable/ic_send" />
 
-            <ImageButton
-                android:id="@+id/sendButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:backgroundTint="@android:color/transparent"
-                android:contentDescription="@string/send"
-                android:src="@drawable/ic_send" />
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 </LinearLayout>
