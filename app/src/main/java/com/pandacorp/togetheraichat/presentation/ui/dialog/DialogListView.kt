@@ -1,4 +1,4 @@
-package com.pandacorp.togetheraichat.presentation.utils.dialog
+package com.pandacorp.togetheraichat.presentation.ui.dialog
 
 import android.content.Context
 import android.os.Bundle
@@ -6,7 +6,7 @@ import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.DialogListViewBinding
 import com.pandacorp.togetheraichat.presentation.ui.adapter.settings.SettingsAdapter
 import com.pandacorp.togetheraichat.presentation.ui.adapter.settings.SettingsItem
-import com.pandacorp.togetheraichat.presentation.utils.Constants
+import com.pandacorp.togetheraichat.utils.Constants
 
 class DialogListView(private val context: Context) : CustomDialog(context) {
     private lateinit var binding: DialogListViewBinding

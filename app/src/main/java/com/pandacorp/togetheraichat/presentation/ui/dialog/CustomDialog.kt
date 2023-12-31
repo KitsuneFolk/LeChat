@@ -1,4 +1,4 @@
-package com.pandacorp.togetheraichat.presentation.utils.dialog
+package com.pandacorp.togetheraichat.presentation.ui.dialog
 
 import android.app.Dialog
 import android.content.Context

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.pandacorp.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.pandacorp.togetheraichat.databinding.ActivityMainBinding
-import com.pandacorp.togetheraichat.presentation.utils.PreferenceHandler
+import com.pandacorp.togetheraichat.utils.PreferenceHandler
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null

@@ -1,4 +1,4 @@
-package com.pandacorp.togetheraichat.presentation.utils
+package com.pandacorp.togetheraichat.utils
 
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager

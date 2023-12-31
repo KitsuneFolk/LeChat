@@ -9,7 +9,7 @@ import com.aallam.openai.client.OpenAI
 import com.aallam.openai.client.OpenAIConfig
 import com.aallam.openai.client.OpenAIHost
 import com.pandacorp.togetheraichat.domain.repository.TogetherRepository
-import com.pandacorp.togetheraichat.presentation.utils.Constants
+import com.pandacorp.togetheraichat.utils.Constants
 import kotlinx.coroutines.flow.Flow
 
 class TogetherRepositoryImpl : TogetherRepository {

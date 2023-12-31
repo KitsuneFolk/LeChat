@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.ScreenSettingsBinding
-import com.pandacorp.togetheraichat.presentation.utils.Constants
-import com.pandacorp.togetheraichat.presentation.utils.dialog.DialogListView
-import com.pandacorp.togetheraichat.presentation.utils.getPackageInfoCompat
+import com.pandacorp.togetheraichat.utils.Constants
+import com.pandacorp.togetheraichat.presentation.ui.dialog.DialogListView
+import com.pandacorp.togetheraichat.utils.getPackageInfoCompat
 
 class SettingsScreen : Fragment() {
     private var _binding: ScreenSettingsBinding? = null
