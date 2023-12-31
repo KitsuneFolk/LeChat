@@ -1,21 +1,17 @@
 package com.pandacorp.togetheraichat.presentation.ui.screen
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.preference.PreferenceManager
 import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.ScreenMainBinding
 import com.pandacorp.togetheraichat.domain.model.MessageItem
 import com.pandacorp.togetheraichat.presentation.ui.adapter.messages.MessagesAdapter
-import com.pandacorp.togetheraichat.presentation.utils.Constants
 import com.pandacorp.togetheraichat.presentation.vm.MessagesViewModel
-import com.pandacorp.togetheraichat.presentation.vm.ViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainScreen : Fragment() {
     private var _binding: ScreenMainBinding? = null
@@ -23,10 +19,7 @@ class MainScreen : Fragment() {
 
     private val navController by lazy { findNavController() }
 
-    private val viewModel: MessagesViewModel by viewModels {
-        val sp: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        ViewModelFactory(sp.getString(Constants.Preferences.Key.API, "") ?: "")
-    }
+    private val vm: MessagesViewModel by viewModel()
 
     private val messagesAdapter = MessagesAdapter()
 
@@ -58,20 +51,20 @@ class MainScreen : Fragment() {
         binding.sendButton.setOnClickListener {
             val message = binding.editText.text.toString().trim()
             if (message.isNotBlank()) {
-                viewModel.addMessage(MessageItem(message = message, role = MessageItem.USER))
+                vm.addMessage(MessageItem(message = message, role = MessageItem.USER))
                 binding.editText.setText("")
                 val response = MessageItem(message = "", role = MessageItem.AI)
-                viewModel.addMessage(response)
+                vm.addMessage(response)
                 val copiedResponse = response.copy()
-                viewModel.getResponse {
+                vm.getResponse {
                     copiedResponse.message += it
-                    viewModel.replaceAt(response.id.toInt(), copiedResponse)
+                    vm.replaceAt(response.id.toInt(), copiedResponse)
                     messagesAdapter.notifyItemChanged(response.id.toInt())
                 }
             }
         }
 
-        viewModel.messagesList.observe(viewLifecycleOwner) {
+        vm.messagesList.observe(viewLifecycleOwner) {
             messagesAdapter.submitList(it)
         }
     }

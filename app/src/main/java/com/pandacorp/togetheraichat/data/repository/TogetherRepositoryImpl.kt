@@ -9,16 +9,17 @@ import com.aallam.openai.client.OpenAI
 import com.aallam.openai.client.OpenAIConfig
 import com.aallam.openai.client.OpenAIHost
 import com.pandacorp.togetheraichat.domain.repository.TogetherRepository
+import com.pandacorp.togetheraichat.presentation.utils.Constants
 import kotlinx.coroutines.flow.Flow
 
-class TogetherRepositoryImpl(private val apiKey: String) : TogetherRepository {
+class TogetherRepositoryImpl : TogetherRepository {
     override fun getResponse(message: String): Flow<ChatCompletionChunk> {
         val host = OpenAIHost(
             baseUrl = "https://api.together.xyz",
         )
         val config = OpenAIConfig(
             host = host,
-            token = apiKey,
+            token = Constants.apiKey.value!!,
         )
         val openAI = OpenAI(config)
 

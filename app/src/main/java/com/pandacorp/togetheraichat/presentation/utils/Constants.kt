@@ -1,6 +1,10 @@
 package com.pandacorp.togetheraichat.presentation.utils
 
-class Constants {
+import androidx.lifecycle.MutableLiveData
+import androidx.preference.PreferenceManager
+import com.pandacorp.togetheraichat.di.app.App
+
+object Constants {
     object Preferences {
         object Key {
             const val THEME = "Themes"
@@ -11,4 +15,8 @@ class Constants {
     object Dialogs {
         const val KEY = "DialogKey"
     }
+
+    val apiKey = MutableLiveData<String>(
+        PreferenceManager.getDefaultSharedPreferences(App.instance).getString(Preferences.Key.API, "")
+    )
 }

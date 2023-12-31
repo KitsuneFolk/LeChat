@@ -48,4 +48,7 @@ dependencies {
     // Fork of github.com/aallam/openai-kotlin with fixed a few properties not being null by default
     implementation("com.github.MrRuslanYT.openai-kotlin:openai-client:db57b563b4")
     implementation("io.ktor:ktor-client-okhttp:2.3.7")
+
+    // Koin
+    implementation("io.insert-koin:koin-android:3.5.3")
 }
