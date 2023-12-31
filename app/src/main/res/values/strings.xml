@@ -4,6 +4,7 @@
     <string name="AI" translatable="false">AI</string>
     <string name="you" translatable="false">You</string>
     <string name="message">Message…</string>
+    <string name="send">Send</string>
 
     <!--  Settings  -->
     <string name="settings">Settings</string>
