@@ -8,6 +8,8 @@ import com.aallam.openai.api.model.ModelId
 import com.aallam.openai.client.OpenAI
 import com.aallam.openai.client.OpenAIConfig
 import com.aallam.openai.client.OpenAIHost
+import com.aallam.openai.client.RetryStrategy
+import com.pandacorp.togetheraichat.client
 import com.pandacorp.togetheraichat.domain.repository.TogetherRepository
 import com.pandacorp.togetheraichat.utils.Constants
 import kotlinx.coroutines.flow.Flow
@@ -20,6 +22,8 @@ class TogetherRepositoryImpl : TogetherRepository {
         val config = OpenAIConfig(
             host = host,
             token = Constants.apiKey.value!!,
+            retry = RetryStrategy(maxRetries = 0),
+            engine = client.engine
         )
         val openAI = OpenAI(config)
 

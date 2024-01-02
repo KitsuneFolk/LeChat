@@ -31,6 +31,9 @@
         <item name="fgl_elevation">0dp</item>
 
         <item name="toolbarStyle">@style/ToolbarStyle</item>
+        <item name="snackbarStyle">@style/SnackBarStyle</item>
+        <item name="snackbarTextViewStyle">@style/SnackBarTextViewStyle</item>
+        <item name="snackbarButtonStyle">@style/SnackBarButtonStyle</item>
     </style>
 
     <style name="BlueTheme" parent="BaseTheme">

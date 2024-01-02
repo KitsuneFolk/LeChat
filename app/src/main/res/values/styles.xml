@@ -6,4 +6,19 @@
         <item name="android:background">?toolbarColor</item>
     </style>
 
+    <style name="SnackBarStyle" parent="ThemeOverlay.Material3.Snackbar">
+        <item name="backgroundTint">?colorPrimary</item>
+    </style>
+
+    <style name="SnackBarTextViewStyle" parent="Widget.Material3.Snackbar.TextView">
+        <item name="android:textColor">?android:textColor</item>
+    </style>
+
+    <style name="SnackBarButtonStyle" parent="Widget.Material3.Button.TextButton.Snackbar">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:textColor">?android:textColor</item>
+        <item name="strokeColor">?android:textColor</item>
+        <item name="strokeWidth">@dimen/stroke</item>
+    </style>
+
 </resources>

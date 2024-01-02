@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.ScreenMainBinding
 import com.pandacorp.togetheraichat.domain.model.MessageItem
 import com.pandacorp.togetheraichat.presentation.ui.adapter.messages.MessagesAdapter
 import com.pandacorp.togetheraichat.presentation.vm.MessagesViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainScreen : Fragment() {
@@ -66,6 +69,28 @@ class MainScreen : Fragment() {
 
         vm.messagesList.observe(viewLifecycleOwner) {
             messagesAdapter.submitList(it)
+        }
+        lifecycleScope.launch {
+            vm.errorCode.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    val errorMessage = when (it) {
+                        500 -> "Internal Server Error"
+                        429 -> "Credit limit exceeded. Please visit https://api.together.xyz to update your credit settings."
+                        401 -> "Missing API key"
+                        else -> "Error code $it"
+                    }
+                    Snackbar.make(
+                        binding.messageInputLayout,
+                        "Error: $errorMessage",
+                        Snackbar.LENGTH_LONG
+                    )
+                        .apply {
+                            animationMode = Snackbar.ANIMATION_MODE_SLIDE
+                            show()
+                        }
+                    vm.errorCode.value = null
+                }
+            }
         }
     }
 }
