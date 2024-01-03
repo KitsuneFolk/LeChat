@@ -11,7 +11,11 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class MessagesViewModel(private val repository: TogetherRepository) : ViewModel() {
-    val messagesList: MutableLiveData<MutableList<MessageItem>> = MutableLiveData(mutableListOf())
+    val messagesList: MutableLiveData<MutableList<MessageItem>> = MutableLiveData(
+        mutableListOf(
+            MessageItem(id = 0, role = MessageItem.SYSTEM, message = "You are a helpful assistant!"),
+        )
+    )
     val errorCode = MutableLiveData<Int?>(null)
 
     fun addMessage(messageItem: MessageItem): Int {
@@ -21,12 +25,22 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
         return messageItem.id.toInt()
     }
 
-    fun getResponse(onTokenReceived: (String?) -> Unit) {
-        val lastUserMessage = messagesList.value?.last { it.role == MessageItem.USER }!!
+    fun getResponse() {
         viewModelScope.launch {
             try {
-                repository.getResponse(lastUserMessage.message)
-                    .onEach { onTokenReceived(it.choices[0].delta.content) }
+                var isFirstTime = true
+                repository.getResponse(messagesList.value!!)
+                    .onEach {
+                        val token = it.choices[0].delta.content
+                        if (isFirstTime) {
+                            val response = MessageItem(message = "", role = MessageItem.AI)
+                            addMessage(response)
+                            isFirstTime = false
+                        }
+                        val response = messagesList.value!!.last().copy()
+                        response.message += token
+                        replaceAt(response.id.toInt(), response)
+                    }
                     .collect()
             } catch (e: TogetherAIException) {
                 val error = e.cause?.toString() ?: "\"Text: Unknown error\""
@@ -39,7 +53,7 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
         }
     }
 
-    fun replaceAt(position: Int, replacement: MessageItem) {
+    private fun replaceAt(position: Int, replacement: MessageItem) {
         messagesList.value!![position] = replacement
         messagesList.postValue(messagesList.value)
     }

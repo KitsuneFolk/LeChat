@@ -11,7 +11,7 @@ import org.koin.dsl.module
 val koinModule = module {
     singleOf(::MessagesMapper)
     single<TogetherRepository> {
-        TogetherRepositoryImpl()
+        TogetherRepositoryImpl(get())
     }
     viewModelOf(::MessagesViewModel)
 }

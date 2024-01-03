@@ -2,8 +2,8 @@ package com.pandacorp.togetheraichat.domain.model
 
 data class MessageItem(
     var id: Long = 0,
-    var message: String,
-    var role: Int
+    var role: Int,
+    var message: String
 ) {
     companion object Role {
         const val SYSTEM = 0

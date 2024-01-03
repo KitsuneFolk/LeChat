@@ -55,15 +55,8 @@ class MainScreen : Fragment() {
             val message = binding.editText.text.toString().trim()
             if (message.isNotBlank()) {
                 vm.addMessage(MessageItem(message = message, role = MessageItem.USER))
+                vm.getResponse()
                 binding.editText.setText("")
-                val response = MessageItem(message = "", role = MessageItem.AI)
-                vm.addMessage(response)
-                val copiedResponse = response.copy()
-                vm.getResponse {
-                    copiedResponse.message += it
-                    vm.replaceAt(response.id.toInt(), copiedResponse)
-                    messagesAdapter.notifyItemChanged(response.id.toInt())
-                }
             }
         }
 
