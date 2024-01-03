@@ -6,7 +6,8 @@ data class MessageItem(
     var role: Int
 ) {
     companion object Role {
-        const val USER = 0
-        const val AI = 1
+        const val SYSTEM = 0
+        const val USER = 1
+        const val AI = 2
     }
 }
