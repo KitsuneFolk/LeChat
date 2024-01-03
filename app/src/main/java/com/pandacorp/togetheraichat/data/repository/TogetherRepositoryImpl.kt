@@ -28,6 +28,7 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
         val mappedMessages = messagesMapper.toChatMessages(messages)
         val chatCompletionRequest = ChatCompletionRequest(
             model = ModelId("mistralai/Mixtral-8x7B-Instruct-v0.1"),
+            temperature = 0.7,
             messages = mappedMessages
         )
         return openAI.chatCompletions(chatCompletionRequest)
