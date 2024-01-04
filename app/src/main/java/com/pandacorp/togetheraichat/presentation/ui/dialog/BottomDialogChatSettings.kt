@@ -33,7 +33,7 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
             // Set the background color to colorPrimary
             val tv = TypedValue()
-            context.theme.resolveAttribute(android.R.attr.colorPrimary, tv, true)
+            context.theme.resolveAttribute(android.R.attr.colorPrimaryDark, tv, true)
             view.backgroundTintList = ColorStateList.valueOf(tv.data)
         }
     }
