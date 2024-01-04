@@ -21,6 +21,19 @@ object PreferenceHandler {
         context.setTheme(theme)
     }
 
+    fun setTemperature(context: Context, temperature: Double) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+            .edit()
+            .putString(Constants.Preferences.Key.TEMPERATURE, temperature.toString())
+            .apply()
+    }
+
+    fun getTemperature(context: Context): Double {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+            .getString(Constants.Preferences.Key.TEMPERATURE, context.getString(R.string.defaultTemperature))!!
+            .toDouble()
+    }
+
     private fun getThemeKey(context: Context): String {
         return PreferenceManager.getDefaultSharedPreferences(context)
             .getString(Constants.Preferences.Key.THEME, Theme.DEFAULT)!!

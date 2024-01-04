@@ -4,8 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aallam.openai.api.exception.TogetherAIException
+import com.pandacorp.togetheraichat.di.app.App
 import com.pandacorp.togetheraichat.domain.model.MessageItem
 import com.pandacorp.togetheraichat.domain.repository.TogetherRepository
+import com.pandacorp.togetheraichat.utils.PreferenceHandler
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -27,7 +29,7 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
         viewModelScope.launch {
             try {
                 var isFirstTime = true
-                repository.getResponse(messagesList.value!!)
+                repository.getResponse(messagesList.value!!, PreferenceHandler.getTemperature(App.instance))
                     .onEach {
                         val token = it.choices[0].delta.content
                         if (isFirstTime) {

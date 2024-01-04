@@ -9,6 +9,7 @@ object Constants {
         object Key {
             const val THEME = "Themes"
             const val API = "TogetherAPIKey"
+            const val TEMPERATURE = "Temperature"
         }
     }
 

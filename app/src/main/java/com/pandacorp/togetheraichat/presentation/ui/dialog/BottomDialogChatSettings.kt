@@ -8,6 +8,7 @@ import android.view.View
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.pandacorp.togetheraichat.databinding.DialogChatSettingsBinding
+import com.pandacorp.togetheraichat.utils.PreferenceHandler
 
 class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
     private val binding: DialogChatSettingsBinding by lazy {
@@ -22,6 +23,13 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        binding.temperatureInputEditText.setText(PreferenceHandler.getTemperature(context).toString())
+        setOnDismissListener {
+            val temperature = binding.temperatureInputEditText.text.toString().toDoubleOrNull()
+            if (temperature != null) {
+                PreferenceHandler.setTemperature(context, temperature)
+            }
+        }
     }
 
     override fun show() {

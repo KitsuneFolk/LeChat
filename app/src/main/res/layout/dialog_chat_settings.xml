@@ -4,7 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="20dp"
+    android:paddingBottom="10dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="?strokeColor"
+        app:hintTextColor="?android:textColor">
+
+        <!--  android:textCursorDrawable="@null" results in the cursor being white,
+            else the cursor is black and not seen  -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/temperatureInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:hint="@string/temperature"
+            android:inputType="numberDecimal"
+            android:maxLength="8"
+            android:maxLines="1"
+            android:text="@string/defaultTemperature"
+            android:textCursorDrawable="@null" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/clearChatButton"
@@ -12,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="?selectableItemBackgroundBorderless"
+        android:background="?selectableItemBackground"
         android:text="@string/clearChat"
         android:textColor="?android:textColor"
         app:cornerRadius="0dp" />

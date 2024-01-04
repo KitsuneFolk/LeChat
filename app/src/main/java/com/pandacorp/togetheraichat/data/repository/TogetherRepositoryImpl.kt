@@ -15,7 +15,7 @@ import com.pandacorp.togetheraichat.utils.Constants
 import kotlinx.coroutines.flow.Flow
 
 class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : TogetherRepository {
-    override fun getResponse(messages: MutableList<MessageItem>): Flow<ChatCompletionChunk> {
+    override fun getResponse(messages: MutableList<MessageItem>, temperature: Double): Flow<ChatCompletionChunk> {
         val host = OpenAIHost(baseUrl = "https://api.together.xyz")
         val config = OpenAIConfig(
             host = host,
@@ -28,7 +28,7 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
         val mappedMessages = messagesMapper.toChatMessages(messages)
         val chatCompletionRequest = ChatCompletionRequest(
             model = ModelId("mistralai/Mixtral-8x7B-Instruct-v0.1"),
-            temperature = 0.7,
+            temperature = temperature,
             messages = mappedMessages
         )
         return openAI.chatCompletions(chatCompletionRequest)

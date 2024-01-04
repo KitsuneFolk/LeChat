@@ -5,6 +5,7 @@
     <string name="you" translatable="false">You</string>
     <string name="message">Message…</string>
     <string name="send">Send</string>
+    <string name="temperature">Temperature</string>
     <string name="clearChat">Clear chat</string>
 
     <!--  Settings  -->
@@ -16,5 +17,7 @@
     <string name="another">Another</string>
     <string name="version">Version %1$s</string>
 
+    <!--  Default values  -->
     <string name="settings_theme_summary">Blue</string>
+    <string name="defaultTemperature">0.7</string>
 </resources>
