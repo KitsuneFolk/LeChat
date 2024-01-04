@@ -1,0 +1,41 @@
+package com.pandacorp.togetheraichat.presentation.ui.dialog
+
+import android.content.Context
+import android.content.res.ColorStateList
+import android.os.Bundle
+import android.util.TypedValue
+import android.view.View
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.pandacorp.togetheraichat.databinding.DialogChatSettingsBinding
+
+class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
+    private val binding: DialogChatSettingsBinding by lazy {
+        // Use by lazy because setOnClearChatClickListener is called before onCreate for some reason
+        DialogChatSettingsBinding.inflate(layoutInflater)
+    }
+
+    fun setOnClearChatClickListener(onClickListener: View.OnClickListener) {
+        binding.clearChatButton.setOnClickListener(onClickListener)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+    }
+
+    override fun show() {
+        super.show()
+        val view = findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+        view!!.post {
+            // Expand the dialog in the landscape mode
+            val behavior = BottomSheetBehavior.from(view)
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            // Set the background color to colorPrimary
+            val tv = TypedValue()
+            context.theme.resolveAttribute(android.R.attr.colorPrimary, tv, true)
+            view.backgroundTintList = ColorStateList.valueOf(tv.data)
+        }
+    }
+
+}

@@ -11,6 +11,7 @@ import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.ScreenMainBinding
 import com.pandacorp.togetheraichat.domain.model.MessageItem
 import com.pandacorp.togetheraichat.presentation.ui.adapter.messages.MessagesAdapter
+import com.pandacorp.togetheraichat.presentation.ui.dialog.BottomDialogChatSettings
 import com.pandacorp.togetheraichat.presentation.vm.MessagesViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -23,6 +24,14 @@ class MainScreen : Fragment() {
     private val vm: MessagesViewModel by viewModel()
 
     private val messagesAdapter = MessagesAdapter()
+
+    private val chatSettingsDialog by lazy {
+        BottomDialogChatSettings(requireContext()).apply {
+            setOnClearChatClickListener {
+                vm.clearChat()
+            }
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = ScreenMainBinding.inflate(inflater)
@@ -49,6 +58,9 @@ class MainScreen : Fragment() {
             true
         }
         binding.recyclerView.adapter = messagesAdapter
+        binding.chatSettingsButton.setOnClickListener {
+            chatSettingsDialog.show()
+        }
         binding.sendButton.setOnClickListener {
             val message = binding.editText.text.toString().trim()
             if (message.isNotBlank()) {

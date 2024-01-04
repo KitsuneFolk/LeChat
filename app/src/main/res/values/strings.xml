@@ -5,6 +5,7 @@
     <string name="you" translatable="false">You</string>
     <string name="message">Message…</string>
     <string name="send">Send</string>
+    <string name="clearChat">Clear chat</string>
 
     <!--  Settings  -->
     <string name="settings">Settings</string>

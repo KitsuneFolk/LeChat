@@ -11,11 +11,9 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class MessagesViewModel(private val repository: TogetherRepository) : ViewModel() {
-    val messagesList: MutableLiveData<MutableList<MessageItem>> = MutableLiveData(
-        mutableListOf(
-            MessageItem(id = 0, role = MessageItem.SYSTEM, message = "You are a helpful assistant!"),
-        )
-    )
+    private val systemMessage =
+        MessageItem(id = 0, role = MessageItem.SYSTEM, message = "You are a helpful assistant!")
+    val messagesList: MutableLiveData<MutableList<MessageItem>> = MutableLiveData(mutableListOf(systemMessage))
     val errorCode = MutableLiveData<Int?>(null)
 
     fun addMessage(messageItem: MessageItem): Int {
@@ -51,6 +49,10 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
                 this@MessagesViewModel.errorCode.postValue(errorCode)
             }
         }
+    }
+
+    fun clearChat() {
+        messagesList.postValue(mutableListOf(systemMessage))
     }
 
     private fun replaceAt(position: Int, replacement: MessageItem) {
