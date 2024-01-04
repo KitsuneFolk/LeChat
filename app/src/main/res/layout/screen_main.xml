@@ -52,9 +52,11 @@
 
         <ImageButton
             android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:background="?selectableItemBackgroundBorderless"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="@string/send"
             android:src="@drawable/ic_send" />
