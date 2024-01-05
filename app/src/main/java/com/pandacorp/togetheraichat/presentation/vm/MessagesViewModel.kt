@@ -35,11 +35,13 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
                     PreferenceHandler.getFrequencyPenalty()
                 )
                     .onEach {
-                        val token = it.choices[0].delta.content
+                        var token = it.choices[0].delta.content
                         if (isFirstTime) {
                             val response = MessageItem(message = "", role = MessageItem.AI)
                             addMessage(response)
                             isFirstTime = false
+                            // Make sure the first token is not a space
+                            token = token?.trim()
                         }
                         val response = messagesList.value!!.last().copy()
                         response.message += token
