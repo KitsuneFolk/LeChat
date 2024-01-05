@@ -18,7 +18,8 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
     override fun getResponse(
         messages: MutableList<MessageItem>,
         temperature: Double,
-        maxTokens: Int?
+        maxTokens: Int?,
+        frequencyPenalty: Double?
     ): Flow<ChatCompletionChunk> {
         val host = OpenAIHost(baseUrl = "https://api.together.xyz")
         val config = OpenAIConfig(
@@ -34,7 +35,8 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
             model = ModelId("mistralai/Mixtral-8x7B-Instruct-v0.1"),
             temperature = temperature,
             maxTokens = if (maxTokens == 0) null else maxTokens,
-            messages = mappedMessages
+            messages = mappedMessages,
+            frequencyPenalty = frequencyPenalty
         )
         return openAI.chatCompletions(chatCompletionRequest)
     }

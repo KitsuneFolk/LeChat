@@ -25,6 +25,7 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
         setContentView(binding.root)
         binding.maxTokensInputEditText.setText(PreferenceHandler.getMaxTokens(context).toString())
         binding.temperatureInputEditText.setText(PreferenceHandler.getTemperature(context).toString())
+        binding.frequencyPenaltyInputEditText.setText(PreferenceHandler.getFrequencyPenalty(context).toString())
         setOnDismissListener {
             val temperature = binding.temperatureInputEditText.text.toString().toDoubleOrNull()
             if (temperature != null) {
@@ -34,6 +35,11 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
             var maxTokens = binding.maxTokensInputEditText.text.toString().toIntOrNull()
             maxTokens = maxOf(maxTokens ?: 0, 0)
             PreferenceHandler.setMaxTokens(context, maxTokens)
+
+            val frequencyPenalty = binding.frequencyPenaltyInputEditText.text.toString().toDoubleOrNull()
+            if (frequencyPenalty != null) {
+                PreferenceHandler.setFrequencyPenalty(context, frequencyPenalty)
+            }
         }
     }
 

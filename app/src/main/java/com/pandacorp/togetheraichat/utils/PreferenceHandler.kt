@@ -60,4 +60,19 @@ object PreferenceHandler {
         return PreferenceManager.getDefaultSharedPreferences(context)
             .getInt(Constants.Preferences.Key.MAX_TOKENS, 0)
     }
+
+    fun setFrequencyPenalty(context: Context, frequencyPenalty: Double) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+            .edit()
+            .putString(Constants.Preferences.Key.FREQUENCY_PENALTY, frequencyPenalty.toString())
+            .apply()
+    }
+
+    fun getFrequencyPenalty(context: Context): Double {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+            .getString(
+                Constants.Preferences.Key.FREQUENCY_PENALTY,
+                context.getString(R.string.defaultFrequencyPenalty)
+            )!!.toDouble()
+    }
 }

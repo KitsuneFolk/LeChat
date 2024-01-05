@@ -57,6 +57,30 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="?strokeColor"
+        app:hintTextColor="?android:textColor">
+
+        <!--  android:textCursorDrawable="@null" results in the cursor being white,
+            else the cursor is black and not seen  -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/frequencyPenaltyInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:hint="@string/frequencyPenalty"
+            android:inputType="numberDecimal"
+            android:maxLength="8"
+            android:maxLines="1"
+            android:text="@string/defaultFrequencyPenalty"
+            android:textCursorDrawable="@null" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/clearChatButton"
         style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
