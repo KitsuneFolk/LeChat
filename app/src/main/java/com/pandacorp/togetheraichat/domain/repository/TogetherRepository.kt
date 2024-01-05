@@ -5,5 +5,9 @@ import com.pandacorp.togetheraichat.domain.model.MessageItem
 import kotlinx.coroutines.flow.Flow
 
 interface TogetherRepository {
-    fun getResponse(messages: MutableList<MessageItem>, temperature: Double): Flow<ChatCompletionChunk>
+    fun getResponse(
+        messages: MutableList<MessageItem>,
+        temperature: Double,
+        maxTokens: Int? = null
+    ): Flow<ChatCompletionChunk>
 }

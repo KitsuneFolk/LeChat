@@ -29,7 +29,7 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
         viewModelScope.launch {
             try {
                 var isFirstTime = true
-                repository.getResponse(messagesList.value!!, PreferenceHandler.getTemperature(App.instance))
+                repository.getResponse(messagesList.value!!, PreferenceHandler.getTemperature(App.instance), PreferenceHandler.getMaxTokens(App.instance))
                     .onEach {
                         val token = it.choices[0].delta.content
                         if (isFirstTime) {

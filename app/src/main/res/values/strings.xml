@@ -5,6 +5,7 @@
     <string name="you" translatable="false">You</string>
     <string name="message">Message…</string>
     <string name="send">Send</string>
+    <string name="maxTokens">Max tokens(0 for unlimited)</string>
     <string name="temperature">Temperature</string>
     <string name="clearChat">Clear chat</string>
 
@@ -20,4 +21,5 @@
     <!--  Default values  -->
     <string name="settings_theme_summary">Blue</string>
     <string name="defaultTemperature">0.7</string>
+    <string name="defaultMaxTokens">0</string>
 </resources>

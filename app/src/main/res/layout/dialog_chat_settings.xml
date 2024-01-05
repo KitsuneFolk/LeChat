@@ -17,6 +17,31 @@
         <!--  android:textCursorDrawable="@null" results in the cursor being white,
             else the cursor is black and not seen  -->
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/maxTokensInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:hint="@string/maxTokens"
+            android:inputType="number"
+            android:maxLength="8"
+            android:ems="1234567890"
+            android:maxLines="1"
+            android:text="@string/defaultMaxTokens"
+            android:textCursorDrawable="@null" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="?strokeColor"
+        app:hintTextColor="?android:textColor">
+
+        <!--  android:textCursorDrawable="@null" results in the cursor being white,
+            else the cursor is black and not seen  -->
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/temperatureInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

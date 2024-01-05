@@ -10,6 +10,7 @@ object Constants {
             const val THEME = "Themes"
             const val API = "TogetherAPIKey"
             const val TEMPERATURE = "Temperature"
+            const val MAX_TOKENS = "MaxTokens"
         }
     }
 

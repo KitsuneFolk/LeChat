@@ -48,4 +48,16 @@ object PreferenceHandler {
             else -> getThemeRes(context, Theme.FOLLOW_SYSTEM)
         }
     }
+
+    fun setMaxTokens(context: Context, maxTokens: Int) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+            .edit()
+            .putInt(Constants.Preferences.Key.MAX_TOKENS, maxTokens)
+            .apply()
+    }
+
+    fun getMaxTokens(context: Context): Int {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+            .getInt(Constants.Preferences.Key.MAX_TOKENS, 0)
+    }
 }
