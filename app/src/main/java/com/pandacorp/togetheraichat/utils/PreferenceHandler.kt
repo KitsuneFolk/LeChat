@@ -1,9 +1,10 @@
 package com.pandacorp.togetheraichat.utils
 
-import android.content.Context
+import android.app.Activity
 import android.content.res.Configuration
 import androidx.preference.PreferenceManager
 import com.pandacorp.togetheraichat.R
+import com.pandacorp.togetheraichat.di.app.App
 
 object PreferenceHandler {
     private object Theme {
@@ -14,65 +15,68 @@ object PreferenceHandler {
         const val DEFAULT = FOLLOW_SYSTEM
     }
 
-    private fun isDeviceDarkMode(context: Context): Boolean =
-        (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+    private fun isDeviceDarkMode(): Boolean =
+        (App.instance.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 
-    fun setTheme(context: Context, theme: Int = getThemeRes(context)) {
-        context.setTheme(theme)
+    fun setTheme(activity: Activity, theme: Int = getThemeRes()) {
+        activity.setTheme(theme)
     }
 
-    fun setTemperature(context: Context, temperature: Double) {
-        PreferenceManager.getDefaultSharedPreferences(context)
+    fun setTemperature(temperature: Double) {
+        PreferenceManager.getDefaultSharedPreferences(App.instance)
             .edit()
             .putString(Constants.Preferences.Key.TEMPERATURE, temperature.toString())
             .apply()
     }
 
-    fun getTemperature(context: Context): Double {
-        return PreferenceManager.getDefaultSharedPreferences(context)
-            .getString(Constants.Preferences.Key.TEMPERATURE, context.getString(R.string.defaultTemperature))!!
+    fun getTemperature(): Double {
+        return PreferenceManager.getDefaultSharedPreferences(App.instance)
+            .getString(
+                Constants.Preferences.Key.TEMPERATURE,
+                App.instance.getString(R.string.defaultTemperature)
+            )!!
             .toDouble()
     }
 
-    private fun getThemeKey(context: Context): String {
-        return PreferenceManager.getDefaultSharedPreferences(context)
+    private fun getThemeKey(): String {
+        return PreferenceManager.getDefaultSharedPreferences(App.instance)
             .getString(Constants.Preferences.Key.THEME, Theme.DEFAULT)!!
     }
 
-    private fun getThemeRes(context: Context, themeKey: String = getThemeKey(context)): Int {
+    private fun getThemeRes(themeKey: String = getThemeKey()): Int {
         return when (themeKey) {
-            Theme.FOLLOW_SYSTEM -> if (isDeviceDarkMode(context)) R.style.DarkTheme else R.style.BlueTheme
+            Theme.FOLLOW_SYSTEM -> if (isDeviceDarkMode()) R.style.DarkTheme else R.style.BlueTheme
             Theme.BLUE -> R.style.BlueTheme
             Theme.DARK -> R.style.DarkTheme
             Theme.PURPLE -> R.style.PurpleTheme
-            else -> getThemeRes(context, Theme.FOLLOW_SYSTEM)
+            else -> getThemeRes(Theme.FOLLOW_SYSTEM)
         }
     }
 
-    fun setMaxTokens(context: Context, maxTokens: Int) {
-        PreferenceManager.getDefaultSharedPreferences(context)
+    fun setMaxTokens(maxTokens: Int) {
+        PreferenceManager.getDefaultSharedPreferences(App.instance)
             .edit()
             .putInt(Constants.Preferences.Key.MAX_TOKENS, maxTokens)
             .apply()
     }
 
-    fun getMaxTokens(context: Context): Int {
-        return PreferenceManager.getDefaultSharedPreferences(context)
+    fun getMaxTokens(): Int {
+        return PreferenceManager.getDefaultSharedPreferences(App.instance)
             .getInt(Constants.Preferences.Key.MAX_TOKENS, 0)
     }
 
-    fun setFrequencyPenalty(context: Context, frequencyPenalty: Double) {
-        PreferenceManager.getDefaultSharedPreferences(context)
+    fun setFrequencyPenalty(frequencyPenalty: Double) {
+        PreferenceManager.getDefaultSharedPreferences(App.instance)
             .edit()
             .putString(Constants.Preferences.Key.FREQUENCY_PENALTY, frequencyPenalty.toString())
             .apply()
     }
 
-    fun getFrequencyPenalty(context: Context): Double {
-        return PreferenceManager.getDefaultSharedPreferences(context)
+    fun getFrequencyPenalty(): Double {
+        return PreferenceManager.getDefaultSharedPreferences(App.instance)
             .getString(
                 Constants.Preferences.Key.FREQUENCY_PENALTY,
-                context.getString(R.string.defaultFrequencyPenalty)
+                App.instance.getString(R.string.defaultFrequencyPenalty)
             )!!.toDouble()
     }
 }
