@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -68,6 +69,13 @@ class MainScreen : Fragment() {
 
         binding.drawerLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (binding.drawerLayout.isDrawerOpen(binding.navigationView)) {
+                binding.drawerLayout.closeDrawer(binding.navigationView)
+            } else {
+                requireActivity().finish()
+            }
+        }
         binding.recyclerView.adapter = messagesAdapter
         binding.chatSettingsButton.setOnClickListener {
             chatSettingsDialog.show()
