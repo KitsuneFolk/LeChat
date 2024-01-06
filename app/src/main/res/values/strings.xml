@@ -11,6 +11,7 @@
     <string name="clearChat">Clear chat</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="chats">Chats</string>
 
     <!--  Settings  -->
     <string name="settings">Settings</string>

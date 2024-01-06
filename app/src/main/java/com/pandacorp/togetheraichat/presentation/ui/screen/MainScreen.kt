@@ -12,6 +12,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.ScreenMainBinding
 import com.pandacorp.togetheraichat.domain.model.MessageItem
+import com.pandacorp.togetheraichat.presentation.ui.adapter.chat.ChatItem
+import com.pandacorp.togetheraichat.presentation.ui.adapter.chat.ChatsAdapter
 import com.pandacorp.togetheraichat.presentation.ui.adapter.messages.MessagesAdapter
 import com.pandacorp.togetheraichat.presentation.ui.dialog.BottomDialogChatSettings
 import com.pandacorp.togetheraichat.presentation.vm.MessagesViewModel
@@ -24,6 +26,10 @@ class MainScreen : Fragment() {
     private val navController by lazy { findNavController() }
 
     private val vm: MessagesViewModel by viewModel()
+
+    private val chatsAdapter = ChatsAdapter().apply {
+        submitList(listOf(ChatItem(0, "Chat 1"), ChatItem(1, "Chat 2"), ChatItem(2, "Chat 3")))
+    }
 
     private val messagesAdapter = MessagesAdapter()
 
@@ -76,6 +82,7 @@ class MainScreen : Fragment() {
                 requireActivity().finish()
             }
         }
+        binding.chatsRecyclerView.adapter = chatsAdapter
         binding.recyclerView.adapter = messagesAdapter
         binding.chatSettingsButton.setOnClickListener {
             chatSettingsDialog.show()
