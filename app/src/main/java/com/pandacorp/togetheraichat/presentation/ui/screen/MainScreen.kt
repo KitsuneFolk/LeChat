@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -57,6 +58,16 @@ class MainScreen : Fragment() {
             }
             true
         }
+        val drawerToggle = ActionBarDrawerToggle(
+            requireActivity(),
+            binding.drawerLayout,
+            binding.toolbarInclude.toolbar,
+            R.string.open,
+            R.string.close
+        )
+
+        binding.drawerLayout.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
         binding.recyclerView.adapter = messagesAdapter
         binding.chatSettingsButton.setOnClickListener {
             chatSettingsDialog.show()

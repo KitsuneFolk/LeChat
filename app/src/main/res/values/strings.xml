@@ -9,6 +9,8 @@
     <string name="temperature">Temperature</string>
     <string name="frequencyPenalty">Frequency penalty</string>
     <string name="clearChat">Clear chat</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
     <!--  Settings  -->
     <string name="settings">Settings</string>
