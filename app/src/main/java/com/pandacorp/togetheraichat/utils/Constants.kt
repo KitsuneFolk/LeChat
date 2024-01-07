@@ -12,6 +12,7 @@ object Constants {
             const val TEMPERATURE = "Temperature"
             const val MAX_TOKENS = "MaxTokens"
             const val FREQUENCY_PENALTY = "FrequencyPenalty"
+            const val TOP_P = "TopP"
         }
     }
 

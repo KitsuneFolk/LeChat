@@ -32,7 +32,8 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
                     messagesList.value!!,
                     PreferenceHandler.getTemperature(),
                     PreferenceHandler.getMaxTokens(),
-                    PreferenceHandler.getFrequencyPenalty()
+                    PreferenceHandler.getFrequencyPenalty(),
+                    PreferenceHandler.getTopP()
                 )
                     .onEach {
                         var token = it.choices[0].delta.content

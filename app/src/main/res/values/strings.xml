@@ -12,6 +12,7 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="chats">Chats</string>
+    <string name="top_p">Top-P</string>
 
     <!--  Settings  -->
     <string name="settings">Settings</string>
@@ -27,4 +28,5 @@
     <string name="defaultTemperature">0.7</string>
     <string name="defaultMaxTokens">0</string>
     <string name="defaultFrequencyPenalty">1.0</string>
+    <string name="defaultTopP">0.7</string>
 </resources>

@@ -9,6 +9,7 @@ interface TogetherRepository {
         messages: MutableList<MessageItem>,
         temperature: Double,
         maxTokens: Int? = null,
-        frequencyPenalty: Double? = null
+        frequencyPenalty: Double? = null,
+        topP: Double? = null
     ): Flow<ChatCompletionChunk>
 }

@@ -79,4 +79,19 @@ object PreferenceHandler {
                 App.instance.getString(R.string.defaultFrequencyPenalty)
             )!!.toDouble()
     }
+
+    fun setTopP(topP: Double) {
+        PreferenceManager.getDefaultSharedPreferences(App.instance)
+            .edit()
+            .putString(Constants.Preferences.Key.TOP_P, topP.toString())
+            .apply()
+    }
+
+    fun getTopP(): Double {
+        return PreferenceManager.getDefaultSharedPreferences(App.instance)
+            .getString(
+                Constants.Preferences.Key.TOP_P,
+                App.instance.getString(R.string.defaultTopP)
+            )!!.toDouble()
+    }
 }

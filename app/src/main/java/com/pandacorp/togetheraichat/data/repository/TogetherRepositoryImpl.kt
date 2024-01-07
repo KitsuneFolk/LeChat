@@ -19,7 +19,8 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
         messages: MutableList<MessageItem>,
         temperature: Double,
         maxTokens: Int?,
-        frequencyPenalty: Double?
+        frequencyPenalty: Double?,
+        topP: Double?
     ): Flow<ChatCompletionChunk> {
         val host = OpenAIHost(baseUrl = "https://api.together.xyz")
         val config = OpenAIConfig(
@@ -36,7 +37,8 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
             temperature = temperature,
             maxTokens = if (maxTokens == 0) null else maxTokens,
             messages = mappedMessages,
-            frequencyPenalty = frequencyPenalty
+            frequencyPenalty = frequencyPenalty,
+            topP = topP
         )
         return openAI.chatCompletions(chatCompletionRequest)
     }
