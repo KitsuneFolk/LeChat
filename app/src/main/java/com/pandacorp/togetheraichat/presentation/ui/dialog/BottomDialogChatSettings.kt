@@ -29,7 +29,7 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
         binding.topPInputEditText.setText(PreferenceHandler.topP.toString())
 
         setOnDismissListener {
-            val temperature = binding.temperatureInputEditText.text.toString().toDoubleOrNull()
+            val temperature = binding.temperatureInputEditText.text.toString().toFloatOrNull()
             if (temperature != null) {
                 PreferenceHandler.temperature = temperature
             }
@@ -38,11 +38,11 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
             maxTokens = maxOf(maxTokens ?: 0, 0)
             PreferenceHandler.maxTokens = maxTokens
 
-            val frequencyPenalty = binding.frequencyPenaltyInputEditText.text.toString().toDoubleOrNull()
+            val frequencyPenalty = binding.frequencyPenaltyInputEditText.text.toString().toFloatOrNull()
             if (frequencyPenalty != null) {
                 PreferenceHandler.frequencyPenalty = frequencyPenalty
             }
-            val topP = binding.topPInputEditText.text.toString().toDoubleOrNull()
+            val topP = binding.topPInputEditText.text.toString().toFloatOrNull()
             if (topP != null) {
                 PreferenceHandler.topP = topP
             }

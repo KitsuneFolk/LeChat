@@ -7,9 +7,9 @@ import kotlinx.coroutines.flow.Flow
 interface TogetherRepository {
     fun getResponse(
         messages: MutableList<MessageItem>,
-        temperature: Double,
+        temperature: Float,
         maxTokens: Int? = null,
-        frequencyPenalty: Double? = null,
-        topP: Double? = null
+        frequencyPenalty: Float? = null,
+        topP: Float? = null
     ): Flow<ChatCompletionChunk>
 }

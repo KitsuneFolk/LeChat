@@ -16,16 +16,16 @@ object PreferenceHandler {
     }
 
     // Cached variables
-    var temperature: Double = PreferenceManager.getDefaultSharedPreferences(App.instance)
+    var temperature: Float = PreferenceManager.getDefaultSharedPreferences(App.instance)
         .getFloat(
             Constants.Preferences.Key.TEMPERATURE,
             App.instance.getString(R.string.defaultTemperature).toFloat()
-        ).toDouble()
+        )
         set(value) {
             field = value
             PreferenceManager.getDefaultSharedPreferences(App.instance)
                 .edit()
-                .putFloat(Constants.Preferences.Key.TEMPERATURE, value.toFloat())
+                .putFloat(Constants.Preferences.Key.TEMPERATURE, value)
                 .apply()
         }
 
@@ -39,29 +39,29 @@ object PreferenceHandler {
                 .apply()
         }
 
-    var frequencyPenalty: Double = PreferenceManager.getDefaultSharedPreferences(App.instance)
+    var frequencyPenalty: Float = PreferenceManager.getDefaultSharedPreferences(App.instance)
         .getFloat(
             Constants.Preferences.Key.FREQUENCY_PENALTY,
             App.instance.getString(R.string.defaultFrequencyPenalty).toFloat()
-        ).toDouble()
+        )
         set(value) {
             field = value
             PreferenceManager.getDefaultSharedPreferences(App.instance)
                 .edit()
-                .putFloat(Constants.Preferences.Key.FREQUENCY_PENALTY, value.toFloat())
+                .putFloat(Constants.Preferences.Key.FREQUENCY_PENALTY, value)
                 .apply()
         }
 
-    var topP: Double = PreferenceManager.getDefaultSharedPreferences(App.instance)
+    var topP: Float = PreferenceManager.getDefaultSharedPreferences(App.instance)
         .getFloat(
             Constants.Preferences.Key.TOP_P,
             App.instance.getString(R.string.defaultTopP).toFloat()
-        ).toDouble()
+        )
         set(value) {
             field = value
             PreferenceManager.getDefaultSharedPreferences(App.instance)
                 .edit()
-                .putFloat(Constants.Preferences.Key.TOP_P, value.toFloat())
+                .putFloat(Constants.Preferences.Key.TOP_P, value)
                 .apply()
         }
 
