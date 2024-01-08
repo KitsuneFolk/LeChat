@@ -8,8 +8,8 @@ interface TogetherRepository {
     fun getResponse(
         messages: MutableList<MessageItem>,
         temperature: Float,
-        maxTokens: Int? = null,
-        frequencyPenalty: Float? = null,
-        topP: Float? = null
+        maxTokens: Int?,
+        frequencyPenalty: Float?,
+        topP: Float?
     ): Flow<ChatCompletionChunk>
 }
