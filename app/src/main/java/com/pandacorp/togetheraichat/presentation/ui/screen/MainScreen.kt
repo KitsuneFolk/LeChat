@@ -79,7 +79,10 @@ class MainScreen : Fragment() {
             if (binding.drawerLayout.isDrawerOpen(binding.navigationView)) {
                 binding.drawerLayout.closeDrawer(binding.navigationView)
             } else {
-                requireActivity().finish()
+                if (isEnabled) {
+                    isEnabled = false
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
+                }
             }
         }
         binding.chatsRecyclerView.adapter = chatsAdapter
