@@ -104,15 +104,13 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/clearChatButton"
-        style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="?selectableItemBackground"
         android:text="@string/clearChat"
         android:textColor="?android:textColor"
-        app:cornerRadius="0dp" />
+        app:backgroundTint="@android:color/transparent" />
 
 </LinearLayout>
