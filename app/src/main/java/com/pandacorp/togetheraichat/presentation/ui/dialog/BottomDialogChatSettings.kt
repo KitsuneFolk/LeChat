@@ -23,29 +23,28 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.maxTokensInputEditText.setText(PreferenceHandler.getMaxTokens().toString())
-        binding.temperatureInputEditText.setText(PreferenceHandler.getTemperature().toString())
-        binding.frequencyPenaltyInputEditText.setText(PreferenceHandler.getFrequencyPenalty().toString())
-        binding.topPInputEditText.setText(PreferenceHandler.getTopP().toString())
+        binding.maxTokensInputEditText.setText(PreferenceHandler.maxTokens.toString())
+        binding.temperatureInputEditText.setText(PreferenceHandler.temperature.toString())
+        binding.frequencyPenaltyInputEditText.setText(PreferenceHandler.frequencyPenalty.toString())
+        binding.topPInputEditText.setText(PreferenceHandler.topP.toString())
 
         setOnDismissListener {
             val temperature = binding.temperatureInputEditText.text.toString().toDoubleOrNull()
             if (temperature != null) {
-                PreferenceHandler.setTemperature(temperature)
+                PreferenceHandler.temperature = temperature
             }
 
             var maxTokens = binding.maxTokensInputEditText.text.toString().toIntOrNull()
             maxTokens = maxOf(maxTokens ?: 0, 0)
-            PreferenceHandler.setMaxTokens(maxTokens)
+            PreferenceHandler.maxTokens = maxTokens
 
             val frequencyPenalty = binding.frequencyPenaltyInputEditText.text.toString().toDoubleOrNull()
             if (frequencyPenalty != null) {
-                PreferenceHandler.setFrequencyPenalty(frequencyPenalty)
+                PreferenceHandler.frequencyPenalty = frequencyPenalty
             }
-
             val topP = binding.topPInputEditText.text.toString().toDoubleOrNull()
             if (topP != null) {
-                PreferenceHandler.setTopP(topP)
+                PreferenceHandler.topP = topP
             }
         }
     }

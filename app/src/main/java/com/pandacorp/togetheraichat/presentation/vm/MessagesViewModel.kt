@@ -30,10 +30,10 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
                 var isFirstTime = true
                 repository.getResponse(
                     messagesList.value!!,
-                    PreferenceHandler.getTemperature(),
-                    PreferenceHandler.getMaxTokens(),
-                    PreferenceHandler.getFrequencyPenalty(),
-                    PreferenceHandler.getTopP()
+                    PreferenceHandler.temperature,
+                    PreferenceHandler.maxTokens,
+                    PreferenceHandler.frequencyPenalty,
+                    PreferenceHandler.topP
                 )
                     .onEach {
                         var token = it.choices[0].delta.content
