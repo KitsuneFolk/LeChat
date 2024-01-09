@@ -19,7 +19,7 @@ object PreferenceHandler {
     var temperature: Float = PreferenceManager.getDefaultSharedPreferences(App.instance)
         .getFloat(
             Constants.Preferences.Key.TEMPERATURE,
-            App.instance.getString(R.string.defaultTemperature).toFloat()
+            Constants.Preferences.DefaultValues.TEMPERATURE
         )
         set(value) {
             field = value
@@ -29,8 +29,11 @@ object PreferenceHandler {
                 .apply()
         }
 
-    var maxTokens: Int =
-        PreferenceManager.getDefaultSharedPreferences(App.instance).getInt(Constants.Preferences.Key.MAX_TOKENS, 0)
+    var maxTokens: Int = PreferenceManager.getDefaultSharedPreferences(App.instance)
+        .getInt(
+            Constants.Preferences.Key.MAX_TOKENS,
+            Constants.Preferences.DefaultValues.MAX_TOKENS
+        )
         set(value) {
             field = value
             PreferenceManager.getDefaultSharedPreferences(App.instance)
@@ -42,7 +45,7 @@ object PreferenceHandler {
     var frequencyPenalty: Float = PreferenceManager.getDefaultSharedPreferences(App.instance)
         .getFloat(
             Constants.Preferences.Key.FREQUENCY_PENALTY,
-            App.instance.getString(R.string.defaultFrequencyPenalty).toFloat()
+            Constants.Preferences.DefaultValues.FREQUENCY_PENALTY
         )
         set(value) {
             field = value
@@ -55,7 +58,7 @@ object PreferenceHandler {
     var topP: Float = PreferenceManager.getDefaultSharedPreferences(App.instance)
         .getFloat(
             Constants.Preferences.Key.TOP_P,
-            App.instance.getString(R.string.defaultTopP).toFloat()
+            Constants.Preferences.DefaultValues.TOP_P
         )
         set(value) {
             field = value

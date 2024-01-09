@@ -2,6 +2,7 @@ package com.pandacorp.togetheraichat.utils
 
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
+import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.di.app.App
 
 object Constants {
@@ -13,6 +14,13 @@ object Constants {
             const val MAX_TOKENS = "MaxTokens"
             const val FREQUENCY_PENALTY = "FrequencyPenalty"
             const val TOP_P = "TopP"
+        }
+
+        object DefaultValues {
+            val TEMPERATURE = App.instance.getString(R.string.defaultTemperature).toFloat()
+            val MAX_TOKENS = App.instance.getString(R.string.defaultMaxTokens).toInt()
+            val FREQUENCY_PENALTY = App.instance.getString(R.string.defaultFrequencyPenalty).toFloat()
+            val TOP_P = App.instance.getString(R.string.defaultTopP).toFloat()
         }
     }
 
