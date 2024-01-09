@@ -13,6 +13,7 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="chats">Chats</string>
+    <string name="addChat">Add chat</string>
 
     <!--  Settings  -->
     <string name="settings">Settings</string>

@@ -100,11 +100,21 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/chats" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addChatButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="@string/addChat"
+                app:backgroundTint="?colorSurface"
+                app:strokeWidth="1dp" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chatsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_chat" />
         </LinearLayout>

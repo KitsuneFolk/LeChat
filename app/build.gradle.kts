@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -48,7 +49,13 @@ dependencies {
     // Fork of github.com/aallam/openai-kotlin that works with the TogetherAI API
     implementation("com.github.MrRuslanYT.openai-kotlin:openai-client:d1b8cccb3d")
     implementation("io.ktor:ktor-client-okhttp:2.3.7")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     // Koin
     implementation("io.insert-koin:koin-android:3.5.3")
+
+    // Room Database
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
 }

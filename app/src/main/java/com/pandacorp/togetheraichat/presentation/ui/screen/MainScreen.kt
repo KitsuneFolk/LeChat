@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.pandacorp.togetheraichat.R
@@ -16,7 +17,9 @@ import com.pandacorp.togetheraichat.presentation.ui.adapter.chat.ChatItem
 import com.pandacorp.togetheraichat.presentation.ui.adapter.chat.ChatsAdapter
 import com.pandacorp.togetheraichat.presentation.ui.adapter.messages.MessagesAdapter
 import com.pandacorp.togetheraichat.presentation.ui.dialog.BottomDialogChatSettings
+import com.pandacorp.togetheraichat.presentation.vm.ChatsViewModel
 import com.pandacorp.togetheraichat.presentation.vm.MessagesViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainScreen : Fragment() {
@@ -25,18 +28,16 @@ class MainScreen : Fragment() {
 
     private val navController by lazy { findNavController() }
 
-    private val vm: MessagesViewModel by viewModel()
+    private val messagesViewModel: MessagesViewModel by viewModel()
+    private val chatsViewModel: ChatsViewModel by viewModel()
 
-    private val chatsAdapter = ChatsAdapter().apply {
-        submitList(listOf(ChatItem(0, "Chat 1"), ChatItem(1, "Chat 2"), ChatItem(2, "Chat 3")))
-    }
-
+    private val chatsAdapter = ChatsAdapter()
     private val messagesAdapter = MessagesAdapter()
 
     private val chatSettingsDialog by lazy {
         BottomDialogChatSettings(requireContext()).apply {
             setOnClearChatClickListener {
-                vm.clearChat()
+                messagesViewModel.clearChat()
             }
         }
     }
@@ -74,6 +75,9 @@ class MainScreen : Fragment() {
         )
 
         binding.drawerLayout.addDrawerListener(drawerToggle)
+        binding.addChatButton.setOnClickListener {
+            chatsViewModel.addChat(ChatItem(title = "New Chat", messages = emptyList()))
+        }
         drawerToggle.syncState()
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (binding.drawerLayout.isDrawerOpen(binding.navigationView)) {
@@ -93,16 +97,22 @@ class MainScreen : Fragment() {
         binding.sendButton.setOnClickListener {
             val message = binding.editText.text.toString().trim()
             if (message.isNotBlank()) {
-                vm.addMessage(MessageItem(message = message, role = MessageItem.USER))
-                vm.getResponse()
+                messagesViewModel.addMessage(MessageItem(message = message, role = MessageItem.USER))
+                messagesViewModel.getResponse()
                 binding.editText.setText("")
             }
         }
 
-        vm.messagesList.observe(viewLifecycleOwner) {
+        lifecycleScope.launch {
+            chatsViewModel.chatsFlow.collect {
+                chatsAdapter.submitList(it)
+            }
+        }
+
+        messagesViewModel.messagesList.observe(viewLifecycleOwner) {
             messagesAdapter.submitList(it)
         }
-        vm.errorCode.observe(viewLifecycleOwner) {
+        messagesViewModel.errorCode.observe(viewLifecycleOwner) {
             if (it != null) {
                 val errorMessage = when (it) {
                     500 -> "Internal Server Error"
@@ -119,7 +129,7 @@ class MainScreen : Fragment() {
                         animationMode = Snackbar.ANIMATION_MODE_SLIDE
                         show()
                     }
-                vm.errorCode.value = null
+                messagesViewModel.errorCode.value = null
             }
         }
     }
