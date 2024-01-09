@@ -24,7 +24,6 @@
     <string name="version">Version %1$s</string>
 
     <!--  Default values  -->
-    <string name="settings_theme_summary">Blue</string>
     <string name="defaultTemperature">0.7f</string>
     <string name="defaultMaxTokens">0</string>
     <string name="defaultFrequencyPenalty">1.0f</string>
