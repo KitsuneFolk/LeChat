@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.ScreenSettingsBinding
-import com.pandacorp.togetheraichat.utils.Constants
 import com.pandacorp.togetheraichat.presentation.ui.dialog.DialogListView
+import com.pandacorp.togetheraichat.utils.Constants
 import com.pandacorp.togetheraichat.utils.getPackageInfoCompat
 
 class SettingsScreen : Fragment() {
@@ -77,7 +77,7 @@ class SettingsScreen : Fragment() {
             binding.themeTextView.apply {
                 val themeKey = sp.getString(
                     Constants.Preferences.Key.THEME,
-                    requireContext().resources.getString(R.string.settings_theme_default_value)
+                    getString(R.string.settings_theme_default_value)
                 )!!
                 text = getThemeFromKey(themeKey)
             }

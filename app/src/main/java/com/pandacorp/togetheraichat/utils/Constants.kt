@@ -17,10 +17,10 @@ object Constants {
         }
 
         object DefaultValues {
-            val TEMPERATURE = App.instance.getString(R.string.defaultTemperature).toFloat()
-            val MAX_TOKENS = App.instance.getString(R.string.defaultMaxTokens).toInt()
-            val FREQUENCY_PENALTY = App.instance.getString(R.string.defaultFrequencyPenalty).toFloat()
-            val TOP_P = App.instance.getString(R.string.defaultTopP).toFloat()
+            val TEMPERATURE = getString(R.string.defaultTemperature).toFloat()
+            val MAX_TOKENS = getString(R.string.defaultMaxTokens).toInt()
+            val FREQUENCY_PENALTY = getString(R.string.defaultFrequencyPenalty).toFloat()
+            val TOP_P = getString(R.string.defaultTopP).toFloat()
         }
     }
 

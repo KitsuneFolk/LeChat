@@ -3,6 +3,7 @@ package com.pandacorp.togetheraichat.utils
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
+import com.pandacorp.togetheraichat.di.app.App
 
 /**
  * Retrieves package information for a given package name, with optional flags.
@@ -17,3 +18,5 @@ fun PackageManager.getPackageInfoCompat(packageName: String, flags: Int = 0): Pa
     } else {
         getPackageInfo(packageName, flags)
     }
+
+fun getString(resId: Int) = App.instance.getString(resId)

@@ -55,7 +55,7 @@ class MainScreen : Fragment() {
     }
 
     private fun initViews() {
-        binding.toolbarInclude.toolbar.title = requireContext().resources.getString(R.string.app_name)
+        binding.toolbarInclude.toolbar.title = getString(R.string.app_name)
         binding.toolbarInclude.toolbar.inflateMenu(R.menu.menu_main)
         binding.toolbarInclude.toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
