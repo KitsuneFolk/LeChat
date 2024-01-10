@@ -18,4 +18,10 @@ class ChatsViewModel(private val repository: ChatsRepository) : ViewModel() {
             chatItem.id = repository.insert(chatItem)
         }
     }
+
+    fun deleteChat(chatItem: ChatItem) {
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.delete(chatItem)
+        }
+    }
 }

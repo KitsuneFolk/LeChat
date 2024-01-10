@@ -26,12 +26,21 @@ class ChatsAdapter : ListAdapter<ChatItem, ChatsAdapter.ViewHolder>(DiffCallback
     inner class ViewHolder(private val binding: ItemChatBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(chatItem: ChatItem) {
             bindTitle(chatItem.title)
+            bindDeleteChatButton(chatItem)
         }
 
         fun bindTitle(title: String) {
             binding.title.text = title
         }
+
+        private fun bindDeleteChatButton(chatItem: ChatItem) {
+            binding.deleteChatButton.setOnClickListener {
+                onChatDeleteListener?.invoke(chatItem)
+            }
+        }
     }
+
+    var onChatDeleteListener: ((ChatItem) -> Unit)? = null
 
     override fun submitList(list: List<ChatItem>?) {
         super.submitList(list?.let { ArrayList(it) })

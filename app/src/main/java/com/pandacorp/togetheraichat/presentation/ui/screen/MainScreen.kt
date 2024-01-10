@@ -31,7 +31,11 @@ class MainScreen : Fragment() {
     private val messagesViewModel: MessagesViewModel by viewModel()
     private val chatsViewModel: ChatsViewModel by viewModel()
 
-    private val chatsAdapter = ChatsAdapter()
+    private val chatsAdapter = ChatsAdapter().apply {
+        onChatDeleteListener = { chatItem ->
+            chatsViewModel.deleteChat(chatItem)
+        }
+    }
     private val messagesAdapter = MessagesAdapter()
 
     private val chatSettingsDialog by lazy {

@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface ChatsRepository {
     fun getAll(): Flow<List<ChatItem>>
     fun insert(item: ChatItem): Long
+    fun delete(item: ChatItem)
 }
