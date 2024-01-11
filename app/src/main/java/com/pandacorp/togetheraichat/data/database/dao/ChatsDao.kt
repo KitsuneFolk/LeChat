@@ -13,8 +13,8 @@ interface ChatsDao {
     fun getAll(): Flow<List<ChatDataItem>>
 
     @Insert
-    fun insert(noteItem: ChatDataItem): Long
+    fun insert(chatItem: ChatDataItem): Long
 
     @Delete
-    fun delete(noteItem: ChatDataItem)
+    fun delete(chatItem: ChatDataItem)
 }
