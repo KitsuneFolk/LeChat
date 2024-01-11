@@ -6,16 +6,19 @@ import androidx.lifecycle.viewModelScope
 import com.aallam.openai.api.exception.TogetherAIException
 import com.pandacorp.togetheraichat.domain.model.MessageItem
 import com.pandacorp.togetheraichat.domain.repository.TogetherRepository
+import com.pandacorp.togetheraichat.utils.Constants
 import com.pandacorp.togetheraichat.utils.PreferenceHandler
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class MessagesViewModel(private val repository: TogetherRepository) : ViewModel() {
-    private val systemMessage =
-        MessageItem(id = 0, role = MessageItem.SYSTEM, message = "You are a helpful assistant!")
-    val messagesList: MutableLiveData<MutableList<MessageItem>> = MutableLiveData(mutableListOf(systemMessage))
+    val messagesList: MutableLiveData<MutableList<MessageItem>> =
+        MutableLiveData(Constants.defaultMessagesList.toMutableList())
     val errorCode = MutableLiveData<Int?>(null)
+
+    var onResponseGenerated: ((List<MessageItem>) -> Unit)? = null
 
     fun addMessage(messageItem: MessageItem): Int {
         messageItem.id = (messagesList.value!!.size).toLong()
@@ -48,6 +51,9 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
                         response.message += token
                         replaceAt(response.id.toInt(), response)
                     }
+                    .onCompletion {
+                        onResponseGenerated?.invoke(messagesList.value!!)
+                    }
                     .collect()
             } catch (e: TogetherAIException) {
                 val error = e.cause?.toString() ?: "\"Text: Unknown error\""
@@ -61,7 +67,7 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
     }
 
     fun clearChat() {
-        messagesList.postValue(mutableListOf(systemMessage))
+        messagesList.postValue(Constants.defaultMessagesList.toMutableList())
     }
 
     private fun replaceAt(position: Int, replacement: MessageItem) {

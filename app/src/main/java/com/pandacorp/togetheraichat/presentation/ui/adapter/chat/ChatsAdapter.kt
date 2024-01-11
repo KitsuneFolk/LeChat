@@ -27,6 +27,7 @@ class ChatsAdapter : ListAdapter<ChatItem, ChatsAdapter.ViewHolder>(DiffCallback
         fun bind(chatItem: ChatItem) {
             bindTitle(chatItem.title)
             bindDeleteChatButton(chatItem)
+            bindClick(chatItem)
         }
 
         fun bindTitle(title: String) {
@@ -38,8 +39,15 @@ class ChatsAdapter : ListAdapter<ChatItem, ChatsAdapter.ViewHolder>(DiffCallback
                 onChatDeleteListener?.invoke(chatItem)
             }
         }
+
+        private fun bindClick(chatItem: ChatItem) {
+            binding.cardView.setOnClickListener {
+                onChatClickListener?.invoke(chatItem)
+            }
+        }
     }
 
+    var onChatClickListener: ((ChatItem) -> Unit)? = null
     var onChatDeleteListener: ((ChatItem) -> Unit)? = null
 
     override fun submitList(list: List<ChatItem>?) {

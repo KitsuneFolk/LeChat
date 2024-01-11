@@ -17,4 +17,6 @@ class ChatsRepositoryImpl(private val dao: ChatsDao, private val mapper: ChatsMa
     override fun insert(item: ChatItem) = dao.insert(mapper.toChatDataItem(item))
 
     override fun delete(item: ChatItem) = dao.delete(mapper.toChatDataItem(item))
+
+    override fun update(item: ChatItem) = dao.update(mapper.toChatDataItem(item))
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
 import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.di.app.App
+import com.pandacorp.togetheraichat.domain.model.MessageItem
 
 object Constants {
     object Preferences {
@@ -27,6 +28,9 @@ object Constants {
     object Dialogs {
         const val KEY = "DialogKey"
     }
+
+    val defaultMessagesList =
+        listOf(MessageItem(id = 0, role = MessageItem.SYSTEM, message = "You are a helpful assistant!"))
 
     val apiKey = MutableLiveData<String>(
         PreferenceManager.getDefaultSharedPreferences(App.instance).getString(Preferences.Key.API, "")

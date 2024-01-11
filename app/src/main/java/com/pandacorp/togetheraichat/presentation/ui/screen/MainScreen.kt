@@ -19,6 +19,7 @@ import com.pandacorp.togetheraichat.presentation.ui.adapter.messages.MessagesAda
 import com.pandacorp.togetheraichat.presentation.ui.dialog.BottomDialogChatSettings
 import com.pandacorp.togetheraichat.presentation.vm.ChatsViewModel
 import com.pandacorp.togetheraichat.presentation.vm.MessagesViewModel
+import com.pandacorp.togetheraichat.utils.Constants
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -34,6 +35,9 @@ class MainScreen : Fragment() {
     private val chatsAdapter = ChatsAdapter().apply {
         onChatDeleteListener = { chatItem ->
             chatsViewModel.deleteChat(chatItem)
+        }
+        onChatClickListener = {
+            chatsViewModel.currentChat.postValue(it)
         }
     }
     private val messagesAdapter = MessagesAdapter()
@@ -80,7 +84,7 @@ class MainScreen : Fragment() {
 
         binding.drawerLayout.addDrawerListener(drawerToggle)
         binding.addChatButton.setOnClickListener {
-            chatsViewModel.addChat(ChatItem(title = "New Chat", messages = emptyList()))
+            chatsViewModel.addChat()
         }
         drawerToggle.syncState()
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
@@ -101,6 +105,18 @@ class MainScreen : Fragment() {
         binding.sendButton.setOnClickListener {
             val message = binding.editText.text.toString().trim()
             if (message.isNotBlank()) {
+                var chat = chatsViewModel.currentChat.value
+                // Add a chat if there's no one
+                if (chat == null) {
+                    val messageItem = MessageItem(
+                        id = 1,
+                        role = MessageItem.USER,
+                        message = message
+                    )
+                    val messages = Constants.defaultMessagesList.plus(messageItem)
+                    chat = ChatItem(title = "New Chat", messages = messages)
+                    chatsViewModel.addChat(chat)
+                }
                 messagesViewModel.addMessage(MessageItem(message = message, role = MessageItem.USER))
                 messagesViewModel.getResponse()
                 binding.editText.setText("")
@@ -110,6 +126,10 @@ class MainScreen : Fragment() {
         lifecycleScope.launch {
             chatsViewModel.chatsFlow.collect {
                 chatsAdapter.submitList(it)
+                // If no chat is selected, select the newest first time user enters the app
+                if (chatsViewModel.currentChat.value == null) {
+                    chatsViewModel.currentChat.postValue(it.firstOrNull())
+                }
             }
         }
 
@@ -134,6 +154,18 @@ class MainScreen : Fragment() {
                         show()
                     }
                 messagesViewModel.errorCode.value = null
+            }
+        }
+        messagesViewModel.onResponseGenerated = {
+            val chat = chatsViewModel.currentChat.value?.copy(messages = it)!!
+            chatsViewModel.currentChat.postValue(chat)
+            chatsViewModel.updateChat(chat)
+        }
+        chatsViewModel.currentChat.observe(viewLifecycleOwner) {
+            if (it?.messages != null) {
+                messagesViewModel.messagesList.postValue(it.messages.toMutableList())
+            } else {
+                messagesViewModel.clearChat()
             }
         }
     }

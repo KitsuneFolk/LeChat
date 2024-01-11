@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.pandacorp.togetheraichat.data.model.ChatDataItem
 import kotlinx.coroutines.flow.Flow
 
@@ -17,4 +18,7 @@ interface ChatsDao {
 
     @Delete
     fun delete(chatItem: ChatDataItem)
+
+    @Update
+    fun update(chatItem: ChatDataItem)
 }

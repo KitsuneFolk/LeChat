@@ -7,4 +7,5 @@ interface ChatsRepository {
     fun getAll(): Flow<List<ChatItem>>
     fun insert(item: ChatItem): Long
     fun delete(item: ChatItem)
+    fun update(item: ChatItem)
 }
