@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.fragula2.navigation.SwipeBackFragment
 import com.google.android.material.snackbar.Snackbar
 import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.ScreenMainBinding
@@ -167,6 +169,28 @@ class MainScreen : Fragment() {
             } else {
                 messagesViewModel.clearChat()
             }
+        }
+        binding.drawerLayout.apply {
+            val swipeBackFragment by lazy { requireParentFragment() as SwipeBackFragment }
+            addDrawerListener(
+                object : DrawerLayout.DrawerListener {
+                    override fun onDrawerOpened(drawerView: View) {
+                        swipeBackFragment.setScrollingEnabled(false)
+                    }
+
+                    override fun onDrawerClosed(drawerView: View) {
+                        swipeBackFragment.setScrollingEnabled(true)
+                    }
+
+                    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+
+                    override fun onDrawerStateChanged(newState: Int) {
+                        if (newState == DrawerLayout.STATE_DRAGGING) {
+                            swipeBackFragment.setScrollingEnabled(false)
+                        }
+                    }
+                }
+            )
         }
     }
 }
