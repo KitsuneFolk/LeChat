@@ -50,6 +50,7 @@ dependencies {
     implementation("com.github.MrRuslanYT.openai-kotlin:openai-client:d1b8cccb3d")
     implementation("io.ktor:ktor-client-okhttp:2.3.7")
     implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.github.skydoves:powerspinner:1.2.7")
 
     // Koin
     implementation("io.insert-koin:koin-android:3.5.3")

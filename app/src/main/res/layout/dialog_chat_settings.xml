@@ -104,6 +104,27 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.skydoves.powerspinner.PowerSpinnerView
+        android:id="@+id/modelSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:hint="@string/model"
+        android:textSize="14sp"
+        app:spinner_arrow_animate="true"
+        app:spinner_arrow_gravity="end"
+        app:spinner_divider_show="false"
+        app:spinner_item_array="@array/Models"
+        app:spinner_item_height="46dp"
+        app:spinner_popup_background="@drawable/colorbackground_rounded_rectangle"
+        app:spinner_popup_elevation="14dp"
+        app:spinner_selected_item_background="@drawable/accent_rounded_rectangle" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/clearChatButton"
         android:layout_width="match_parent"

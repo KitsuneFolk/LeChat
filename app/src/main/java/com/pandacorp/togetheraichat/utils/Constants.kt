@@ -15,6 +15,7 @@ object Constants {
             const val MAX_TOKENS = "MaxTokens"
             const val FREQUENCY_PENALTY = "FrequencyPenalty"
             const val TOP_P = "TopP"
+            const val MODEL_VALUE = "ModelValue"
         }
 
         object DefaultValues {
@@ -22,6 +23,7 @@ object Constants {
             val MAX_TOKENS = getString(R.string.defaultMaxTokens).toInt()
             val FREQUENCY_PENALTY = getString(R.string.defaultFrequencyPenalty).toFloat()
             val TOP_P = getString(R.string.defaultTopP).toFloat()
+            val MODEL_VALUE = getString(R.string.defaultModelValue)
         }
     }
 

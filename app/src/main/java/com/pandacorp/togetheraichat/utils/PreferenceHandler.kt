@@ -68,6 +68,16 @@ object PreferenceHandler {
                 .apply()
         }
 
+    var modelValue: String = PreferenceManager.getDefaultSharedPreferences(App.instance)
+        .getString(Constants.Preferences.Key.MODEL_VALUE, Constants.Preferences.DefaultValues.MODEL_VALUE)!!
+        set(value) {
+            field = value
+            PreferenceManager.getDefaultSharedPreferences(App.instance)
+                .edit()
+                .putString(Constants.Preferences.Key.MODEL_VALUE, value)
+                .apply()
+        }
+
     private fun isDeviceDarkMode(): Boolean =
         (App.instance.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 

@@ -7,8 +7,10 @@ import android.util.TypedValue
 import android.view.View
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.DialogChatSettingsBinding
 import com.pandacorp.togetheraichat.utils.PreferenceHandler
+import com.pandacorp.togetheraichat.utils.getArray
 
 class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
     private val binding: DialogChatSettingsBinding by lazy {
@@ -27,6 +29,8 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
         binding.temperatureInputEditText.setText(PreferenceHandler.temperature.toString())
         binding.frequencyPenaltyInputEditText.setText(PreferenceHandler.frequencyPenalty.toString())
         binding.topPInputEditText.setText(PreferenceHandler.topP.toString())
+        binding.modelSpinner.selectItemByIndex(getArray(R.array.Models_values).indexOf(PreferenceHandler.modelValue))
+        binding.modelSpinner.lifecycleOwner = this
 
         setOnDismissListener {
             val temperature = binding.temperatureInputEditText.text.toString().toFloatOrNull()
@@ -46,6 +50,11 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
             if (topP != null) {
                 PreferenceHandler.topP = topP
             }
+
+            val modelIndex = binding.modelSpinner.selectedIndex
+            val modelValue = getArray(R.array.Models_values)[modelIndex]
+            PreferenceHandler.modelValue = modelValue
+            binding.modelSpinner.dismiss()
         }
     }
 

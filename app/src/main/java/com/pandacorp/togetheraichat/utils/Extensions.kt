@@ -20,3 +20,5 @@ fun PackageManager.getPackageInfoCompat(packageName: String, flags: Int = 0): Pa
     }
 
 fun getString(resId: Int) = App.instance.getString(resId)
+
+fun getArray(resId: Int) = App.instance.resources.getStringArray(resId)

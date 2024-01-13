@@ -23,4 +23,24 @@
         <item>@color/PurpleTheme_colorBackground</item>
     </string-array>
 
+    <string name="defaultModelValue">mistralai/Mixtral-8x7B-Instruct-v0.1</string>
+
+    <string-array name="Models">
+        <item>Mixtral-8x7B Instruct</item>
+        <item>DiscoLM Mixtral 8x7b</item>
+        <item>Mistral (7B) Instruct v0.2</item>
+        <item>LLaMA-2 Chat (70B)</item>
+        <item>Phind Code LLaMA v2 (34B)</item>
+        <item>WizardCoder v1.0 (34B)</item>
+    </string-array>
+
+    <string-array name="Models_values" translatable="false">
+        <item>mistralai/Mixtral-8x7B-Instruct-v0.1</item>
+        <item>DiscoResearch/DiscoLM-mixtral-8x7b-v2</item>
+        <item>mistralai/Mistral-7B-Instruct-v0.2</item>
+        <item>togethercomputer/llama-2-70b-chat</item>
+        <item>Phind/Phind-CodeLlama-34B-v2</item>
+        <item>WizardLM/WizardCoder-Python-34B-V1.0</item>
+    </string-array>
+
 </resources>
