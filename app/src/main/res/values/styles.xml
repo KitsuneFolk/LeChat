@@ -8,6 +8,7 @@
 
     <style name="ButtonStyle" parent="Widget.Material3.Button">
         <item name="android:textColor">?android:textColor</item>
+        <item name="rippleColor">@android:color/darker_gray</item>
     </style>
 
     <style name="SnackBarStyle" parent="ThemeOverlay.Material3.Snackbar">

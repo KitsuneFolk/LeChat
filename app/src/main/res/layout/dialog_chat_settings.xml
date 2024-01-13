@@ -113,6 +113,7 @@
         android:layout_marginEnd="10dp"
         android:text="@string/clearChat"
         android:textColor="?android:textColor"
-        app:backgroundTint="@android:color/transparent" />
+        app:backgroundTint="@android:color/transparent"
+        app:rippleColor="@android:color/darker_gray" />
 
 </LinearLayout>
