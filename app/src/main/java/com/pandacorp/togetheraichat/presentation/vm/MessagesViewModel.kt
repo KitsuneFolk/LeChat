@@ -66,10 +66,6 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
         }
     }
 
-    fun clearChat() {
-        messagesList.postValue(Constants.defaultMessagesList.toMutableList())
-    }
-
     private fun replaceAt(position: Int, replacement: MessageItem) {
         messagesList.value!![position] = replacement
         messagesList.postValue(messagesList.value)

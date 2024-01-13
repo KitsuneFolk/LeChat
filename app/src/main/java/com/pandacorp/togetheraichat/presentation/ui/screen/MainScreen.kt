@@ -47,7 +47,7 @@ class MainScreen : Fragment() {
     private val chatSettingsDialog by lazy {
         BottomDialogChatSettings(requireContext()).apply {
             setOnClearChatClickListener {
-                messagesViewModel.clearChat()
+                chatsViewModel.clearCurrentChat()
             }
         }
     }
@@ -167,7 +167,7 @@ class MainScreen : Fragment() {
             if (it?.messages != null) {
                 messagesViewModel.messagesList.postValue(it.messages.toMutableList())
             } else {
-                messagesViewModel.clearChat()
+                messagesViewModel.messagesList.postValue(Constants.defaultMessagesList.toMutableList())
             }
         }
         binding.drawerLayout.apply {

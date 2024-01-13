@@ -38,4 +38,15 @@ class ChatsViewModel(private val repository: ChatsRepository) : ViewModel() {
             repository.update(chatItem)
         }
     }
+
+    /**
+     * Clear all messages but don't delete the chat
+     */
+    fun clearCurrentChat() {
+        currentChat.value?.let {
+            val clearedChat = it.copy(messages = Constants.defaultMessagesList)
+            currentChat.postValue(clearedChat)
+            updateChat(clearedChat)
+        }
+    }
 }
