@@ -9,6 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.pandacorp.togetheraichat.R
 import com.pandacorp.togetheraichat.databinding.DialogChatSettingsBinding
+import com.pandacorp.togetheraichat.presentation.ui.adapter.spinner.SpinnerAdapter
 import com.pandacorp.togetheraichat.utils.PreferenceHandler
 import com.pandacorp.togetheraichat.utils.getArray
 
@@ -16,6 +17,9 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
     private val binding: DialogChatSettingsBinding by lazy {
         // Use by lazy because setOnClearChatClickListener is called before onCreate for some reason
         DialogChatSettingsBinding.inflate(layoutInflater)
+    }
+    private val modelsAdapter = SpinnerAdapter(binding.modelSpinner).apply {
+        setItems(getArray(R.array.Models_values).map { it })
     }
 
     fun setOnClearChatClickListener(onClickListener: View.OnClickListener) {
@@ -25,6 +29,7 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        binding.modelSpinner.setSpinnerAdapter(modelsAdapter)
         binding.maxTokensInputEditText.setText(PreferenceHandler.maxTokens.toString())
         binding.temperatureInputEditText.setText(PreferenceHandler.temperature.toString())
         binding.frequencyPenaltyInputEditText.setText(PreferenceHandler.frequencyPenalty.toString())
