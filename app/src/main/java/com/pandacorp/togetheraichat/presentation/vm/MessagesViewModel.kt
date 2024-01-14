@@ -33,6 +33,7 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
                 var isFirstTime = true
                 repository.getResponse(
                     messagesList.value!!,
+                    PreferenceHandler.modelValue,
                     PreferenceHandler.temperature,
                     PreferenceHandler.maxTokens,
                     PreferenceHandler.frequencyPenalty,

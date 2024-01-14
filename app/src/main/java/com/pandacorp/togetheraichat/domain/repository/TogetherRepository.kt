@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface TogetherRepository {
     fun getResponse(
         messages: MutableList<MessageItem>,
+        model: String,
         temperature: Float,
         maxTokens: Int?,
         frequencyPenalty: Float?,
