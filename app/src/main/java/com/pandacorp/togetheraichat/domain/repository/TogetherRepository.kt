@@ -6,11 +6,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface TogetherRepository {
     fun getResponse(
-        messages: MutableList<MessageItem>,
+        messages: List<MessageItem>,
         model: String,
         temperature: Float,
         maxTokens: Int?,
         frequencyPenalty: Float?,
         topP: Float?
     ): Flow<ChatCompletionChunk>
+
+    suspend fun summarizeChat(messages: List<MessageItem>): String
 }

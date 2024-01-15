@@ -18,4 +18,19 @@ class MessagesMapper {
             ChatMessage(role = role, content = it.message)
         }
     }
+
+    fun toSummarizationMessages(messages: List<MessageItem>): String {
+        var stringMessages = ""
+        messages.map { messageItem ->
+            val roleName = when (messageItem.role) {
+                0 -> "System"
+                1 -> "User"
+                2 -> "AI"
+                else -> "Unknown Role"
+            }
+
+            stringMessages += "$roleName: ${messageItem.message}\n"
+        }
+        return stringMessages
+    }
 }

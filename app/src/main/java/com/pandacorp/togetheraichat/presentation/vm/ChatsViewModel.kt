@@ -17,7 +17,7 @@ class ChatsViewModel(private val repository: ChatsRepository) : ViewModel() {
 
     val currentChat = MutableLiveData<ChatItem?>(null)
 
-    fun addChat(chatItem: ChatItem = ChatItem(title = "New Chat", messages = Constants.defaultMessagesList)) {
+    fun addChat(chatItem: ChatItem = ChatItem()) {
         CoroutineScope(Dispatchers.IO).launch {
             chatItem.id = repository.insert(chatItem)
             currentChat.postValue(chatItem)

@@ -22,6 +22,8 @@ import com.pandacorp.togetheraichat.presentation.ui.dialog.BottomDialogChatSetti
 import com.pandacorp.togetheraichat.presentation.vm.ChatsViewModel
 import com.pandacorp.togetheraichat.presentation.vm.MessagesViewModel
 import com.pandacorp.togetheraichat.utils.Constants
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,8 +40,9 @@ class MainScreen : Fragment() {
         onChatDeleteListener = { chatItem ->
             chatsViewModel.deleteChat(chatItem)
         }
-        onChatClickListener = {
-            chatsViewModel.currentChat.postValue(it)
+        onChatClickListener = { chatItem ->
+            // TODO: Sometimes submitList() doesn't update the list, find item in viewmodel and update now
+            chatsViewModel.currentChat.postValue(chatsViewModel.chatsFlow.value.first { it.id == chatItem.id })
         }
     }
     private val messagesAdapter = MessagesAdapter()
@@ -159,9 +162,16 @@ class MainScreen : Fragment() {
             }
         }
         messagesViewModel.onResponseGenerated = {
-            val chat = chatsViewModel.currentChat.value?.copy(messages = it)!!
-            chatsViewModel.currentChat.postValue(chat)
-            chatsViewModel.updateChat(chat)
+            CoroutineScope(Dispatchers.IO).launch {
+                var title = ChatItem().title
+                // Summarize only once by checking if the title is default
+                if (chatsViewModel.currentChat.value?.title == title) {
+                    title = messagesViewModel.summarizeChat(it)
+                }
+                val chat = chatsViewModel.currentChat.value!!.copy(title = title, messages = it)
+                chatsViewModel.currentChat.postValue(chat)
+                chatsViewModel.updateChat(chat)
+            }
         }
         chatsViewModel.currentChat.observe(viewLifecycleOwner) {
             if (it?.messages != null) {

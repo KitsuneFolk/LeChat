@@ -67,6 +67,10 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
         }
     }
 
+    suspend fun summarizeChat(messages: List<MessageItem>): String {
+        return repository.summarizeChat(messages)
+    }
+
     private fun replaceAt(position: Int, replacement: MessageItem) {
         messagesList.value!![position] = replacement
         messagesList.postValue(messagesList.value)
