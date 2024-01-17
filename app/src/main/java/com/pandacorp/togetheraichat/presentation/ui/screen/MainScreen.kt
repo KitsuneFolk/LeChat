@@ -69,7 +69,6 @@ class MainScreen : Fragment() {
     }
 
     private fun initViews() {
-        binding.toolbarInclude.toolbar.title = getString(R.string.app_name)
         binding.toolbarInclude.toolbar.inflateMenu(R.menu.menu_main)
         binding.toolbarInclude.toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -174,6 +173,7 @@ class MainScreen : Fragment() {
             }
         }
         chatsViewModel.currentChat.observe(viewLifecycleOwner) {
+            binding.toolbarInclude.toolbar.title = it?.title ?: ChatItem().title
             if (it?.messages != null) {
                 messagesViewModel.messagesList.postValue(it.messages.toMutableList())
             } else {
