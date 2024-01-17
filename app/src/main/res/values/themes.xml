@@ -35,6 +35,7 @@
         <item name="snackbarStyle">@style/SnackBarStyle</item>
         <item name="snackbarTextViewStyle">@style/SnackBarTextViewStyle</item>
         <item name="snackbarButtonStyle">@style/SnackBarButtonStyle</item>
+        <item name="textInputStyle">@style/TextInputLayoutStyle</item>
     </style>
 
     <style name="BlueTheme" parent="BaseTheme">

@@ -26,4 +26,19 @@
         <item name="strokeWidth">@dimen/stroke</item>
     </style>
 
+    <style name="TextInputLayoutStyle" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">?android:textColor</item>
+        <item name="android:textColorHint">?android:textColor</item>
+        <item name="materialThemeOverlay">@style/EditTextOverlay</item>
+    </style>
+
+    <style name="TextInputEditText" parent="@style/Widget.Material3.TextInputEditText.OutlinedBox">
+        <item name="android:textColor">?android:textColor</item>
+        <item name="android:textColorHighlight">?colorAccent</item>
+    </style>
+
+    <style name="EditTextOverlay" parent="ThemeOverlay.Design.TextInputEditText">
+        <item name="editTextStyle">@style/TextInputEditText</item>
+    </style>
+
 </resources>

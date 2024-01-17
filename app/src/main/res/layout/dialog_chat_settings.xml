@@ -10,12 +10,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxStrokeColor="?strokeColor"
-        app:hintTextColor="?android:textColor">
+        android:layout_height="wrap_content">
 
-        <!--  android:textCursorDrawable="@null" results in the cursor being white,
-            else the cursor is black and not seen  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/maxTokensInputEditText"
             android:layout_width="match_parent"
@@ -27,19 +23,14 @@
             android:inputType="number"
             android:maxLength="8"
             android:maxLines="1"
-            android:text="@string/defaultMaxTokens"
-            android:textCursorDrawable="@null" />
+            android:text="@string/defaultMaxTokens" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxStrokeColor="?strokeColor"
-        app:hintTextColor="?android:textColor">
+        android:layout_height="wrap_content">
 
-        <!--  android:textCursorDrawable="@null" results in the cursor being white,
-            else the cursor is black and not seen  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/temperatureInputEditText"
             android:layout_width="match_parent"
@@ -51,19 +42,14 @@
             android:inputType="numberDecimal"
             android:maxLength="8"
             android:maxLines="1"
-            android:text="@string/defaultTemperature"
-            android:textCursorDrawable="@null" />
+            android:text="@string/defaultTemperature" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxStrokeColor="?strokeColor"
-        app:hintTextColor="?android:textColor">
+        android:layout_height="wrap_content">
 
-        <!--  android:textCursorDrawable="@null" results in the cursor being white,
-            else the cursor is black and not seen  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/frequencyPenaltyInputEditText"
             android:layout_width="match_parent"
@@ -75,19 +61,14 @@
             android:inputType="numberDecimal"
             android:maxLength="8"
             android:maxLines="1"
-            android:text="@string/defaultFrequencyPenalty"
-            android:textCursorDrawable="@null" />
+            android:text="@string/defaultFrequencyPenalty" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxStrokeColor="?strokeColor"
-        app:hintTextColor="?android:textColor">
+        android:layout_height="wrap_content">
 
-        <!--  android:textCursorDrawable="@null" results in the cursor being white,
-            else the cursor is black and not seen  -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/topPInputEditText"
             android:layout_width="match_parent"
@@ -99,8 +80,7 @@
             android:inputType="numberDecimal"
             android:maxLength="8"
             android:maxLines="1"
-            android:text="@string/defaultTopP"
-            android:textCursorDrawable="@null" />
+            android:text="@string/defaultTopP" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
