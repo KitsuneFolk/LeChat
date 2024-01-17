@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.pandacorp.togetheraichat"
+    namespace = "com.pandacorp.lechat"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.pandacorp.togetheraichat"
+        applicationId = "com.pandacorp.lechat"
         minSdk = 21
         targetSdk = 34
         versionCode = 1

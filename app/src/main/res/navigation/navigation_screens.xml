@@ -6,12 +6,12 @@
 
     <swipeable
         android:id="@+id/nav_main_screen"
-        android:name="com.pandacorp.togetheraichat.presentation.ui.screen.MainScreen"
+        android:name="com.pandacorp.lechat.presentation.ui.screen.MainScreen"
         tools:layout="@layout/screen_main" />
 
     <swipeable
         android:id="@+id/nav_settings_screen"
-        android:name="com.pandacorp.togetheraichat.presentation.ui.screen.SettingsScreen"
+        android:name="com.pandacorp.lechat.presentation.ui.screen.SettingsScreen"
         tools:layout="@layout/screen_settings" />
 
 </navigation>

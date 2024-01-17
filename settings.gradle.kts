@@ -14,6 +14,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TogetherAIChat"
+rootProject.name = "LeChat"
 include(":app")
  
