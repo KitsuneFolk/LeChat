@@ -29,11 +29,15 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.modelSpinner.setSpinnerAdapter(modelsAdapter)
         binding.maxTokensInputEditText.setText(PreferenceHandler.maxTokens.toString())
         binding.temperatureInputEditText.setText(PreferenceHandler.temperature.toString())
         binding.frequencyPenaltyInputEditText.setText(PreferenceHandler.frequencyPenalty.toString())
         binding.topPInputEditText.setText(PreferenceHandler.topP.toString())
+        binding.modelSpinnerCardView.setOnClickListener {
+            binding.modelSpinner.showOrDismiss()
+        }
+        binding.modelSpinner.isClickable = false
+        binding.modelSpinner.setSpinnerAdapter(modelsAdapter)
         binding.modelSpinner.selectItemByIndex(getArray(R.array.Models_values).indexOf(PreferenceHandler.modelValue))
         binding.modelSpinner.lifecycleOwner = this
 
