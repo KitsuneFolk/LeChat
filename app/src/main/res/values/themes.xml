@@ -46,6 +46,7 @@
         <item name="colorPrimaryDark">@color/BlueTheme_colorPrimaryDark</item>
         <item name="colorAccent">@color/BlueTheme_colorAccent</item>
         <item name="android:textColorSecondary">@color/BlueTheme_textColorSecondary</item>
+        <item name="inactiveStrokeColor">@color/BlueTheme_inactiveStrokeColor</item>
     </style>
 
     <style name="DarkTheme" parent="BaseTheme">
@@ -56,6 +57,7 @@
         <item name="colorPrimaryDark">@color/DarkTheme_colorPrimaryDark</item>
         <item name="colorAccent">@color/DarkTheme_colorAccent</item>
         <item name="android:textColorSecondary">@color/DarkTheme_textColorSecondary</item>
+        <item name="inactiveStrokeColor">@color/DarkTheme_inactiveStrokeColor</item>
     </style>
 
     <style name="PurpleTheme" parent="BaseTheme">
@@ -66,6 +68,7 @@
         <item name="colorPrimaryDark">@color/PurpleTheme_colorPrimaryDark</item>
         <item name="colorAccent">@color/PurpleTheme_colorAccent</item>
         <item name="android:textColorSecondary">@color/PurpleTheme_textColorSecondary</item>
+        <item name="inactiveStrokeColor">@color/PurpleTheme_inactiveStrokeColor</item>
     </style>
 
 </resources>

@@ -6,6 +6,7 @@
     <color name="BlueTheme_colorAccent">#FF1FF4</color>
     <color name="BlueTheme_colorBackground">#4B68FF</color>
     <color name="BlueTheme_textColorSecondary">#F0DBD8</color>
+    <color name="BlueTheme_inactiveStrokeColor">#737373</color>
 
     <!-- DarkTheme -->
     <color name="DarkTheme_colorPrimary">#0A0A0A</color>
@@ -13,6 +14,7 @@
     <color name="DarkTheme_colorAccent">#FFCC80</color>
     <color name="DarkTheme_colorBackground">#141414</color>
     <color name="DarkTheme_textColorSecondary">#DAB1B1</color>
+    <color name="DarkTheme_inactiveStrokeColor">#505050</color>
 
     <!-- PurpleTheme -->
     <color name="PurpleTheme_colorPrimary">#8A2BE2</color>
@@ -20,9 +22,9 @@
     <color name="PurpleTheme_colorBackground">#9966CC</color>
     <color name="PurpleTheme_colorAccent">#8C9EFF</color>
     <color name="PurpleTheme_textColorSecondary">#EFB3FF</color>
+    <color name="PurpleTheme_inactiveStrokeColor">#737373</color>
 
     <!--  Other  -->
     <color name="ic_launcher_background">#3F48CC</color>
     <color name="light_gray">#BABABA</color>
-    <color name="dark_gray">#646464</color>
 </resources>

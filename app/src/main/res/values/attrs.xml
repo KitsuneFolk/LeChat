@@ -2,4 +2,5 @@
 <resources>
     <attr name="toolbarColor" format="color" />
     <attr name="colorBackground" format="color" />
+    <attr name="inactiveStrokeColor" format="color" />
 </resources>
