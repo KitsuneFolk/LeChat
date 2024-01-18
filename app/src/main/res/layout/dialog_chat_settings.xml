@@ -93,7 +93,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="?selectableItemBackground"
+        android:background="@drawable/ripple_border"
         android:gravity="center"
         android:hint="@string/model"
         android:textSize="14sp"
