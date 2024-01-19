@@ -87,6 +87,7 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
             // Remove quotes from the summary
             summarized.replace("\"", "")
             summarized.replace("\'", "")
+            summarized.trim()
             continuation.resume(summarized)
         }
     }
