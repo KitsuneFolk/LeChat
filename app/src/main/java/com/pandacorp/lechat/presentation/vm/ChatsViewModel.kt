@@ -44,7 +44,7 @@ class ChatsViewModel(private val repository: ChatsRepository) : ViewModel() {
      */
     fun clearCurrentChat() {
         currentChat.value?.let {
-            val clearedChat = it.copy(title = ChatItem().title, messages = Constants.defaultMessagesList)
+            val clearedChat = it.copy(title = ChatItem.defaultTitle, messages = Constants.defaultMessagesList)
             currentChat.postValue(clearedChat)
             updateChat(clearedChat)
         }

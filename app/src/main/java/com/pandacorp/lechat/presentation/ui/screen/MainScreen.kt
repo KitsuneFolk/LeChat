@@ -162,7 +162,7 @@ class MainScreen : Fragment() {
         }
         messagesViewModel.onResponseGenerated = {
             CoroutineScope(Dispatchers.IO).launch {
-                var title = ChatItem().title
+                var title = ChatItem.defaultTitle
                 // Summarize only once by checking if the title is default
                 if (chatsViewModel.currentChat.value?.title == title) {
                     title = messagesViewModel.summarizeChat(it)
@@ -173,7 +173,7 @@ class MainScreen : Fragment() {
             }
         }
         chatsViewModel.currentChat.observe(viewLifecycleOwner) {
-            binding.toolbarInclude.toolbar.title = it?.title ?: ChatItem().title
+            binding.toolbarInclude.toolbar.title = it?.title ?: ChatItem.defaultTitle
             if (it?.messages != null) {
                 messagesViewModel.messagesList.postValue(it.messages.toMutableList())
             } else {
