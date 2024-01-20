@@ -43,6 +43,7 @@ class MainScreen : Fragment() {
         onChatClickListener = { chatItem ->
             // TODO: Sometimes submitList() doesn't update the list, find item in viewmodel and update now
             chatsViewModel.currentChat.postValue(chatsViewModel.chatsFlow.value.first { it.id == chatItem.id })
+            binding.drawerLayout.close()
         }
     }
     private val messagesAdapter = MessagesAdapter()
