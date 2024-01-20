@@ -85,9 +85,9 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
                 }
                 .toList() // Use toList to collect the entire flow
             // Remove quotes from the summary
-            summarized.replace("\"", "")
-            summarized.replace("\'", "")
-            summarized.trim()
+            summarized = summarized.replace("\"", "")
+            summarized = summarized.replace("\'", "")
+            summarized = summarized.trim() // Models return a whitespace character at the start of the response
             continuation.resume(summarized)
         }
     }
