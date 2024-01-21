@@ -15,6 +15,8 @@
     <string name="close">Close</string>
     <string name="chats">Chats</string>
     <string name="addChat">Add chat</string>
+    <string name="deleted">Deleted %1$s</string>
+    <string name="undo">Undo</string>
 
     <!--  Settings  -->
     <string name="settings">Settings</string>

@@ -39,6 +39,18 @@ class MainScreen : Fragment() {
     private val chatsAdapter = ChatsAdapter().apply {
         onChatDeleteListener = { chatItem ->
             chatsViewModel.deleteChat(chatItem)
+            Snackbar.make(
+                binding.messageInputLayout,
+                resources.getString(R.string.deleted, "1"),
+                Snackbar.LENGTH_LONG
+            )
+                .apply {
+                    animationMode = Snackbar.ANIMATION_MODE_SLIDE
+                    show()
+                    setAction(R.string.undo) {
+                        chatsViewModel.addChat(chatItem)
+                    }
+                }
         }
         onChatClickListener = { chatItem ->
             // TODO: Sometimes submitList() doesn't update the list, find item in viewmodel and update now
