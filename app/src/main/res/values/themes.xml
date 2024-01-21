@@ -13,7 +13,7 @@
         <item name="android:statusBarColor">?toolbarColor</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="android:navigationBarColor">?colorPrimary</item>
-        <item name="rippleColor">@android:color/white</item>
+        <item name="rippleColor">?colorControlHighlight</item>
         <item name="colorSurface">?colorPrimaryDark</item>
         <item name="colorControlNormal">@android:color/white</item>
         <item name="strokeColor">@android:color/darker_gray</item>
