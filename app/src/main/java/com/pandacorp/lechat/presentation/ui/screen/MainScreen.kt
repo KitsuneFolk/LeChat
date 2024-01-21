@@ -100,6 +100,9 @@ class MainScreen : Fragment() {
         )
 
         binding.drawerLayout.addDrawerListener(drawerToggle)
+        binding.motionDrawerLayout.post {
+            binding.motionDrawerLayout.loadLayoutDescription(R.xml.drawer_layout_motion_scene)
+        }
         binding.addChatButton.setOnClickListener {
             chatsViewModel.addChat()
         }

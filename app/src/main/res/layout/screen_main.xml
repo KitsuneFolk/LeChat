@@ -7,79 +7,87 @@
     android:layout_height="match_parent"
     tools:openDrawer="start">
 
-    <LinearLayout
+    <!-- Custom class to create an animation on slide -->
+    <com.pandacorp.lechat.utils.MotionDrawerLayout
+        android:id="@+id/motionDrawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?android:colorBackground"
-        android:orientation="vertical">
-
-        <include
-            android:id="@+id/toolbarInclude"
-            layout="@layout/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbarInclude"
-            tools:listitem="@layout/item_message" />
+        android:background="?android:colorBackground">
 
         <LinearLayout
-            android:id="@+id/messageInputLayout"
+            android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/message_input_bg"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText"
-                android:layout_width="0dp"
+            <include
+                android:id="@+id/toolbarInclude"
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:hint="@string/message"
-                android:imeOptions="actionDone"
-                android:textColorHint="@color/light_gray" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbarInclude"
+                tools:listitem="@layout/item_message" />
 
-            <ImageButton
-                android:id="@+id/chatSettingsButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="5dp"
-                android:background="?selectableItemBackgroundBorderless"
-                android:backgroundTint="@android:color/transparent"
-                android:contentDescription="@string/settings"
-                android:src="@drawable/ic_chat_bubble" />
+            <LinearLayout
+                android:id="@+id/messageInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/message_input_bg"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-            <ImageButton
-                android:id="@+id/sendButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="?selectableItemBackgroundBorderless"
-                android:backgroundTint="@android:color/transparent"
-                android:contentDescription="@string/send"
-                android:src="@drawable/ic_send" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/message"
+                    android:imeOptions="actionDone"
+                    android:textColorHint="@color/light_gray" />
 
+                <ImageButton
+                    android:id="@+id/chatSettingsButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:backgroundTint="@android:color/transparent"
+                    android:contentDescription="@string/settings"
+                    android:src="@drawable/ic_chat_bubble" />
+
+                <ImageButton
+                    android:id="@+id/sendButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:backgroundTint="@android:color/transparent"
+                    android:contentDescription="@string/send"
+                    android:src="@drawable/ic_send" />
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </com.pandacorp.lechat.utils.MotionDrawerLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"

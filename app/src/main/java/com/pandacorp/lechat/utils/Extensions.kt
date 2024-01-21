@@ -3,6 +3,8 @@ package com.pandacorp.lechat.utils
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Bundle
+import android.os.Parcelable
 import com.pandacorp.lechat.di.app.App
 
 /**
@@ -22,3 +24,23 @@ fun PackageManager.getPackageInfoCompat(packageName: String, flags: Int = 0): Pa
 fun getString(resId: Int) = App.instance.getString(resId)
 
 fun getArray(resId: Int) = App.instance.resources.getStringArray(resId)
+
+/**
+ * A compatibility wrapper around Bundle's `getParcelableExtra()` method that works on old and new API
+ *
+ * @param name The name of the extra to retrieve.
+ * @param clazz The class of the extra to retrieve.
+ * @return The Parcelable extra with the specified name and class, or null if it does not exist.
+ */
+inline fun <reified T : Parcelable> Bundle.getParcelableExtraSupport(name: String, clazz: Class<T>): T? {
+    val extra =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getParcelable(name, clazz)
+        } else {
+            @Suppress("DEPRECATION")
+            getParcelable(name)
+                    as? T
+        }
+    if (extra is T) return extra
+    return null
+}
