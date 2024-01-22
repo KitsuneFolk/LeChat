@@ -37,6 +37,9 @@ class MainScreen : Fragment() {
     private val chatsViewModel: ChatsViewModel by viewModel()
 
     private val chatsAdapter = ChatsAdapter().apply {
+        onChatRenameListener = { chatItem ->
+            chatsViewModel.updateChat(chatItem)
+        }
         onChatDeleteListener = { chatItem ->
             chatsViewModel.deleteChat(chatItem)
             Snackbar.make(

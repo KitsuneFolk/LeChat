@@ -2,6 +2,7 @@ package com.pandacorp.lechat.presentation.ui.adapter.chat
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -26,15 +27,40 @@ class ChatsAdapter : ListAdapter<ChatItem, ChatsAdapter.ViewHolder>(DiffCallback
     inner class ViewHolder(private val binding: ItemChatBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(chatItem: ChatItem) {
             bindTitle(chatItem.title)
-            bindDeleteChatButton(chatItem)
+            bindButtons(chatItem)
             bindClick(chatItem)
         }
 
         fun bindTitle(title: String) {
             binding.title.text = title
+            binding.editText.setText(title)
         }
 
-        private fun bindDeleteChatButton(chatItem: ChatItem) {
+        private fun bindButtons(chatItem: ChatItem) {
+            fun toggleRenameMode(show: Boolean) {
+                with(binding) {
+                    editText.visibility = if (show) View.VISIBLE else View.GONE
+                    title.visibility = if (show) View.GONE else View.VISIBLE
+                    renameChatButton.visibility = if (show) View.GONE else View.VISIBLE
+                    deleteChatButton.visibility = if (show) View.GONE else View.VISIBLE
+                    applyRenameButton.visibility = if (show) View.VISIBLE else View.GONE
+                    cancelRenameButton.visibility = if (show) View.VISIBLE else View.GONE
+                }
+            }
+
+            binding.renameChatButton.setOnClickListener {
+                toggleRenameMode(true)
+            }
+
+            binding.cancelRenameButton.setOnClickListener {
+                toggleRenameMode(false)
+            }
+
+            binding.applyRenameButton.setOnClickListener {
+                onChatRenameListener?.invoke(chatItem.copy(title = binding.editText.text.toString()))
+                toggleRenameMode(false)
+            }
+
             binding.deleteChatButton.setOnClickListener {
                 onChatDeleteListener?.invoke(chatItem)
             }
@@ -48,6 +74,7 @@ class ChatsAdapter : ListAdapter<ChatItem, ChatsAdapter.ViewHolder>(DiffCallback
     }
 
     var onChatClickListener: ((ChatItem) -> Unit)? = null
+    var onChatRenameListener: ((ChatItem) -> Unit)? = null
     var onChatDeleteListener: ((ChatItem) -> Unit)? = null
 
     override fun submitList(list: List<ChatItem>?) {
