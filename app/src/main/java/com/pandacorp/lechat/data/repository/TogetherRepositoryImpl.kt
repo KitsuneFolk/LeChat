@@ -55,7 +55,7 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
         val mappedMessages = messagesMapper.toSummarizationMessages(messages)
         val summarizationPrompt =
             """"
-            Summarize this chat in a few words(3-6 words), don't use any redundant words("Sure", "Certainly", etc), you must NOT use quotes(" or '), only summarization. This is very important to my career.
+            Summarize this chat in a three to six words, don't use redundant words("Sure", "Certainly", etc), provide only summarization. This is very important to my career.
             Example 1:
               User: What's the capital of Ukraine?
               AI: The capital of Ukraine is Kyiv. Kyiv is an important industrial, scientific, educational, and cultural center in Eastern Europe.
