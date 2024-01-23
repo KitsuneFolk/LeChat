@@ -10,6 +10,7 @@ import com.pandacorp.lechat.R
 import com.pandacorp.lechat.databinding.ScreenSettingsBinding
 import com.pandacorp.lechat.presentation.ui.dialog.DialogListView
 import com.pandacorp.lechat.utils.Constants
+import com.pandacorp.lechat.utils.PreferenceHandler
 import com.pandacorp.lechat.utils.getPackageInfoCompat
 
 class SettingsScreen : Fragment() {
@@ -88,6 +89,11 @@ class SettingsScreen : Fragment() {
             val key = binding.apiEditText.text.toString()
             sp.edit().putString(Constants.Preferences.Key.API, key).apply()
             Constants.apiKey.postValue(key)
+        }
+
+        binding.drawerAnimationSwitch.isChecked = PreferenceHandler.showDrawerAnimation
+        binding.drawerAnimationSwitch.setOnCheckedChangeListener { _, isChecked ->
+            PreferenceHandler.showDrawerAnimation = isChecked
         }
 
         // Retrieve the version from build.gradle and assign it to the TextView

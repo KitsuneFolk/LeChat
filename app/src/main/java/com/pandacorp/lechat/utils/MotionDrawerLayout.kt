@@ -20,7 +20,7 @@ class MotionDrawerLayout : MotionLayout, DrawerLayout.DrawerListener {
     override fun onDrawerStateChanged(newState: Int) {}
 
     override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-        progress = slideOffset
+        progress = if (PreferenceHandler.showDrawerAnimation) slideOffset else 0f
     }
 
     override fun onDrawerClosed(drawerView: View) {}

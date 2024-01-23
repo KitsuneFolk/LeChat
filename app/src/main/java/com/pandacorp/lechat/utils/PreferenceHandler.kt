@@ -78,6 +78,19 @@ object PreferenceHandler {
                 .apply()
         }
 
+    var showDrawerAnimation: Boolean = PreferenceManager.getDefaultSharedPreferences(App.instance)
+        .getBoolean(
+            Constants.Preferences.Key.SHOW_DRAWER_ANIMATION,
+            Constants.Preferences.DefaultValues.SHOW_DRAWER_ANIMATION
+        )
+        set(value) {
+            field = value
+            PreferenceManager.getDefaultSharedPreferences(App.instance)
+                .edit()
+                .putBoolean(Constants.Preferences.Key.SHOW_DRAWER_ANIMATION, value)
+                .apply()
+        }
+
     private fun isDeviceDarkMode(): Boolean =
         (App.instance.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 

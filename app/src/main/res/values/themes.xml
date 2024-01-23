@@ -32,6 +32,7 @@
 
         <item name="toolbarStyle">@style/ToolbarStyle</item>
         <item name="materialButtonStyle">@style/ButtonStyle</item>
+        <item name="switchStyle">@style/Widget.AppCompat.CompoundButton.Switch</item>
         <item name="snackbarStyle">@style/SnackBarStyle</item>
         <item name="snackbarTextViewStyle">@style/SnackBarTextViewStyle</item>
         <item name="snackbarButtonStyle">@style/SnackBarButtonStyle</item>
