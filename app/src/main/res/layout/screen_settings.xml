@@ -248,6 +248,41 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/chatTitleLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingStart="5dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="5dp"
+                            android:paddingBottom="10dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@string/createTitleByAI"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:src="@drawable/ic_title" />
+
+                            <com.google.android.material.switchmaterial.SwitchMaterial
+                                android:id="@+id/chatTitleSwitch"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked="@string/defaultCreateTitleByAI"
+                                android:paddingStart="10dp"
+                                android:paddingTop="10dp"
+                                android:paddingEnd="5dp"
+                                android:paddingBottom="10dp"
+                                android:text="@string/createTitleByAI"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:id="@+id/versionLayout"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

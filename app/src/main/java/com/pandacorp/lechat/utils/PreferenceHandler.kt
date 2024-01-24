@@ -91,6 +91,19 @@ object PreferenceHandler {
                 .apply()
         }
 
+    var createTitleByAI: Boolean = PreferenceManager.getDefaultSharedPreferences(App.instance)
+        .getBoolean(
+            Constants.Preferences.Key.CREATE_TITLE_BY_AI,
+            Constants.Preferences.DefaultValues.CREATE_TITLE_BY_AI
+        )
+        set(value) {
+            field = value
+            PreferenceManager.getDefaultSharedPreferences(App.instance)
+                .edit()
+                .putBoolean(Constants.Preferences.Key.CREATE_TITLE_BY_AI, value)
+                .apply()
+        }
+
     private fun isDeviceDarkMode(): Boolean =
         (App.instance.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 

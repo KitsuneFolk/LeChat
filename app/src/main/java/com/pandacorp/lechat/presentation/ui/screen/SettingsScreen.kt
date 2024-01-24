@@ -96,6 +96,11 @@ class SettingsScreen : Fragment() {
             PreferenceHandler.showDrawerAnimation = isChecked
         }
 
+        binding.chatTitleSwitch.isChecked = PreferenceHandler.createTitleByAI
+        binding.chatTitleSwitch.setOnCheckedChangeListener { _, isChecked ->
+            PreferenceHandler.createTitleByAI = isChecked
+        }
+
         // Retrieve the version from build.gradle and assign it to the TextView
         binding.versionTextView.apply {
             val version =

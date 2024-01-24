@@ -22,6 +22,7 @@ import com.pandacorp.lechat.presentation.ui.dialog.BottomDialogChatSettings
 import com.pandacorp.lechat.presentation.vm.ChatsViewModel
 import com.pandacorp.lechat.presentation.vm.MessagesViewModel
 import com.pandacorp.lechat.utils.Constants
+import com.pandacorp.lechat.utils.PreferenceHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -184,7 +185,9 @@ class MainScreen : Fragment() {
                 var title = ChatItem.defaultTitle
                 // Summarize only once by checking if the title is default
                 if (chatsViewModel.currentChat.value?.title == title) {
-                    title = messagesViewModel.summarizeChat(it)
+                    if (PreferenceHandler.createTitleByAI) {
+                        title = messagesViewModel.summarizeChat(it)
+                    }
                 }
                 val chat = chatsViewModel.currentChat.value!!.copy(title = title, messages = it)
                 chatsViewModel.currentChat.postValue(chat)
