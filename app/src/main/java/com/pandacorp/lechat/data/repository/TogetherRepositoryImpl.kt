@@ -55,7 +55,7 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
         val mappedMessages = messagesMapper.toSummarizationMessages(messages)
         val summarizationPrompt =
             """"
-            Summarize this chat in a three to six words, don't use redundant words("Sure", "Certainly", etc), provide only summarization. This is very important to my career.
+            You are a professional summarization bot. Summarize this conversation and return a title which will be assigned to this conversation. This is very important to my career. Please respond only with the title and nothing more.
             Example 1:
               User: What's the capital of Ukraine?
               AI: The capital of Ukraine is Kyiv. Kyiv is an important industrial, scientific, educational, and cultural center in Eastern Europe.
@@ -67,7 +67,8 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
               Good Summary: Monaco is located in Western Europe.
               Bad Summary: Monaco is a small principality located in Western Europe on the French Riviera. It is known for its luxurious lifestyle.
             Conversation:
-              "$mappedMessages"
+            "
+            $mappedMessages"
             """
         var summarized = ""
         val summarizeMessage = listOf(
