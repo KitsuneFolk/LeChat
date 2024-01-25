@@ -8,7 +8,8 @@ import com.pandacorp.lechat.domain.model.MessageItem
 import com.pandacorp.lechat.domain.repository.TogetherRepository
 import com.pandacorp.lechat.utils.Constants
 import com.pandacorp.lechat.utils.PreferenceHandler
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -17,8 +18,11 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
     val messagesList: MutableLiveData<MutableList<MessageItem>> =
         MutableLiveData(Constants.defaultMessagesList.toMutableList())
     val errorCode = MutableLiveData<Int?>(null)
+    val isResponseGenerating = MutableLiveData(false)
 
     var onResponseGenerated: ((List<MessageItem>) -> Unit)? = null
+
+    private var responseJob: Job? = null
 
     fun addMessage(messageItem: MessageItem): Int {
         messageItem.id = (messagesList.value!!.size).toLong()
@@ -31,7 +35,7 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
         viewModelScope.launch {
             try {
                 var isFirstTime = true
-                repository.getResponse(
+                responseJob = repository.getResponse(
                     messagesList.value!!,
                     PreferenceHandler.modelValue,
                     PreferenceHandler.temperature,
@@ -47,15 +51,18 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
                             isFirstTime = false
                             // Make sure the first token is not a space
                             token = token?.trim()
+                            isResponseGenerating.postValue(true)
                         }
                         val response = messagesList.value!!.last().copy()
                         response.message += token
                         replaceAt(response.id.toInt(), response)
                     }
                     .onCompletion {
+                        isResponseGenerating.postValue(false)
+                        responseJob = null
                         onResponseGenerated?.invoke(messagesList.value!!)
                     }
-                    .collect()
+                    .launchIn(this)
             } catch (e: TogetherAIException) {
                 val error = e.cause?.toString() ?: "\"Text: Unknown error\""
                 val regex = Regex("\\b(\\d{3})\\b")
@@ -65,6 +72,11 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
                 this@MessagesViewModel.errorCode.postValue(errorCode)
             }
         }
+    }
+
+    fun stopResponse() {
+        responseJob?.cancel()
+        responseJob = null
     }
 
     suspend fun summarizeChat(messages: List<MessageItem>): String {

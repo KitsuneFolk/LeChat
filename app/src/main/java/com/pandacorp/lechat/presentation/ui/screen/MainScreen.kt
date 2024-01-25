@@ -126,24 +126,28 @@ class MainScreen : Fragment() {
         binding.chatSettingsButton.setOnClickListener {
             chatSettingsDialog.show()
         }
-        binding.sendButton.setOnClickListener {
-            val message = binding.editText.text.toString().trim()
-            if (message.isNotBlank()) {
-                var chat = chatsViewModel.currentChat.value
-                // Add a chat if there's no one
-                if (chat == null) {
-                    val messageItem = MessageItem(
-                        id = 1,
-                        role = MessageItem.USER,
-                        message = message
-                    )
-                    val messages = Constants.defaultMessagesList.plus(messageItem)
-                    chat = ChatItem(title = "New Chat", messages = messages)
-                    chatsViewModel.addChat(chat)
+        binding.sendStopButton.setOnClickListener {
+            if (messagesViewModel.isResponseGenerating.value == true) {
+                messagesViewModel.stopResponse()
+            } else {
+                val message = binding.editText.text.toString().trim()
+                if (message.isNotBlank()) {
+                    var chat = chatsViewModel.currentChat.value
+                    // Add a chat if there's no one
+                    if (chat == null) {
+                        val messageItem = MessageItem(
+                            id = 1,
+                            role = MessageItem.USER,
+                            message = message
+                        )
+                        val messages = Constants.defaultMessagesList.plus(messageItem)
+                        chat = ChatItem(title = "New Chat", messages = messages)
+                        chatsViewModel.addChat(chat)
+                    }
+                    messagesViewModel.addMessage(MessageItem(message = message, role = MessageItem.USER))
+                    messagesViewModel.getResponse()
+                    binding.editText.setText("")
                 }
-                messagesViewModel.addMessage(MessageItem(message = message, role = MessageItem.USER))
-                messagesViewModel.getResponse()
-                binding.editText.setText("")
             }
         }
 
@@ -178,6 +182,13 @@ class MainScreen : Fragment() {
                         show()
                     }
                 messagesViewModel.errorCode.value = null
+            }
+        }
+        messagesViewModel.isResponseGenerating.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.sendStopButton.setImageResource(R.drawable.ic_stop)
+            } else {
+                binding.sendStopButton.setImageResource(R.drawable.ic_send)
             }
         }
         messagesViewModel.onResponseGenerated = {
