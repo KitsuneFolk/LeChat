@@ -55,17 +55,12 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
         val mappedMessages = messagesMapper.toSummarizationMessages(messages)
         val summarizationPrompt =
             """"
-            You are a professional summarization bot. Summarize this conversation and return a title which will be assigned to this conversation. This is very important to my career. Please respond only with the title and nothing more.
-            Example 1:
+            You are a professional summarization bot. Summarize this conversation and return a title which will be assigned to this conversation. Respond only with the title and nothing more. You are prohibited from using words not related to the title(e.g "Certainly", "Sure", "Title: ").
+            Example:
               User: What's the capital of Ukraine?
               AI: The capital of Ukraine is Kyiv. Kyiv is an important industrial, scientific, educational, and cultural center in Eastern Europe.
               Good Summary: The capital of Ukraine.
-              Bad Summary: The capital of Ukraine is Kyiv, which is an important center of Easter Europe.
-            Example 2:
-              User: Where is Monaco located?
-              AI: Monaco is a principality located in Western Europe, on the French Riviera in the Mediterranean Sea. It is bordered by France to the north, east, and west, and by the Mediterranean Sea to the south.
-              Good Summary: Monaco is located in Western Europe.
-              Bad Summary: Monaco is a small principality located in Western Europe on the French Riviera. It is known for its luxurious lifestyle.
+              Bad Summary: "Title: The capital of Ukraine is Kyiv, which is an important center of Easter Europe."
             Conversation:
             "
             $mappedMessages"
@@ -88,6 +83,7 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
             // Remove quotes from the summary
             summarized = summarized.replace("\"", "")
             summarized = summarized.replace("\'", "")
+            summarized = summarized.replace("Title: ", "")
             summarized = summarized.trim() // Models return a whitespace character at the start of the response
             continuation.resume(summarized)
         }
