@@ -55,12 +55,12 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
         val mappedMessages = messagesMapper.toSummarizationMessages(messages)
         val summarizationPrompt =
             """"
-            You are a professional summarization bot. Summarize this conversation and return a title which will be assigned to this conversation. Respond only with the title and nothing more. You are prohibited from using words not related to the title(e.g "Certainly", "Sure", "Title: ").
+            You are a professional title creator bot. Create a title for this conversation in the user's language. Respond only with the title and nothing more. You are prohibited from using words not related to the title(e.g "Certainly", "Sure", "Title: ").
             Example:
               User: What's the capital of Ukraine?
               AI: The capital of Ukraine is Kyiv. Kyiv is an important industrial, scientific, educational, and cultural center in Eastern Europe.
-              Good Summary: The capital of Ukraine.
-              Bad Summary: "Title: The capital of Ukraine is Kyiv, which is an important center of Easter Europe."
+              Good title: The capital of Ukraine.
+              Bad title: "Title: The capital of Ukraine is Kyiv, which is an important center of Easter Europe."
             Conversation:
             "
             $mappedMessages"
