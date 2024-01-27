@@ -14,6 +14,7 @@ import com.pandacorp.lechat.domain.model.MessageItem
 class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(DiffCallback()) {
     companion object {
         const val PAYLOAD_BUTTONS = "buttons"
+        const val PAYLOAD_MESSAGE = "message"
     }
 
     class DiffCallback : DiffUtil.ItemCallback<MessageItem>() {
@@ -25,7 +26,7 @@ class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(Dif
         override fun getChangePayload(oldItem: MessageItem, newItem: MessageItem): Bundle? {
             val diff = Bundle()
             if (newItem.message != oldItem.message) {
-                diff.putString("message", newItem.message)
+                diff.putString(PAYLOAD_MESSAGE, newItem.message)
             }
             return if (diff.size() == 0) {
                 null
@@ -94,8 +95,8 @@ class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(Dif
             val bundle = payloads[0] as Bundle
             for (key in bundle.keySet()) {
                 when (key) {
-                    "message" -> {
-                        holder.bindMessage(bundle.getString("message") ?: continue)
+                    PAYLOAD_MESSAGE -> {
+                        holder.bindMessage(bundle.getString(PAYLOAD_MESSAGE) ?: continue)
                     }
 
                     PAYLOAD_BUTTONS -> {
