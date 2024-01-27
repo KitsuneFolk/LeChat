@@ -79,6 +79,11 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
         responseJob = null
     }
 
+    fun regenerateMessage(messageId: Long) {
+        messagesList.value?.remove(messagesList.value?.find { it.id == messageId })
+        getResponse()
+    }
+
     suspend fun summarizeChat(messages: List<MessageItem>): String {
         return repository.summarizeChat(messages)
     }

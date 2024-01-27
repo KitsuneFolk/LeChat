@@ -2,6 +2,7 @@ package com.pandacorp.lechat.presentation.ui.adapter.messages
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -11,6 +12,10 @@ import com.pandacorp.lechat.databinding.ItemMessageBinding
 import com.pandacorp.lechat.domain.model.MessageItem
 
 class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(DiffCallback()) {
+    companion object {
+        const val PAYLOAD_BUTTONS = "buttons"
+    }
+
     class DiffCallback : DiffUtil.ItemCallback<MessageItem>() {
         override fun areItemsTheSame(oldItem: MessageItem, newItem: MessageItem): Boolean =
             oldItem.id == newItem.id
@@ -44,12 +49,26 @@ class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(Dif
                 }
             }
             bindMessage(item.message)
+            bindButtons(item)
         }
 
         fun bindMessage(message: String) {
             binding.messageTextView.text = message
         }
+
+        fun bindButtons(
+            item: MessageItem,
+            show: Boolean = item.role == MessageItem.AI && currentList.last().id == item.id
+        ) {
+            binding.buttonsLayout.visibility =
+                if (show) View.VISIBLE else View.GONE
+            binding.regenerateButton.setOnClickListener {
+                onRegenerateClickListener?.invoke(item)
+            }
+        }
     }
+
+    var onRegenerateClickListener: ((MessageItem) -> Unit)? = null
 
     override fun submitList(list: List<MessageItem>?) {
         val newList = list?.toMutableList()
@@ -77,6 +96,10 @@ class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(Dif
                 when (key) {
                     "message" -> {
                         holder.bindMessage(bundle.getString("message") ?: continue)
+                    }
+
+                    PAYLOAD_BUTTONS -> {
+                        holder.bindButtons(currentList[position], bundle.getBoolean(PAYLOAD_BUTTONS, true))
                     }
                 }
             }

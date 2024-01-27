@@ -18,25 +18,69 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/roleTextView"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/roleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:textStyle="bold"
+                tools:text="You" />
+
+            <TextView
+                android:id="@+id/messageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                tools:text="Example message to AI" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonsLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:textStyle="bold"
-            tools:text="You" />
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/messageTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            tools:text="Example message to AI" />
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="6dp"
+                app:dividerColor="?strokeColor" />
 
+            <LinearLayout
+                android:id="@+id/regenerateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_regenerate" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="@string/regenerate" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

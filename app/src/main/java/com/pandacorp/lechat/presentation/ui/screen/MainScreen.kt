@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -62,7 +63,13 @@ class MainScreen : Fragment() {
             binding.drawerLayout.close()
         }
     }
-    private val messagesAdapter = MessagesAdapter()
+    private val messagesAdapter = MessagesAdapter().apply {
+        onRegenerateClickListener = {
+            if (messagesViewModel.isResponseGenerating.value != true) {
+                messagesViewModel.regenerateMessage(it.id)
+            }
+        }
+    }
 
     private val chatSettingsDialog by lazy {
         BottomDialogChatSettings(requireContext()).apply {
@@ -144,6 +151,11 @@ class MainScreen : Fragment() {
                         chat = ChatItem(title = ChatItem.defaultTitle, messages = messages)
                         chatsViewModel.addChat(chat)
                     }
+                    // Hide the previous AI's message's buttons
+                    messagesAdapter.notifyItemChanged(
+                        messagesAdapter.currentList.indexOf(messagesAdapter.currentList.findLast { it.role == MessageItem.AI }),
+                        bundleOf(Pair(MessagesAdapter.PAYLOAD_BUTTONS, false))
+                    )
                     messagesViewModel.addMessage(MessageItem(message = message, role = MessageItem.USER))
                     messagesViewModel.getResponse()
                     binding.editText.setText("")
@@ -193,9 +205,9 @@ class MainScreen : Fragment() {
         }
         messagesViewModel.onResponseGenerated = {
             CoroutineScope(Dispatchers.IO).launch {
-                var title = ChatItem.defaultTitle
+                var title = chatsViewModel.currentChat.value?.title ?: ChatItem.defaultTitle
                 // Summarize only once by checking if the title is default
-                if (chatsViewModel.currentChat.value?.title == title) {
+                if (chatsViewModel.currentChat.value?.title == ChatItem.defaultTitle) {
                     if (PreferenceHandler.createTitleByAI) {
                         title = messagesViewModel.summarizeChat(it)
                     }
