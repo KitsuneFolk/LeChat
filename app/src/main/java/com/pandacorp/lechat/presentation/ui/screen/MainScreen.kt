@@ -141,7 +141,7 @@ class MainScreen : Fragment() {
                             message = message
                         )
                         val messages = Constants.defaultMessagesList.plus(messageItem)
-                        chat = ChatItem(title = "New Chat", messages = messages)
+                        chat = ChatItem(title = ChatItem.defaultTitle, messages = messages)
                         chatsViewModel.addChat(chat)
                     }
                     messagesViewModel.addMessage(MessageItem(message = message, role = MessageItem.USER))
