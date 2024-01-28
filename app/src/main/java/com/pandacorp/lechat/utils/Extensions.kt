@@ -24,7 +24,7 @@ fun PackageManager.getPackageInfoCompat(packageName: String, flags: Int = 0): Pa
 
 fun getString(resId: Int) = App.instance.getString(resId)
 
-fun getArray(resId: Int) = App.instance.resources.getStringArray(resId)
+fun getArray(resId: Int): Array<String> = App.instance.resources.getStringArray(resId)
 
 /**
  * A compatibility wrapper around Bundle's `getParcelableExtra()` method that works on old and new API
