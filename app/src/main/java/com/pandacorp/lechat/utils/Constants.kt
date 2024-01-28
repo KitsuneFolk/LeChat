@@ -35,10 +35,12 @@ object Constants {
         const val KEY = "DialogKey"
     }
 
+    val sp = PreferenceManager.getDefaultSharedPreferences(App.instance)!!
+
     val defaultMessagesList =
         listOf(MessageItem(id = 0, role = MessageItem.SYSTEM, message = "You are a helpful assistant!"))
 
     val apiKey = MutableLiveData<String>(
-        PreferenceManager.getDefaultSharedPreferences(App.instance).getString(Preferences.Key.API, "")
+        sp.getString(Preferences.Key.API, "")
     )
 }

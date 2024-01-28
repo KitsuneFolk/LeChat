@@ -7,6 +7,7 @@ import com.pandacorp.lechat.databinding.DialogListViewBinding
 import com.pandacorp.lechat.presentation.ui.adapter.settings.SettingsAdapter
 import com.pandacorp.lechat.presentation.ui.adapter.settings.SettingsItem
 import com.pandacorp.lechat.utils.Constants
+import com.pandacorp.lechat.utils.Constants.sp
 
 class DialogListView(private val context: Context) : CustomDialog(context) {
     private lateinit var binding: DialogListViewBinding

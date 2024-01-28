@@ -5,21 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.preference.PreferenceManager
 import com.pandacorp.lechat.R
 import com.pandacorp.lechat.databinding.ScreenSettingsBinding
 import com.pandacorp.lechat.presentation.ui.dialog.DialogListView
 import com.pandacorp.lechat.utils.Constants
+import com.pandacorp.lechat.utils.Constants.sp
 import com.pandacorp.lechat.utils.PreferenceHandler
 import com.pandacorp.lechat.utils.getPackageInfoCompat
 
 class SettingsScreen : Fragment() {
     private var _binding: ScreenSettingsBinding? = null
     private val binding get() = _binding!!
-
-    private val sp by lazy {
-        PreferenceManager.getDefaultSharedPreferences(requireContext())
-    }
 
     private val themeDialog by lazy {
         DialogListView(requireContext()).apply {

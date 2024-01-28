@@ -2,9 +2,9 @@ package com.pandacorp.lechat.utils
 
 import android.app.Activity
 import android.content.res.Configuration
-import androidx.preference.PreferenceManager
 import com.pandacorp.lechat.R
 import com.pandacorp.lechat.di.app.App
+import com.pandacorp.lechat.utils.Constants.sp
 
 object PreferenceHandler {
     private object Theme {
@@ -16,92 +16,65 @@ object PreferenceHandler {
     }
 
     // Cached variables
-    var temperature: Float = PreferenceManager.getDefaultSharedPreferences(App.instance)
-        .getFloat(
-            Constants.Preferences.Key.TEMPERATURE,
-            Constants.Preferences.DefaultValues.TEMPERATURE
-        )
+    var temperature: Float = sp.getFloat(
+        Constants.Preferences.Key.TEMPERATURE,
+        Constants.Preferences.DefaultValues.TEMPERATURE
+    )
         set(value) {
             field = value
-            PreferenceManager.getDefaultSharedPreferences(App.instance)
-                .edit()
-                .putFloat(Constants.Preferences.Key.TEMPERATURE, value)
-                .apply()
+            sp.edit().putFloat(Constants.Preferences.Key.TEMPERATURE, value).apply()
         }
 
-    var maxTokens: Int = PreferenceManager.getDefaultSharedPreferences(App.instance)
-        .getInt(
-            Constants.Preferences.Key.MAX_TOKENS,
-            Constants.Preferences.DefaultValues.MAX_TOKENS
-        )
+    var maxTokens: Int = sp.getInt(
+        Constants.Preferences.Key.MAX_TOKENS,
+        Constants.Preferences.DefaultValues.MAX_TOKENS
+    )
         set(value) {
             field = value
-            PreferenceManager.getDefaultSharedPreferences(App.instance)
-                .edit()
-                .putInt(Constants.Preferences.Key.MAX_TOKENS, value)
-                .apply()
+            sp.edit().putInt(Constants.Preferences.Key.MAX_TOKENS, value).apply()
         }
 
-    var frequencyPenalty: Float = PreferenceManager.getDefaultSharedPreferences(App.instance)
-        .getFloat(
-            Constants.Preferences.Key.FREQUENCY_PENALTY,
-            Constants.Preferences.DefaultValues.FREQUENCY_PENALTY
-        )
+    var frequencyPenalty: Float = sp.getFloat(
+        Constants.Preferences.Key.FREQUENCY_PENALTY,
+        Constants.Preferences.DefaultValues.FREQUENCY_PENALTY
+    )
         set(value) {
             field = value
-            PreferenceManager.getDefaultSharedPreferences(App.instance)
-                .edit()
-                .putFloat(Constants.Preferences.Key.FREQUENCY_PENALTY, value)
-                .apply()
+            sp.edit().putFloat(Constants.Preferences.Key.FREQUENCY_PENALTY, value).apply()
         }
 
-    var topP: Float = PreferenceManager.getDefaultSharedPreferences(App.instance)
-        .getFloat(
-            Constants.Preferences.Key.TOP_P,
-            Constants.Preferences.DefaultValues.TOP_P
-        )
+    var topP: Float = sp.getFloat(
+        Constants.Preferences.Key.TOP_P,
+        Constants.Preferences.DefaultValues.TOP_P
+    )
         set(value) {
             field = value
-            PreferenceManager.getDefaultSharedPreferences(App.instance)
-                .edit()
-                .putFloat(Constants.Preferences.Key.TOP_P, value)
-                .apply()
+            sp.edit().putFloat(Constants.Preferences.Key.TOP_P, value).apply()
         }
 
-    var modelValue: String = PreferenceManager.getDefaultSharedPreferences(App.instance)
+    var modelValue: String = sp
         .getString(Constants.Preferences.Key.MODEL_VALUE, Constants.Preferences.DefaultValues.MODEL_VALUE)!!
         set(value) {
             field = value
-            PreferenceManager.getDefaultSharedPreferences(App.instance)
-                .edit()
-                .putString(Constants.Preferences.Key.MODEL_VALUE, value)
-                .apply()
+            sp.edit().putString(Constants.Preferences.Key.MODEL_VALUE, value).apply()
         }
 
-    var showDrawerAnimation: Boolean = PreferenceManager.getDefaultSharedPreferences(App.instance)
-        .getBoolean(
-            Constants.Preferences.Key.SHOW_DRAWER_ANIMATION,
-            Constants.Preferences.DefaultValues.SHOW_DRAWER_ANIMATION
-        )
+    var showDrawerAnimation: Boolean = sp.getBoolean(
+        Constants.Preferences.Key.SHOW_DRAWER_ANIMATION,
+        Constants.Preferences.DefaultValues.SHOW_DRAWER_ANIMATION
+    )
         set(value) {
             field = value
-            PreferenceManager.getDefaultSharedPreferences(App.instance)
-                .edit()
-                .putBoolean(Constants.Preferences.Key.SHOW_DRAWER_ANIMATION, value)
-                .apply()
+            sp.edit().putBoolean(Constants.Preferences.Key.SHOW_DRAWER_ANIMATION, value).apply()
         }
 
-    var createTitleByAI: Boolean = PreferenceManager.getDefaultSharedPreferences(App.instance)
-        .getBoolean(
-            Constants.Preferences.Key.CREATE_TITLE_BY_AI,
-            Constants.Preferences.DefaultValues.CREATE_TITLE_BY_AI
-        )
+    var createTitleByAI: Boolean = sp.getBoolean(
+        Constants.Preferences.Key.CREATE_TITLE_BY_AI,
+        Constants.Preferences.DefaultValues.CREATE_TITLE_BY_AI
+    )
         set(value) {
             field = value
-            PreferenceManager.getDefaultSharedPreferences(App.instance)
-                .edit()
-                .putBoolean(Constants.Preferences.Key.CREATE_TITLE_BY_AI, value)
-                .apply()
+            sp.edit().putBoolean(Constants.Preferences.Key.CREATE_TITLE_BY_AI, value).apply()
         }
 
     private fun isDeviceDarkMode(): Boolean =
@@ -112,8 +85,7 @@ object PreferenceHandler {
     }
 
     private fun getThemeKey(): String {
-        return PreferenceManager.getDefaultSharedPreferences(App.instance)
-            .getString(Constants.Preferences.Key.THEME, Theme.DEFAULT)!!
+        return sp.getString(Constants.Preferences.Key.THEME, Theme.DEFAULT)!!
     }
 
     private fun getThemeRes(themeKey: String = getThemeKey()): Int {
