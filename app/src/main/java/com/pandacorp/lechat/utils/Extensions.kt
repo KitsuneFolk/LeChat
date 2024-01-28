@@ -1,5 +1,6 @@
 package com.pandacorp.lechat.utils
 
+import android.content.SharedPreferences
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
@@ -43,4 +44,30 @@ inline fun <reified T : Parcelable> Bundle.getParcelableExtraSupport(name: Strin
         }
     if (extra is T) return extra
     return null
+}
+
+/**
+ * Takes a key and an argument of the supported types and stores it in the SharedPreferences.
+ *
+ * Supported types are: String, Int, Float, Long, and Boolean.
+ *
+ * If the type of the argument is not supported, an IllegalArgumentException is thrown.
+ *
+ * @param key the key to identify the value in the SharedPreferences
+ * @param argument the value to be stored in the SharedPreferences
+ * @throws IllegalArgumentException if the type of the argument is not supported
+ */
+fun SharedPreferences.put(key: String, argument: Any) {
+    val editor = this.edit()
+
+    when (argument) {
+        is String -> editor.putString(key, argument)
+        is Int -> editor.putInt(key, argument)
+        is Float -> editor.putFloat(key, argument)
+        is Long -> editor.putLong(key, argument)
+        is Boolean -> editor.putBoolean(key, argument)
+        else -> throw IllegalArgumentException("Unsupported type for SharedPreferences edit operation")
+    }
+
+    editor.apply()
 }

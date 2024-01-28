@@ -22,7 +22,7 @@ object PreferenceHandler {
     )
         set(value) {
             field = value
-            sp.edit().putFloat(Constants.Preferences.Key.TEMPERATURE, value).apply()
+            sp.put(Constants.Preferences.Key.TEMPERATURE, value)
         }
 
     var maxTokens: Int = sp.getInt(
@@ -31,7 +31,7 @@ object PreferenceHandler {
     )
         set(value) {
             field = value
-            sp.edit().putInt(Constants.Preferences.Key.MAX_TOKENS, value).apply()
+            sp.put(Constants.Preferences.Key.MAX_TOKENS, value)
         }
 
     var frequencyPenalty: Float = sp.getFloat(
@@ -40,7 +40,7 @@ object PreferenceHandler {
     )
         set(value) {
             field = value
-            sp.edit().putFloat(Constants.Preferences.Key.FREQUENCY_PENALTY, value).apply()
+            sp.put(Constants.Preferences.Key.FREQUENCY_PENALTY, value)
         }
 
     var topP: Float = sp.getFloat(
@@ -49,14 +49,14 @@ object PreferenceHandler {
     )
         set(value) {
             field = value
-            sp.edit().putFloat(Constants.Preferences.Key.TOP_P, value).apply()
+            sp.put(Constants.Preferences.Key.TOP_P, value)
         }
 
     var modelValue: String = sp
         .getString(Constants.Preferences.Key.MODEL_VALUE, Constants.Preferences.DefaultValues.MODEL_VALUE)!!
         set(value) {
             field = value
-            sp.edit().putString(Constants.Preferences.Key.MODEL_VALUE, value).apply()
+            sp.put(Constants.Preferences.Key.MODEL_VALUE, value)
         }
 
     var showDrawerAnimation: Boolean = sp.getBoolean(
@@ -65,7 +65,7 @@ object PreferenceHandler {
     )
         set(value) {
             field = value
-            sp.edit().putBoolean(Constants.Preferences.Key.SHOW_DRAWER_ANIMATION, value).apply()
+            sp.put(Constants.Preferences.Key.SHOW_DRAWER_ANIMATION, value)
         }
 
     var createTitleByAI: Boolean = sp.getBoolean(
@@ -74,7 +74,7 @@ object PreferenceHandler {
     )
         set(value) {
             field = value
-            sp.edit().putBoolean(Constants.Preferences.Key.CREATE_TITLE_BY_AI, value).apply()
+            sp.put(Constants.Preferences.Key.CREATE_TITLE_BY_AI, value)
         }
 
     private fun isDeviceDarkMode(): Boolean =
