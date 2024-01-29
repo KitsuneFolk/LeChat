@@ -17,7 +17,7 @@ class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(Dif
         const val PAYLOAD_MESSAGE = "message"
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<MessageItem>() {
+    private class DiffCallback : DiffUtil.ItemCallback<MessageItem>() {
         override fun areItemsTheSame(oldItem: MessageItem, newItem: MessageItem): Boolean =
             oldItem.id == newItem.id
 
