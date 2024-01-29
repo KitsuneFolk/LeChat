@@ -22,30 +22,6 @@ fun PackageManager.getPackageInfoCompat(packageName: String, flags: Int = 0): Pa
         getPackageInfo(packageName, flags)
     }
 
-fun getString(resId: Int) = App.instance.getString(resId)
-
-fun getArray(resId: Int): Array<String> = App.instance.resources.getStringArray(resId)
-
-/**
- * A compatibility wrapper around Bundle's `getParcelableExtra()` method that works on old and new API
- *
- * @param name The name of the extra to retrieve.
- * @param clazz The class of the extra to retrieve.
- * @return The Parcelable extra with the specified name and class, or null if it does not exist.
- */
-inline fun <reified T : Parcelable> Bundle.getParcelableExtraSupport(name: String, clazz: Class<T>): T? {
-    val extra =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            getParcelable(name, clazz)
-        } else {
-            @Suppress("DEPRECATION")
-            getParcelable(name)
-                    as? T
-        }
-    if (extra is T) return extra
-    return null
-}
-
 /**
  * Takes a key and an argument of the supported types and stores it in the SharedPreferences.
  *
@@ -71,3 +47,27 @@ fun SharedPreferences.put(key: String, argument: Any) {
 
     editor.apply()
 }
+
+/**
+ * A compatibility wrapper around Bundle's `getParcelableExtra()` method that works on old and new API
+ *
+ * @param name The name of the extra to retrieve.
+ * @param clazz The class of the extra to retrieve.
+ * @return The Parcelable extra with the specified name and class, or null if it does not exist.
+ */
+inline fun <reified T : Parcelable> Bundle.getParcelableExtraSupport(name: String, clazz: Class<T>): T? {
+    val extra =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getParcelable(name, clazz)
+        } else {
+            @Suppress("DEPRECATION")
+            getParcelable(name)
+                    as? T
+        }
+    if (extra is T) return extra
+    return null
+}
+
+fun getString(resId: Int) = App.instance.getString(resId)
+
+fun getArray(resId: Int): Array<String> = App.instance.resources.getStringArray(resId)

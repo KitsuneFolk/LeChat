@@ -77,12 +77,12 @@ object PreferenceHandler {
             sp.put(Constants.Preferences.Key.CREATE_TITLE_BY_AI, value)
         }
 
-    private fun isDeviceDarkMode(): Boolean =
-        (App.instance.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
-
     fun setTheme(activity: Activity, theme: Int = getThemeRes()) {
         activity.setTheme(theme)
     }
+
+    private fun isDeviceDarkMode(): Boolean =
+        (App.instance.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 
     private fun getThemeKey(): String {
         return sp.getString(Constants.Preferences.Key.THEME, Theme.DEFAULT)!!

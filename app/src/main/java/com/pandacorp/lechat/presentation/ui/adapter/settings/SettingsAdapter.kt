@@ -14,7 +14,15 @@ class SettingsAdapter(
     context: Context,
     items: MutableList<SettingsItem>
 ) : ArrayAdapter<SettingsItem>(context, 0, items) {
+    fun interface OnListItemClickListener {
+        fun onClick(listItem: SettingsItem)
+    }
+
     private var onListItemClickListener: OnListItemClickListener? = null
+
+    fun setOnClickListener(onListItemClickListener: OnListItemClickListener) {
+        this.onListItemClickListener = onListItemClickListener
+    }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var view = convertView
@@ -34,13 +42,5 @@ class SettingsAdapter(
             }
         }
         return view
-    }
-
-    fun setOnClickListener(onListItemClickListener: OnListItemClickListener) {
-        this.onListItemClickListener = onListItemClickListener
-    }
-
-    fun interface OnListItemClickListener {
-        fun onClick(listItem: SettingsItem)
     }
 }

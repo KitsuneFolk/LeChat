@@ -8,6 +8,10 @@ import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
 class App : Application() {
+    companion object {
+        lateinit var instance: App
+    }
+
     override fun onCreate() {
         // Throw uncaught exceptions
         Thread.setDefaultUncaughtExceptionHandler { _, throwable -> throw (throwable) }
@@ -22,9 +26,5 @@ class App : Application() {
                 listOf(koinModule)
             )
         }
-    }
-
-    companion object {
-        lateinit var instance: App
     }
 }

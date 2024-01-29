@@ -25,6 +25,42 @@ class SpinnerAdapter(
 
     private val spinnerItems: MutableList<CharSequence> = arrayListOf()
 
+    inner class DefaultSpinnerViewHolder(private val binding: PowerspinnerItemDefaultPowerBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        internal fun bind(spinnerView: PowerSpinnerView, item: CharSequence, isSelectedItem: Boolean) {
+            binding.itemDefaultText.apply {
+                text = item
+                typeface = spinnerView.typeface
+                gravity = spinnerView.gravity
+                setTextSize(TypedValue.COMPLEX_UNIT_PX, spinnerView.textSize)
+                setTextColor(spinnerView.currentTextColor)
+            }
+            binding.root.setPadding(
+                spinnerView.paddingLeft,
+                spinnerView.paddingTop,
+                spinnerView.paddingRight,
+                spinnerView.paddingBottom
+            )
+            if (spinnerView.spinnerItemHeight != NO_INT_VALUE) {
+                binding.root.height = spinnerView.spinnerItemHeight
+            }
+            if (spinnerView.spinnerSelectedItemBackground != null && isSelectedItem) {
+                binding.root.background = spinnerView.spinnerSelectedItemBackground
+            } else {
+                val tv = TypedValue()
+                binding.root.context.theme.resolveAttribute(
+                    android.R.attr.selectableItemBackground,
+                    tv,
+                    true
+                )
+                binding.root.background = AppCompatResources.getDrawable(
+                    binding.root.context,
+                    R.drawable.colorbackground_rounded_rectangle
+                )
+            }
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DefaultSpinnerViewHolder {
         val binding =
             PowerspinnerItemDefaultPowerBinding.inflate(
@@ -67,41 +103,4 @@ class SpinnerAdapter(
     }
 
     override fun getItemCount(): Int = spinnerItems.size
-
-    inner class DefaultSpinnerViewHolder(private val binding: PowerspinnerItemDefaultPowerBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        internal fun bind(spinnerView: PowerSpinnerView, item: CharSequence, isSelectedItem: Boolean) {
-            binding.itemDefaultText.apply {
-                text = item
-                typeface = spinnerView.typeface
-                gravity = spinnerView.gravity
-                setTextSize(TypedValue.COMPLEX_UNIT_PX, spinnerView.textSize)
-                setTextColor(spinnerView.currentTextColor)
-            }
-            binding.root.setPadding(
-                spinnerView.paddingLeft,
-                spinnerView.paddingTop,
-                spinnerView.paddingRight,
-                spinnerView.paddingBottom
-            )
-            if (spinnerView.spinnerItemHeight != NO_INT_VALUE) {
-                binding.root.height = spinnerView.spinnerItemHeight
-            }
-            if (spinnerView.spinnerSelectedItemBackground != null && isSelectedItem) {
-                binding.root.background = spinnerView.spinnerSelectedItemBackground
-            } else {
-                val tv = TypedValue()
-                binding.root.context.theme.resolveAttribute(
-                    android.R.attr.selectableItemBackground,
-                    tv,
-                    true
-                )
-                binding.root.background = AppCompatResources.getDrawable(
-                    binding.root.context,
-                    R.drawable.colorbackground_rounded_rectangle
-                )
-            }
-        }
-    }
 }
