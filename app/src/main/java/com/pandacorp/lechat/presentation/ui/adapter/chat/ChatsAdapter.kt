@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pandacorp.lechat.databinding.ItemChatBinding
 
 class ChatsAdapter : ListAdapter<ChatItem, ChatsAdapter.ViewHolder>(DiffCallback()) {
+    companion object {
+        const val PAYLOAD_TITLE = "title"
+    }
     class DiffCallback : DiffUtil.ItemCallback<ChatItem>() {
         override fun areItemsTheSame(oldItem: ChatItem, newItem: ChatItem): Boolean = oldItem.id == newItem.id
 
@@ -18,7 +21,7 @@ class ChatsAdapter : ListAdapter<ChatItem, ChatsAdapter.ViewHolder>(DiffCallback
         override fun getChangePayload(oldItem: ChatItem, newItem: ChatItem): Bundle? {
             val diff = Bundle()
             if (newItem.title != oldItem.title) {
-                diff.putString("title", newItem.title)
+                diff.putString(PAYLOAD_TITLE, newItem.title)
             }
             return if (diff.size() == 0) null else diff
         }
@@ -97,8 +100,8 @@ class ChatsAdapter : ListAdapter<ChatItem, ChatsAdapter.ViewHolder>(DiffCallback
             val bundle = payloads[0] as Bundle
             for (key in bundle.keySet()) {
                 when (key) {
-                    "title" -> {
-                        holder.bindTitle(bundle.getString("title") ?: continue)
+                    PAYLOAD_TITLE -> {
+                        holder.bindTitle(bundle.getString(PAYLOAD_TITLE) ?: continue)
                     }
                 }
             }
