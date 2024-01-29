@@ -80,5 +80,4 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
             view.backgroundTintList = ColorStateList.valueOf(tv.data)
         }
     }
-
 }

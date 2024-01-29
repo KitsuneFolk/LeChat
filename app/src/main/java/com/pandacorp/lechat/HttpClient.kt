@@ -9,6 +9,5 @@ val client = HttpClient(OkHttp) {
         config {
             followRedirects(true)
         }
-
     }
 }

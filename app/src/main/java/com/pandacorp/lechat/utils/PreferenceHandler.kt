@@ -52,8 +52,8 @@ object PreferenceHandler {
             sp.put(Constants.Preferences.Key.TOP_P, value)
         }
 
-    var modelValue: String = sp
-        .getString(Constants.Preferences.Key.MODEL_VALUE, Constants.Preferences.DefaultValues.MODEL_VALUE)!!
+    var modelValue: String =
+        sp.getString(Constants.Preferences.Key.MODEL_VALUE, Constants.Preferences.DefaultValues.MODEL_VALUE)!!
         set(value) {
             field = value
             sp.put(Constants.Preferences.Key.MODEL_VALUE, value)

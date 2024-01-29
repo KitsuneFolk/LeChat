@@ -21,5 +21,4 @@ abstract class CustomDialog(context: Context) : Dialog(context) {
             clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         }
     }
-
 }
