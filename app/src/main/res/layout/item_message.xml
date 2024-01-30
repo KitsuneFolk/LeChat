@@ -72,6 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/regenerate"
                     android:src="@drawable/ic_regenerate" />
 
                 <TextView
@@ -95,6 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/copy"
                     android:src="@drawable/ic_copy" />
 
                 <TextView
