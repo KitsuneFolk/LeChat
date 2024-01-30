@@ -1,15 +1,19 @@
 package com.pandacorp.lechat.presentation.ui.adapter.messages
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pandacorp.lechat.R
 import com.pandacorp.lechat.databinding.ItemMessageBinding
 import com.pandacorp.lechat.domain.model.MessageItem
+import com.pandacorp.lechat.utils.getString
 
 class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(DiffCallback()) {
     companion object {
@@ -65,6 +69,12 @@ class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(Dif
                 if (show) View.VISIBLE else View.GONE
             binding.regenerateButton.setOnClickListener {
                 onRegenerateClickListener?.invoke(item)
+            }
+            binding.copyButton.setOnClickListener {
+                val clipData = ClipData.newPlainText(getString(R.string.message), item.message)
+                val clipboardManager =
+                    getSystemService(binding.root.context, ClipboardManager::class.java) as ClipboardManager
+                clipboardManager.setPrimaryClip(clipData)
             }
         }
     }

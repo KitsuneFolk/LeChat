@@ -77,9 +77,33 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="5dp"
                     android:text="@string/regenerate" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/copyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="?selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_copy" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="@string/copy" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
