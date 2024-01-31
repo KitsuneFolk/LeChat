@@ -15,15 +15,10 @@ import com.pandacorp.lechat.utils.getArray
 
 class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
     private val binding: DialogChatSettingsBinding by lazy {
-        // Use by lazy because setOnClearChatClickListener is called before onCreate for some reason
         DialogChatSettingsBinding.inflate(layoutInflater)
     }
     private val modelsAdapter = SpinnerAdapter(binding.modelSpinner).apply {
         setItems(getArray(R.array.Models_values).map { it })
-    }
-
-    fun setOnClearChatClickListener(onClickListener: View.OnClickListener) {
-        binding.clearChatButton.setOnClickListener(onClickListener)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

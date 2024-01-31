@@ -17,7 +17,6 @@
     <string name="frequencyPenalty">Frequency penalty</string>
     <string name="top_p">Top-P</string>
     <string name="model">Model</string>
-    <string name="clearChat">Clear chat</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="chats">Chats</string>

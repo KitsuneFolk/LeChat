@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pandacorp.lechat.domain.repository.ChatsRepository
 import com.pandacorp.lechat.presentation.ui.adapter.chat.ChatItem
-import com.pandacorp.lechat.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
@@ -36,17 +35,6 @@ class ChatsViewModel(private val repository: ChatsRepository) : ViewModel() {
     fun updateChat(chatItem: ChatItem) {
         CoroutineScope(Dispatchers.IO).launch {
             repository.update(chatItem)
-        }
-    }
-
-    /**
-     * Clear all messages but don't delete the chat
-     */
-    fun clearCurrentChat() {
-        currentChat.value?.let {
-            val clearedChat = it.copy(title = ChatItem.defaultTitle, messages = Constants.defaultMessagesList)
-            currentChat.postValue(clearedChat)
-            updateChat(clearedChat)
         }
     }
 }

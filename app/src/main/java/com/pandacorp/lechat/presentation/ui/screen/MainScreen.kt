@@ -72,11 +72,7 @@ class MainScreen : Fragment() {
     }
 
     private val chatSettingsDialog by lazy {
-        BottomDialogChatSettings(requireContext()).apply {
-            setOnClearChatClickListener {
-                chatsViewModel.clearCurrentChat()
-            }
-        }
+        BottomDialogChatSettings(requireContext())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
