@@ -37,30 +37,30 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editText"
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:imeOptions="actionDone"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/light_gray"
-                android:hint="@string/message" />
+                android:layout_weight="1"
+                android:hint="@string/message"
+                android:imeOptions="actionDone"
+                android:textColorHint="@color/light_gray" />
 
             <ImageButton
                 android:id="@+id/sendButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:contentDescription="@string/send"
                 android:backgroundTint="@android:color/transparent"
+                android:contentDescription="@string/send"
                 android:src="@drawable/ic_send" />
 
         </LinearLayout>
