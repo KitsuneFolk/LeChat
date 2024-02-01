@@ -18,6 +18,7 @@ object Constants {
             const val MODEL_VALUE = "ModelValue"
             const val SHOW_DRAWER_ANIMATION = "ShowDrawerAnimation"
             const val CREATE_TITLE_BY_AI = "CreateTitleByAI"
+            const val CREATE_SUGGESTIONS_BY_AI = "CreateSuggestionsByAI"
         }
 
         object DefaultValues {
@@ -28,6 +29,7 @@ object Constants {
             val MODEL_VALUE = getString(R.string.defaultModelValue)
             val SHOW_DRAWER_ANIMATION = getString(R.string.defaultShowDrawerAnimation).toBoolean()
             val CREATE_TITLE_BY_AI = getString(R.string.defaultCreateTitleByAI).toBoolean()
+            val CREATE_SUGGESTIONS_BY_AI = getString(R.string.defaultCreateSuggestionsByAI).toBoolean()
         }
     }
 

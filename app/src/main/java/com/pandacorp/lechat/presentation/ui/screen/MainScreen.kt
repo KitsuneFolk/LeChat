@@ -226,7 +226,9 @@ class MainScreen : Fragment() {
                 val chat = chatsViewModel.currentChat.value!!.copy(title = title, messages = it)
                 chatsViewModel.currentChat.postValue(chat)
                 chatsViewModel.updateChat(chat)
-                messagesViewModel.suggestionsList.postValue(messagesViewModel.getSuggestions(it))
+                if (PreferenceHandler.createSuggestionsByAI) {
+                    messagesViewModel.suggestionsList.postValue(messagesViewModel.getSuggestions(it))
+                }
             }
         }
         chatsViewModel.currentChat.observe(viewLifecycleOwner) {

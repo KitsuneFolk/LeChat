@@ -97,6 +97,11 @@ class SettingsScreen : Fragment() {
             PreferenceHandler.createTitleByAI = isChecked
         }
 
+        binding.chatSuggestionsSwitch.isChecked = PreferenceHandler.createSuggestionsByAI
+        binding.chatSuggestionsSwitch.setOnCheckedChangeListener { _, isChecked ->
+            PreferenceHandler.createSuggestionsByAI = isChecked
+        }
+
         // Retrieve the version from build.gradle and assign it to the TextView
         binding.versionTextView.apply {
             val version =

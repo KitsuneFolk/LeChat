@@ -34,6 +34,7 @@
     <string name="another">Another</string>
     <string name="showDrawerAnimation">Show drawer animation</string>
     <string name="createTitleByAI">Create titles of chats by AI</string>
+    <string name="createSuggestionsByAI">Create suggestions by AI</string>
     <string name="version">Version %1$s</string>
 
     <!--  Default values  -->
@@ -43,4 +44,5 @@
     <string name="defaultTopP">0.7f</string>
     <string name="defaultShowDrawerAnimation">true</string>
     <string name="defaultCreateTitleByAI">true</string>
+    <string name="defaultCreateSuggestionsByAI">true</string>
 </resources>

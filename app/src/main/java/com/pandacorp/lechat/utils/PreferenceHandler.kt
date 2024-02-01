@@ -77,6 +77,15 @@ object PreferenceHandler {
             sp.put(Constants.Preferences.Key.CREATE_TITLE_BY_AI, value)
         }
 
+    var createSuggestionsByAI: Boolean = sp.getBoolean(
+        Constants.Preferences.Key.CREATE_SUGGESTIONS_BY_AI,
+        Constants.Preferences.DefaultValues.CREATE_SUGGESTIONS_BY_AI
+    )
+        set(value) {
+            field = value
+            sp.put(Constants.Preferences.Key.CREATE_SUGGESTIONS_BY_AI, value)
+        }
+
     fun setTheme(activity: Activity, theme: Int = getThemeRes()) {
         activity.setTheme(theme)
     }
