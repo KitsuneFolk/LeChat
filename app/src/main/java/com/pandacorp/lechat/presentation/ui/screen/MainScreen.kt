@@ -19,6 +19,7 @@ import com.pandacorp.lechat.domain.model.MessageItem
 import com.pandacorp.lechat.presentation.ui.adapter.chat.ChatItem
 import com.pandacorp.lechat.presentation.ui.adapter.chat.ChatsAdapter
 import com.pandacorp.lechat.presentation.ui.adapter.messages.MessagesAdapter
+import com.pandacorp.lechat.presentation.ui.adapter.suggestions.SuggestionsAdapter
 import com.pandacorp.lechat.presentation.ui.dialog.BottomDialogChatSettings
 import com.pandacorp.lechat.presentation.vm.ChatsViewModel
 import com.pandacorp.lechat.presentation.vm.MessagesViewModel
@@ -68,6 +69,12 @@ class MainScreen : Fragment() {
             if (messagesViewModel.isResponseGenerating.value != true) {
                 messagesViewModel.regenerateMessage(it.id)
             }
+        }
+    }
+
+    private val suggestionsAdapter = SuggestionsAdapter().apply {
+        onSuggestionClickListener = {
+
         }
     }
 
@@ -126,6 +133,7 @@ class MainScreen : Fragment() {
         }
         binding.chatsRecyclerView.adapter = chatsAdapter
         binding.recyclerView.adapter = messagesAdapter
+        binding.suggestionsRecyclerView.adapter = suggestionsAdapter
         binding.chatSettingsButton.setOnClickListener {
             chatSettingsDialog.show()
         }
@@ -171,6 +179,9 @@ class MainScreen : Fragment() {
 
         messagesViewModel.messagesList.observe(viewLifecycleOwner) {
             messagesAdapter.submitList(it)
+        }
+        messagesViewModel.suggestionsList.observe(viewLifecycleOwner) {
+            suggestionsAdapter.submitList(it)
         }
         messagesViewModel.errorCode.observe(viewLifecycleOwner) {
             if (it != null) {

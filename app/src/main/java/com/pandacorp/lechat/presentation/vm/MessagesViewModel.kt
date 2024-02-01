@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.aallam.openai.api.exception.TogetherAIException
 import com.pandacorp.lechat.domain.model.MessageItem
 import com.pandacorp.lechat.domain.repository.TogetherRepository
+import com.pandacorp.lechat.presentation.ui.adapter.suggestions.SuggestionItem
 import com.pandacorp.lechat.utils.Constants
 import com.pandacorp.lechat.utils.PreferenceHandler
 import kotlinx.coroutines.Job
@@ -17,6 +18,8 @@ import kotlinx.coroutines.launch
 class MessagesViewModel(private val repository: TogetherRepository) : ViewModel() {
     val messagesList: MutableLiveData<MutableList<MessageItem>> =
         MutableLiveData(Constants.defaultMessagesList.toMutableList())
+    val suggestionsList: MutableLiveData<MutableList<SuggestionItem>> =
+        MutableLiveData(MutableList(6) { SuggestionItem("Suggestion $it") })
     val errorCode = MutableLiveData<Int?>(null)
     val isResponseGenerating = MutableLiveData(false)
 
