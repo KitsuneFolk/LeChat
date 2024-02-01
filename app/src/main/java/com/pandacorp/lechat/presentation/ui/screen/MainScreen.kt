@@ -75,7 +75,9 @@ class MainScreen : Fragment() {
 
     private val suggestionsAdapter = SuggestionsAdapter().apply {
         onSuggestionClickListener = {
-
+            messagesViewModel.addMessage(MessageItem(role = MessageItem.USER, message = it.text))
+            messagesViewModel.suggestionsList.postValue(null)
+            messagesViewModel.getResponse()
         }
     }
 
