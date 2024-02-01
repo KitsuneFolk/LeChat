@@ -11,6 +11,7 @@ import com.pandacorp.lechat.client
 import com.pandacorp.lechat.data.mapper.MessagesMapper
 import com.pandacorp.lechat.domain.model.MessageItem
 import com.pandacorp.lechat.domain.repository.TogetherRepository
+import com.pandacorp.lechat.presentation.ui.adapter.suggestions.SuggestionItem
 import com.pandacorp.lechat.utils.Constants
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -88,4 +89,52 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
             continuation.resume(summarized)
         }
     }
+
+    override suspend fun getSuggestions(messages: List<MessageItem>): List<SuggestionItem> =
+        suspendCoroutine { continuation ->
+            val mappedMessages = messagesMapper.toSummarizationMessages(messages)
+            val suggestionsPrompt = """
+                You specialize in crafting engaging questions to keep conversations flowing. Generate 3 questions in the user's language that they might ask, and haven't been addressed by the AI. Begin each question with "Question: ", keeping them concise and straightforward.
+    
+                Example:
+                User: What ingredients are needed for a Neapolitan pizza?
+                AI: Neapolitan pizza requires tomato sauce, mozzarella cheese, and fresh basil leaves.
+    
+                Your suggestions:
+                Question: What distinguishes Neapolitan pizza from Margherita pizza?
+                Question: What temperature is ideal for baking a homemade pizza?
+                Question: Can you suggest an easy alternative to tomato sauce for pizza?
+    
+                Conversation:
+                $mappedMessages
+            """
+
+            var suggestionsString = ""
+            val summarizeMessage = listOf(
+                MessageItem(
+                    id = 0,
+                    role = MessageItem.USER,
+                    message = suggestionsPrompt
+                )
+            )
+            @OptIn(DelicateCoroutinesApi::class)
+            GlobalScope.launch {
+                getResponse(summarizeMessage, "mistralai/Mistral-7B-Instruct-v0.2", 0.3f, 200, 0f, 0f)
+                    .onEach {
+                        suggestionsString += it.choices[0].delta.content
+                    }
+                    .toList() // Use toList to collect the entire flow
+                // Remove quotes from the summary
+                suggestionsString = suggestionsString.replace("\"", "")
+                suggestionsString = suggestionsString.replace("\'", "")
+                // Remove "Question: " from the summary, we need it otherwise AI will have create questions and answers itself
+                suggestionsString = suggestionsString.replace("Question: ", "")
+                suggestionsString =
+                    suggestionsString.trim() // Models return a whitespace character at the start of the response
+                val suggestionsList = suggestionsString.split("\n").map {
+                    SuggestionItem(text = it.trim())
+                }
+                continuation.resume(suggestionsList)
+            }
+        }
 }

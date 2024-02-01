@@ -18,8 +18,7 @@ import kotlinx.coroutines.launch
 class MessagesViewModel(private val repository: TogetherRepository) : ViewModel() {
     val messagesList: MutableLiveData<MutableList<MessageItem>> =
         MutableLiveData(Constants.defaultMessagesList.toMutableList())
-    val suggestionsList: MutableLiveData<MutableList<SuggestionItem>> =
-        MutableLiveData(MutableList(6) { SuggestionItem("Suggestion $it") })
+    val suggestionsList: MutableLiveData<List<SuggestionItem>> = MutableLiveData()
     val errorCode = MutableLiveData<Int?>(null)
     val isResponseGenerating = MutableLiveData(false)
 
@@ -94,5 +93,9 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
     private fun replaceAt(position: Int, replacement: MessageItem) {
         messagesList.value!![position] = replacement
         messagesList.postValue(messagesList.value)
+    }
+
+    suspend fun getSuggestions(messages: List<MessageItem>): List<SuggestionItem> {
+        return repository.getSuggestions(messages)
     }
 }

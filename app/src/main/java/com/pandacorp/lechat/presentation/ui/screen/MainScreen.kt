@@ -61,6 +61,7 @@ class MainScreen : Fragment() {
         onChatClickListener = { chatItem ->
             // TODO: Sometimes submitList() doesn't update the list, find item in viewmodel and update now
             chatsViewModel.currentChat.postValue(chatsViewModel.chatsFlow.value.first { it.id == chatItem.id })
+            messagesViewModel.suggestionsList.postValue(null)
             binding.drawerLayout.close()
         }
     }
@@ -119,6 +120,7 @@ class MainScreen : Fragment() {
         }
         binding.addChatButton.setOnClickListener {
             chatsViewModel.addChat()
+            messagesViewModel.suggestionsList.postValue(null)
         }
         drawerToggle.syncState()
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
@@ -222,6 +224,7 @@ class MainScreen : Fragment() {
                 val chat = chatsViewModel.currentChat.value!!.copy(title = title, messages = it)
                 chatsViewModel.currentChat.postValue(chat)
                 chatsViewModel.updateChat(chat)
+                messagesViewModel.suggestionsList.postValue(messagesViewModel.getSuggestions(it))
             }
         }
         chatsViewModel.currentChat.observe(viewLifecycleOwner) {
