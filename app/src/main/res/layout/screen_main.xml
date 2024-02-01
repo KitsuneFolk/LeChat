@@ -135,5 +135,4 @@
                 tools:listitem="@layout/item_chat" />
         </LinearLayout>
     </com.google.android.material.navigation.NavigationView>
-
 </androidx.drawerlayout.widget.DrawerLayout>
