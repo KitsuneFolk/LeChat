@@ -26,21 +26,97 @@
     <string name="defaultModelValue">mistralai/Mixtral-8x7B-Instruct-v0.1</string>
 
     <string-array name="Models">
-        <item>Mixtral-8x7B Instruct</item>
+        <item>01-ai Yi Chat (34B)</item>
+        <item>Chronos Hermes (13B)</item>
         <item>DiscoLM Mixtral 8x7b</item>
-        <item>Mistral (7B) Instruct v0.2</item>
+        <item>MythoMax-L2 (13B)</item>
+        <item>Vicuna v1.5 (13B)</item>
+        <item>Vicuna v1.5 (7B)</item>
+        <item>Vicuna v1.5 16K (13B)</item>
+        <item>Code Llama Instruct (13B)</item>
+        <item>Code Llama Instruct (34B)</item>
+        <item>Code Llama Instruct (70B)</item>
+        <item>Code Llama Instruct (7B)</item>
+        <item>LLaMA-2 Chat (13B)</item>
         <item>LLaMA-2 Chat (70B)</item>
-        <item>Phind Code LLaMA v2 (34B)</item>
-        <item>WizardCoder v1.0 (34B)</item>
+        <item>LLaMA-2 Chat (7B)</item>
+        <item>Nous Capybara v1.9 (7B)</item>
+        <item>Nous Hermes 2 - Mixtral 8x7B-DPO</item>
+        <item>Nous Hermes 2 - Mixtral 8x7B-SFT</item>
+        <item>Nous Hermes LLaMA-2 (70B)</item>
+        <item>Nous Hermes LLaMA-2 (7B)</item>
+        <item>Nous Hermes Llama-2 (13B)</item>
+        <item>Nous Hermes-2 Yi (34B)</item>
+        <item>OpenChat 3.5</item>
+        <item>OpenOrca Mistral (7B) 8K</item>
+        <item>Qwen-Chat (7B)</item>
+        <item>Snorkel Mistral PairRM DPO</item>
+        <item>Alpaca (7B)</item>
+        <item>Falcon Instruct (40B)</item>
+        <item>Falcon Instruct (7B)</item>
+        <item>GPT-NeoXT-Chat-Base (20B)</item>
+        <item>LLaMA–2–7B-32K-Instruct (7B)</item>
+        <item>Pythia-Chat-Base (7B)</item>
+        <item>RedPajama-INCITE Chat (3B)</item>
+        <item>RedPajama-INCITE Chat (7B)</item>
+        <item>StripedHyena Nous (7B)</item>
+        <item>ReMM SLERP L2 (13B)</item>
+        <item>Toppy M (7B)</item>
+        <item>WizardLM v1.2 (13B)</item>
+        <item>Platypus2 Instruct (70B)</item>
+        <item>Mistral (7B) Instruct</item>
+        <item>Mistral (7B) Instruct v0.2</item>
+        <item>Mixtral-8x7B Instruct</item>
+        <item>OpenHermes-2-Mistral (7B)</item>
+        <item>OpenHermes-2.5-Mistral (7B)</item>
+        <item>Upstage SOLAR Instruct v1 (11B)</item>
     </string-array>
 
     <string-array name="Models_values" translatable="false">
-        <item>mistralai/Mixtral-8x7B-Instruct-v0.1</item>
+        <item>zero-one-ai/Yi-34B-Chat</item>
+        <item>Austism/chronos-hermes-13b</item>
         <item>DiscoResearch/DiscoLM-mixtral-8x7b-v2</item>
-        <item>mistralai/Mistral-7B-Instruct-v0.2</item>
+        <item>Gryphe/MythoMax-L2-13b</item>
+        <item>lmsys/vicuna-13b-v1.5</item>
+        <item>lmsys/vicuna-7b-v1.5</item>
+        <item>lmsys/vicuna-13b-v1.5-16k</item>
+        <item>codellama/CodeLlama-13b-Instruct-hf</item>
+        <item>codellama/CodeLlama-34b-Instruct-hf</item>
+        <item>codellama/CodeLlama-70b-Instruct-hf</item>
+        <item>codellama/CodeLlama-7b-Instruct-hf</item>
+        <item>togethercomputer/llama-2-13b-chat</item>
         <item>togethercomputer/llama-2-70b-chat</item>
-        <item>Phind/Phind-CodeLlama-34B-v2</item>
-        <item>WizardLM/WizardCoder-Python-34B-V1.0</item>
+        <item>togethercomputer/llama-2-7b-chat</item>
+        <item>NousResearch/Nous-Capybara-7B-V1p9</item>
+        <item>NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO</item>
+        <item>NousResearch/Nous-Hermes-2-Mixtral-8x7B-SFT</item>
+        <item>NousResearch/Nous-Hermes-Llama2-70b</item>
+        <item>NousResearch/Nous-Hermes-llama-2-7b</item>
+        <item>NousResearch/Nous-Hermes-Llama2-13b</item>
+        <item>NousResearch/Nous-Hermes-2-Yi-34B</item>
+        <item>openchat/openchat-3.5-1210</item>
+        <item>Open-Orca/Mistral-7B-OpenOrca</item>
+        <item>togethercomputer/Qwen-7B-Chat</item>
+        <item>snorkelai/Snorkel-Mistral-PairRM-DPO</item>
+        <item>togethercomputer/alpaca-7b</item>
+        <item>togethercomputer/falcon-40b-instruct</item>
+        <item>togethercomputer/falcon-7b-instruct</item>
+        <item>togethercomputer/GPT-NeoXT-Chat-Base-20B</item>
+        <item>togethercomputer/Llama-2-7B-32K-Instruct</item>
+        <item>togethercomputer/Pythia-Chat-Base-7B-v0.16</item>
+        <item>togethercomputer/RedPajama-INCITE-Chat-3B-v1</item>
+        <item>togethercomputer/RedPajama-INCITE-7B-Chat</item>
+        <item>togethercomputer/StripedHyena-Nous-7B</item>
+        <item>Undi95/ReMM-SLERP-L2-13B</item>
+        <item>Undi95/Toppy-M-7B</item>
+        <item>WizardLM/WizardLM-13B-V1.2</item>
+        <item>garage-bAInd/Platypus2-70B-instruct</item>
+        <item>mistralai/Mistral-7B-Instruct-v0.1</item>
+        <item>mistralai/Mistral-7B-Instruct-v0.2</item>
+        <item>mistralai/Mixtral-8x7B-Instruct-v0.1</item>
+        <item>teknium/OpenHermes-2-Mistral-7B</item>
+        <item>teknium/OpenHermes-2p5-Mistral-7B</item>
+        <item>upstage/SOLAR-10.7B-Instruct-v1.0</item>
     </string-array>
 
 </resources>
