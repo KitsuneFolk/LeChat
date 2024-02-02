@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -159,11 +158,6 @@ class MainScreen : Fragment() {
                         chat = ChatItem(title = ChatItem.defaultTitle, messages = messages)
                         chatsViewModel.addChat(chat)
                     }
-                    // Hide the previous AI's message's buttons
-                    messagesAdapter.notifyItemChanged(
-                        messagesAdapter.currentList.indexOf(messagesAdapter.currentList.findLast { it.role == MessageItem.AI }),
-                        bundleOf(Pair(MessagesAdapter.PAYLOAD_BUTTONS, false))
-                    )
                     messagesViewModel.addMessage(MessageItem(message = message, role = MessageItem.USER))
                     messagesViewModel.getResponse()
                     binding.editText.setText("")
@@ -205,13 +199,6 @@ class MainScreen : Fragment() {
                         show()
                     }
                 messagesViewModel.errorCode.value = null
-            }
-        }
-        messagesViewModel.isResponseGenerating.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.sendStopButton.setImageResource(R.drawable.ic_stop)
-            } else {
-                binding.sendStopButton.setImageResource(R.drawable.ic_send)
             }
         }
         messagesViewModel.onResponseGenerated = {

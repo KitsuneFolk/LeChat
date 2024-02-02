@@ -82,7 +82,7 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
     }
 
     fun regenerateMessage(messageId: Long) {
-        messagesList.value?.remove(messagesList.value?.find { it.id == messageId })
+        messagesList.value?.removeAll { it.id >= messageId }
         getResponse()
     }
 

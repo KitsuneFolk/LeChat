@@ -63,10 +63,9 @@ class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(Dif
 
         fun bindButtons(
             item: MessageItem,
-            show: Boolean = item.role == MessageItem.AI && currentList.last().id == item.id
+            show: Boolean = item.role == MessageItem.AI
         ) {
-            binding.buttonsLayout.visibility =
-                if (show) View.VISIBLE else View.GONE
+            binding.buttonsLayout.visibility = if (show) View.VISIBLE else View.GONE
             binding.regenerateButton.setOnClickListener {
                 onRegenerateClickListener?.invoke(item)
             }
