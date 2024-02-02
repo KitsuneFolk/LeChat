@@ -17,7 +17,6 @@ import com.pandacorp.lechat.utils.getString
 
 class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(DiffCallback()) {
     companion object {
-        const val PAYLOAD_BUTTONS = "buttons"
         const val PAYLOAD_MESSAGE = "message"
     }
 
@@ -61,7 +60,7 @@ class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(Dif
             binding.messageTextView.text = message
         }
 
-        fun bindButtons(
+        private fun bindButtons(
             item: MessageItem,
             show: Boolean = item.role == MessageItem.AI
         ) {
@@ -106,10 +105,6 @@ class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(Dif
                 when (key) {
                     PAYLOAD_MESSAGE -> {
                         holder.bindMessage(bundle.getString(PAYLOAD_MESSAGE) ?: continue)
-                    }
-
-                    PAYLOAD_BUTTONS -> {
-                        holder.bindButtons(currentList[position], bundle.getBoolean(PAYLOAD_BUTTONS, true))
                     }
                 }
             }
