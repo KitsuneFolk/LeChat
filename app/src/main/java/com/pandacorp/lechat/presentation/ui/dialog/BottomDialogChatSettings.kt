@@ -18,7 +18,7 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
         DialogChatSettingsBinding.inflate(layoutInflater)
     }
     private val modelsAdapter = SpinnerAdapter(binding.modelSpinner).apply {
-        setItems(getArray(R.array.Models_values).map { it })
+        setItems(getArray(R.array.Models).toList())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
