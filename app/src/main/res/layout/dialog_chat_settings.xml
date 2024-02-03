@@ -114,6 +114,7 @@
             app:spinner_item_height="46dp"
             app:spinner_popup_background="@drawable/colorbackground_rounded_rectangle"
             app:spinner_popup_elevation="14dp"
+            app:spinner_popup_max_height="300dp"
             app:spinner_selected_item_background="@drawable/cpd_rounded_rectangle" />
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>
