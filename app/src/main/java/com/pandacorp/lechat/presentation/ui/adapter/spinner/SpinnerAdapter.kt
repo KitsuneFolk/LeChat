@@ -93,7 +93,8 @@ class SpinnerAdapter(
         val oldIndex = this.index
         this.index = index
         this.spinnerView.notifyItemSelected(index, spinnerItems[index])
-        notifyDataSetChanged()
+        notifyItemChanged(oldIndex)
+        notifyItemChanged(index)
         this.onSpinnerItemSelectedListener?.onItemSelected(
             oldIndex = oldIndex,
             oldItem = oldIndex.takeIf { it != NO_SELECTED_INDEX }?.let { spinnerItems[oldIndex] },
