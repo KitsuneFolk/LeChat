@@ -94,19 +94,23 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
         suspendCoroutine { continuation ->
             val mappedMessages = messagesMapper.toSummarizationMessages(messages)
             val suggestionsPrompt = """
-                You specialize in crafting engaging questions to keep conversations flowing. Generate 3 questions in the user's language that they might ask, and haven't been addressed by the AI. Begin each question with "Question: ", keeping them concise and straightforward.
+                You specialize in crafting engaging questions to keep conversations flowing from the User's perspective. Generate THREE questions in the user's language that they might ask, and haven't been addressed by the AI. Begin each question with "User: ", keeping them concise and straightforward, separate each question with a new line. DO NOT answer your own questions.
     
                 Example:
+                ```
                 User: What ingredients are needed for a Neapolitan pizza?
                 AI: Neapolitan pizza requires tomato sauce, mozzarella cheese, and fresh basil leaves.
-    
                 Your suggestions:
-                Question: What distinguishes Neapolitan pizza from Margherita pizza?
-                Question: What temperature is ideal for baking a homemade pizza?
-                Question: Can you suggest an easy alternative to tomato sauce for pizza?
-    
+                User: What distinguishes Neapolitan pizza from Margherita pizza?
+                User: What temperature is ideal for baking a homemade pizza?
+                User: Can you suggest an easy alternative to tomato sauce for pizza?
+                ```
+                
                 Conversation:
+                ```
                 $mappedMessages
+                ```
+                Now generate ONLY THREE interesting questions about the conversation's topic.
             """
 
             var suggestionsString = ""
@@ -127,13 +131,14 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
                 // Remove quotes from the summary
                 suggestionsString = suggestionsString.replace("\"", "")
                 suggestionsString = suggestionsString.replace("\'", "")
-                // Remove "Question: " from the summary, we need it otherwise AI will have create questions and answers itself
-                suggestionsString = suggestionsString.replace("Question: ", "")
+                // Remove "User: " from the summary, we need it otherwise AI will have create questions and answers itself
+                suggestionsString = suggestionsString.replace("User: ", "")
                 suggestionsString =
                     suggestionsString.trim() // Models return a whitespace character at the start of the response
-                val suggestionsList = suggestionsString.split("\n").map {
+                var suggestionsList = suggestionsString.split("\n").map {
                     SuggestionItem(text = it.trim())
                 }
+                suggestionsList = suggestionsList.subList(0, 3) // Limit to 3
                 continuation.resume(suggestionsList)
             }
         }
