@@ -201,6 +201,13 @@ class MainScreen : Fragment() {
                 messagesViewModel.errorCode.value = null
             }
         }
+        messagesViewModel.isResponseGenerating.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.sendStopButton.setImageResource(R.drawable.ic_stop)
+            } else {
+                binding.sendStopButton.setImageResource(R.drawable.ic_send)
+            }
+        }
         messagesViewModel.onResponseGenerated = {
             CoroutineScope(Dispatchers.IO).launch {
                 var title = chatsViewModel.currentChat.value?.title ?: ChatItem.defaultTitle
