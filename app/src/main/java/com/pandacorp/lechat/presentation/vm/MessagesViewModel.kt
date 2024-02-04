@@ -90,12 +90,12 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
         return repository.summarizeChat(messages)
     }
 
+    suspend fun getSuggestions(messages: List<MessageItem>): List<SuggestionItem> {
+        return repository.getSuggestions(messages)
+    }
+
     private fun replaceAt(position: Int, replacement: MessageItem) {
         messagesList.value!![position] = replacement
         messagesList.postValue(messagesList.value)
-    }
-
-    suspend fun getSuggestions(messages: List<MessageItem>): List<SuggestionItem> {
-        return repository.getSuggestions(messages)
     }
 }
