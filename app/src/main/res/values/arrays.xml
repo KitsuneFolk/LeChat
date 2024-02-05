@@ -7,7 +7,7 @@
         <item>Purple</item>
     </string-array>
 
-    <string name="settings_theme_default_value" translatable="false">follow_system</string>
+    <string name="defaultTheme" translatable="false">follow_system</string>
 
     <string-array name="Themes_values" translatable="false">
         <item>follow_system</item>

@@ -74,7 +74,7 @@ class SettingsScreen : Fragment() {
             binding.themeTextView.apply {
                 val themeKey = sp.getString(
                     Constants.Preferences.Key.THEME,
-                    getString(R.string.settings_theme_default_value)
+                    getString(R.string.defaultTheme)
                 )!!
                 text = getThemeFromKey(themeKey)
             }
