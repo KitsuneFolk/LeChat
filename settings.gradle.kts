@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "LeChat"
 include(":app")
- 
+include(":openai-kotlin")

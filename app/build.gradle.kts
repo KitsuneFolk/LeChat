@@ -47,7 +47,6 @@ dependencies {
     implementation("com.github.MrRuslanYT:SplashScreen:1.0.1")
     implementation("com.fragula2:fragula-core:2.10.1")
     // Fork of github.com/aallam/openai-kotlin that works with the TogetherAI API
-    implementation("com.github.MrRuslanYT.openai-kotlin:openai-client:d1b8cccb3d")
     implementation("io.ktor:ktor-client-okhttp:2.3.7")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.github.skydoves:powerspinner:1.2.7")
@@ -59,4 +58,6 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
+
+    implementation(project(":openai-kotlin"))
 }
