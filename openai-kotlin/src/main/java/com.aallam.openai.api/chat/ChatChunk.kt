@@ -1,4 +1,4 @@
-package com.aallam.openai.api.chat;
+package com.aallam.openai.api.chat
 
 import com.aallam.openai.api.core.FinishReason
 import kotlinx.serialization.SerialName

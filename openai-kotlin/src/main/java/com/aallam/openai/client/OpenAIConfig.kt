@@ -98,20 +98,6 @@ class OpenAIHost(
          * A pre-configured instance of [OpenAIHost] with the base URL set as `https://api.openai.com/v1/`.
          */
         val OpenAI: OpenAIHost = OpenAIHost(baseUrl = "https://api.openai.com/v1/")
-
-        /**
-         * Creates an instance of [OpenAIHost] configured for Azure hosting with the given resource name, deployment ID,
-         * and API version.
-         *
-         * @param resourceName The name of your Azure OpenAI Resource.
-         * @param deploymentId The name of your model deployment.
-         * @param apiVersion The API version to use for this operation. This parameter should follow the YYYY-MM-DD format.
-         */
-        fun azure(resourceName: String, deploymentId: String, apiVersion: String): OpenAIHost =
-            OpenAIHost(
-                baseUrl = "https://$resourceName.openai.azure.com/openai/deployments/$deploymentId/",
-                queryParams = mapOf("api-version" to apiVersion),
-            )
     }
 }
 

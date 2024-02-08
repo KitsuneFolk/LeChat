@@ -13,7 +13,5 @@ value class Role(val role: String) {
         val System: Role = Role("system")
         val User: Role = Role("user")
         val Assistant: Role = Role("assistant")
-        val Function: Role = Role("function")
-        val Tool: Role = Role("tool")
     }
 }

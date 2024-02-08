@@ -13,13 +13,5 @@ internal class OpenAIApi(
     private val requester: HttpRequester
 ) : OpenAI,
     Completions by CompletionsApi(requester),
-    Files by FilesApi(requester),
-    Edits by EditsApi(requester),
-    Embeddings by EmbeddingsApi(requester),
-    Models by ModelsApi(requester),
-    Moderations by ModerationsApi(requester),
-    FineTunes by FineTunesApi(requester),
     Chat by ChatApi(requester),
-    Audio by AudioApi(requester),
-    FineTuning by FineTuningApi(requester),
     Closeable by requester

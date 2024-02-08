@@ -43,10 +43,8 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
         val mappedMessages = messagesMapper.toChatMessages(messages)
         val chatCompletionRequest = ChatCompletionRequest(
             model = ModelId(model),
-            temperature = temperature.toDouble(),
-            maxTokens = if (maxTokens == 0) null else maxTokens,
             messages = mappedMessages,
-            frequencyPenalty = frequencyPenalty?.toDouble(),
+            temperature = temperature.toDouble(),
             topP = topP?.toDouble()
         )
         return openAI.chatCompletions(chatCompletionRequest)
