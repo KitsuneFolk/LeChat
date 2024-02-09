@@ -3,13 +3,13 @@ package com.pandacorp.lechat.presentation.vm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aallam.openai.api.exception.TogetherAIException
 import com.pandacorp.lechat.domain.model.MessageItem
 import com.pandacorp.lechat.domain.repository.TogetherRepository
 import com.pandacorp.lechat.presentation.ui.adapter.suggestions.SuggestionItem
 import com.pandacorp.lechat.utils.Constants
 import com.pandacorp.lechat.utils.PreferenceHandler
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
@@ -35,44 +35,38 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
 
     fun getResponse() {
         viewModelScope.launch {
-            try {
-                var isFirstTime = true
-                responseJob = repository.getResponse(
-                    messagesList.value!!,
-                    PreferenceHandler.modelValue,
-                    PreferenceHandler.temperature,
-                    PreferenceHandler.maxTokens,
-                    PreferenceHandler.frequencyPenalty,
-                    PreferenceHandler.topP
-                )
-                    .onEach {
-                        var token = it.choices[0].delta.content
-                        if (isFirstTime) {
-                            val response = MessageItem(message = "", role = MessageItem.AI)
-                            addMessage(response)
-                            isFirstTime = false
-                            // Make sure the first token is not a space
-                            token = token?.trim()
-                            isResponseGenerating.postValue(true)
-                        }
-                        val response = messagesList.value!!.last().copy()
-                        response.message += token
-                        replaceAt(response.id.toInt(), response)
+            var isFirstTime = true
+            responseJob = repository.getResponse(
+                messagesList.value!!,
+                PreferenceHandler.modelValue,
+                PreferenceHandler.temperature,
+                PreferenceHandler.maxTokens,
+                PreferenceHandler.frequencyPenalty,
+                PreferenceHandler.topP
+            )
+                .onEach {
+                    var token = it.choices[0].delta.content
+                    if (isFirstTime) {
+                        val response = MessageItem(message = "", role = MessageItem.AI)
+                        addMessage(response)
+                        isFirstTime = false
+                        // Make sure the first token is not a space
+                        token = token?.trim()
+                        isResponseGenerating.postValue(true)
                     }
-                    .onCompletion {
-                        isResponseGenerating.postValue(false)
-                        responseJob = null
-                        onResponseGenerated?.invoke(messagesList.value!!)
-                    }
-                    .launchIn(this)
-            } catch (e: TogetherAIException) {
-                val error = e.cause?.toString() ?: "\"Text: Unknown error\""
-                val regex = Regex("\\b(\\d{3})\\b")
-                val matchResult = regex.find(error)
-
-                val errorCode = matchResult?.groupValues?.get(1)?.toIntOrNull()
-                this@MessagesViewModel.errorCode.postValue(errorCode)
-            }
+                    val response = messagesList.value!!.last().copy()
+                    response.message += token
+                    replaceAt(response.id.toInt(), response)
+                }
+                .catch {
+                    handleError(it)
+                }
+                .onCompletion {
+                    isResponseGenerating.postValue(false)
+                    responseJob = null
+                    onResponseGenerated?.invoke(messagesList.value!!)
+                }
+                .launchIn(this)
         }
     }
 
@@ -97,5 +91,14 @@ class MessagesViewModel(private val repository: TogetherRepository) : ViewModel(
     private fun replaceAt(position: Int, replacement: MessageItem) {
         messagesList.value!![position] = replacement
         messagesList.postValue(messagesList.value)
+    }
+
+    private fun handleError(e: Throwable) {
+        val message = e.cause?.toString() ?: "\"Text: Unknown error\""
+        val regex = Regex("\\b(\\d{3})\\b")
+        val matchResult = regex.find(message)
+
+        val errorCode = matchResult?.groupValues?.get(1)?.toIntOrNull()
+        this@MessagesViewModel.errorCode.postValue(errorCode)
     }
 }
