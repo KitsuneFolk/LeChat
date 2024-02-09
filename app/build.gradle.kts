@@ -46,7 +46,6 @@ dependencies {
     // Custom
     implementation("com.github.MrRuslanYT:SplashScreen:1.0.1")
     implementation("com.fragula2:fragula-core:2.10.1")
-    // Fork of github.com/aallam/openai-kotlin that works with the TogetherAI API
     implementation("io.ktor:ktor-client-okhttp:2.3.7")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.github.skydoves:powerspinner:1.2.7")
