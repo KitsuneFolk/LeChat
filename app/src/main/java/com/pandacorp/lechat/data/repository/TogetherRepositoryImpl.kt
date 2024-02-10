@@ -92,23 +92,16 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
         suspendCoroutine { continuation ->
             val mappedMessages = messagesMapper.toSummarizationMessages(messages)
             val suggestionsPrompt = """
-                You specialize in crafting engaging questions to keep conversations flowing from the User's perspective. Generate THREE questions in the user's language that they might ask, and haven't been addressed by the AI. Begin each question with "User: ", keeping them concise and straightforward, separate each question with a new line. DO NOT answer your own questions.
-    
-                Example:
-                ```
-                User: What ingredients are needed for a Neapolitan pizza?
-                AI: Neapolitan pizza requires tomato sauce, mozzarella cheese, and fresh basil leaves.
-                Your suggestions:
-                User: What distinguishes Neapolitan pizza from Margherita pizza?
-                User: What temperature is ideal for baking a homemade pizza?
-                User: Can you suggest an easy alternative to tomato sauce for pizza?
-                ```
+                API message: You are a professional questions composer from the User's perspective. Please generate 3 questions in the user's language that they might ask, and haven't been addressed by the AI. Keep them concise and straightforward, separate each question with a new line. Please only generate questions, no words of acknowledgement, don't write numbers of questions nor use dashes.
+                
+                Good Example: "Why is the sky blue?"
+                Bad Example: "1. Why is the sky blue?"
                 
                 Conversation:
                 ```
                 $mappedMessages
                 ```
-                Now generate ONLY THREE interesting questions about the conversation's topic.
+                Now generate three interesting questions from the user's perspective.
             """
 
             var suggestionsString = ""
@@ -121,7 +114,7 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
             )
             @OptIn(DelicateCoroutinesApi::class)
             GlobalScope.launch {
-                getResponse(summarizeMessage, "mistralai/Mistral-7B-Instruct-v0.2", 0.3f, 200, 0f, 0f)
+                getResponse(summarizeMessage, "mistralai/Mixtral-8x7B-Instruct-v0.1", 0.7f, 200, null, null)
                     .onEach {
                         suggestionsString += it.choices[0].delta.content
                     }
@@ -129,8 +122,10 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
                 // Remove quotes from the summary
                 suggestionsString = suggestionsString.replace("\"", "")
                 suggestionsString = suggestionsString.replace("\'", "")
-                // Remove "User: " from the summary, we need it otherwise AI will have create questions and answers itself
-                suggestionsString = suggestionsString.replace("User: ", "")
+                // Can't make mixtral don't include numbers
+                suggestionsString = suggestionsString.replaceFirst("1. ", "")
+                suggestionsString = suggestionsString.replaceFirst("2. ", "")
+                suggestionsString = suggestionsString.replaceFirst("3. ", "")
                 suggestionsString =
                     suggestionsString.trim() // Models return a whitespace character at the start of the response
                 var suggestionsList = suggestionsString.split("\n").map {
