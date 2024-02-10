@@ -11,6 +11,7 @@ import com.pandacorp.lechat.presentation.ui.dialog.DialogListView
 import com.pandacorp.lechat.utils.Constants
 import com.pandacorp.lechat.utils.Constants.sp
 import com.pandacorp.lechat.utils.PreferenceHandler
+import com.pandacorp.lechat.utils.getArray
 import com.pandacorp.lechat.utils.getPackageInfoCompat
 
 class SettingsScreen : Fragment() {
@@ -111,9 +112,8 @@ class SettingsScreen : Fragment() {
     }
 
     private fun getThemeFromKey(key: String): String {
-        val themes = resources.getStringArray(R.array.Themes)
-        val keys = resources.getStringArray(R.array.Themes_values)
-
+        val themes = getArray(R.array.Themes)
+        val keys = getArray(R.array.Themes_values)
         val index = keys.indexOf(key)
         return themes[index]
     }

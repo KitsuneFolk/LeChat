@@ -8,6 +8,7 @@ import com.pandacorp.lechat.presentation.ui.adapter.settings.SettingsAdapter
 import com.pandacorp.lechat.presentation.ui.adapter.settings.SettingsItem
 import com.pandacorp.lechat.utils.Constants
 import com.pandacorp.lechat.utils.Constants.sp
+import com.pandacorp.lechat.utils.getArray
 
 class DialogListView(private val context: Context) : CustomDialog(context) {
     private lateinit var binding: DialogListViewBinding
@@ -37,9 +38,9 @@ class DialogListView(private val context: Context) : CustomDialog(context) {
     }
 
     private fun fillThemesList(): MutableList<SettingsItem> {
-        val valuesList = context.resources.getStringArray(R.array.Themes_values)
+        val valuesList = getArray(R.array.Themes_values)
         val drawablesList = context.resources.obtainTypedArray(R.array.Themes_drawables)
-        val titlesList = context.resources.getStringArray(R.array.Themes)
+        val titlesList = getArray(R.array.Themes)
         val themesList: MutableList<SettingsItem> = mutableListOf()
         repeat(valuesList.size) { i ->
             themesList.add(

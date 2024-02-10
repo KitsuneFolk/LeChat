@@ -46,7 +46,7 @@ class MainScreen : Fragment() {
             chatsViewModel.deleteChat(chatItem)
             Snackbar.make(
                 binding.messageInputLayout,
-                resources.getString(R.string.deleted, "1"),
+                getString(R.string.deleted, "1"),
                 Snackbar.LENGTH_LONG
             )
                 .apply {

@@ -42,14 +42,13 @@ class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(Dif
     inner class ViewHolder(private val binding: ItemMessageBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MessageItem) {
-            val resources = binding.root.context.resources
             when (item.role) {
                 MessageItem.AI -> {
-                    binding.roleTextView.text = resources.getText(R.string.AI)
+                    binding.roleTextView.text = getString(R.string.AI)
                 }
 
                 MessageItem.USER -> {
-                    binding.roleTextView.text = resources.getText(R.string.you)
+                    binding.roleTextView.text = getString(R.string.you)
                 }
             }
             bindMessage(item.message)
