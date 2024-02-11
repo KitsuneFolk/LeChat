@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -220,6 +221,13 @@ class MainScreen : Fragment() {
                 val chat = chatsViewModel.currentChat.value!!.copy(title = title, messages = it)
                 chatsViewModel.currentChat.postValue(chat)
                 chatsViewModel.updateChat(chat)
+                // Show Regenerate button
+                binding.recyclerView.post { // Won't show if used without post
+                    messagesAdapter.notifyItemChanged(
+                        messagesAdapter.currentList.lastIndex,
+                        bundleOf(Pair(MessagesAdapter.PAYLOAD_REGENERATE_BUTTON, true))
+                    )
+                }
                 if (PreferenceHandler.createSuggestionsByAI) {
                     messagesViewModel.suggestionsList.postValue(messagesViewModel.getSuggestions(it))
                 }

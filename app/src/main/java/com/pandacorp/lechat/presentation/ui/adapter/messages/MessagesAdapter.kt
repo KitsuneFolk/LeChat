@@ -18,6 +18,7 @@ import com.pandacorp.lechat.utils.getString
 class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(DiffCallback()) {
     companion object {
         const val PAYLOAD_MESSAGE = "message"
+        const val PAYLOAD_REGENERATE_BUTTON = "regenerate"
     }
 
     private class DiffCallback : DiffUtil.ItemCallback<MessageItem>() {
@@ -59,14 +60,21 @@ class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(Dif
             binding.messageTextView.text = message
         }
 
+        fun showRegenerateButton(show: Boolean) {
+            binding.regenerateButton.visibility = if (show) View.VISIBLE else View.GONE
+        }
+
         private fun bindButtons(
             item: MessageItem,
-            show: Boolean = item.role == MessageItem.AI
+            showButtons: Boolean = item.role == MessageItem.AI,
+            showRegenerateButton: Boolean = item.role == MessageItem.AI
         ) {
-            binding.divider.visibility = if (show) View.VISIBLE else View.GONE
-            binding.buttonsLayout.visibility = if (show) View.VISIBLE else View.GONE
+            binding.divider.visibility = if (showButtons) View.VISIBLE else View.GONE
+            binding.buttonsLayout.visibility = if (showButtons) View.VISIBLE else View.GONE
+            showRegenerateButton(showRegenerateButton)
             binding.regenerateButton.setOnClickListener {
                 onRegenerateClickListener?.invoke(item)
+                showRegenerateButton(false)
             }
             binding.copyButton.setOnClickListener {
                 val clipData = ClipData.newPlainText(getString(R.string.message), item.message)
@@ -105,6 +113,11 @@ class MessagesAdapter : ListAdapter<MessageItem, MessagesAdapter.ViewHolder>(Dif
                 when (key) {
                     PAYLOAD_MESSAGE -> {
                         holder.bindMessage(bundle.getString(PAYLOAD_MESSAGE) ?: continue)
+                    }
+
+                    PAYLOAD_REGENERATE_BUTTON -> {
+                        val showRegenerateButton = bundle.getBoolean(PAYLOAD_REGENERATE_BUTTON)
+                        holder.showRegenerateButton(showRegenerateButton)
                     }
                 }
             }
