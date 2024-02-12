@@ -83,6 +83,7 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
             summarized = summarized.replace("\"", "")
             summarized = summarized.replace("\'", "")
             summarized = summarized.replace("Title: ", "")
+            if (summarized.last() == '.') summarized = summarized.dropLast(1) // Remove the final dot
             summarized = summarized.trim() // Models return a whitespace character at the start of the response
             continuation.resume(summarized)
         }
