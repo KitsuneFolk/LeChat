@@ -261,6 +261,8 @@ class MainScreen : Fragment() {
                     override fun onDrawerStateChanged(newState: Int) {
                         if (newState == DrawerLayout.STATE_DRAGGING) {
                             swipeBackFragment.setScrollingEnabled(false)
+                        } else if (newState == DrawerLayout.STATE_IDLE) {
+                            swipeBackFragment.setScrollingEnabled(true)
                         }
                     }
                 }
