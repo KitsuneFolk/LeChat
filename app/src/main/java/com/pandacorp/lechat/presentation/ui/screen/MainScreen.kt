@@ -215,7 +215,10 @@ class MainScreen : Fragment() {
                 // Summarize only once by checking if the title is default
                 if (chatsViewModel.currentChat.value?.title == ChatItem.defaultTitle) {
                     if (PreferenceHandler.createTitleByAI) {
-                        title = messagesViewModel.summarizeChat(it)
+                        val tempTitle = messagesViewModel.summarizeChat(it)
+                        if (tempTitle.isNotBlank()) { // Might return empty string if server error occurred
+                            title = tempTitle
+                        }
                     }
                 }
                 val chat = chatsViewModel.currentChat.value!!.copy(title = title, messages = it)
