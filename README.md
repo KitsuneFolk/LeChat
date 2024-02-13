@@ -5,6 +5,18 @@ It offers chat history, multiple chat models that are available at [api.together
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+## Images
+<p float="left">
+    <img src=".github/images/MainScreen.png" width="200" height="340" />
+    <img src=".github/images/DrawerLayout.png" width="200" height="340" />
+    <img src=".github/images/BottomMenu.png" width="200" height="340" />
+    <img src=".github/images/Models.png" width="200" height="340" />
+    <img src=".github/images/SettingsScreen.png" width="200" height="340" />
+    <img src=".github/images/SettingsScreen_BlueTheme.png" width="200" height="340" />
+    <img src=".github/images/SettingsScreen_PurpleTheme.png" width="200" height="340" />
+    <img src=".github/images/SettingsScreen_ThemesDialog.png" width="200" height="340" />
+</p>
+
 ## To run this App follow these steps:
 
 1. Download APK from the releases tab
