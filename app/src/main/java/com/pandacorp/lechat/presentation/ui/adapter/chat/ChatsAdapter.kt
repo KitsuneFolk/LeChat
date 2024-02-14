@@ -13,6 +13,7 @@ class ChatsAdapter : ListAdapter<ChatItem, ChatsAdapter.ViewHolder>(DiffCallback
     companion object {
         const val PAYLOAD_TITLE = "title"
     }
+
     private class DiffCallback : DiffUtil.ItemCallback<ChatItem>() {
         override fun areItemsTheSame(oldItem: ChatItem, newItem: ChatItem): Boolean = oldItem.id == newItem.id
 
