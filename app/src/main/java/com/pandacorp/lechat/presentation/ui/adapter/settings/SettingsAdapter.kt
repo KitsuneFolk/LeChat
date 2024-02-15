@@ -29,15 +29,15 @@ class SettingsAdapter(
         if (view == null) view = LayoutInflater.from(context).inflate(R.layout.item_settings, parent, false)!!
         val listItem = getItem(position)!!
         view.apply {
-            findViewById<ImageView>(R.id.ListItemImageView).apply {
+            findViewById<ImageView>(R.id.imageView).apply {
                 setImageDrawable(listItem.drawable)
             }
-            findViewById<ConstraintLayout>(R.id.ListItemLayout).apply {
+            findViewById<ConstraintLayout>(R.id.root).apply {
                 setOnClickListener {
                     onListItemClickListener?.onClick(listItem)
                 }
             }
-            findViewById<TextView>(R.id.ListItemTextView).apply {
+            findViewById<TextView>(R.id.textView).apply {
                 text = listItem.title
             }
         }
