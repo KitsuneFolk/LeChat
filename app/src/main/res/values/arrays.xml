@@ -28,6 +28,8 @@
     <string-array name="Models">
         <item>01-ai Yi Chat (34B)</item>
         <item>Chronos Hermes (13B)</item>
+        <item>Deepseek Coder Instruct (33B)</item>
+        <item>Platypus2 Instruct (70B)</item>
         <item>DiscoLM Mixtral 8x7b</item>
         <item>MythoMax-L2 (13B)</item>
         <item>Vicuna v1.5 (13B)</item>
@@ -50,6 +52,12 @@
         <item>OpenChat 3.5</item>
         <item>OpenOrca Mistral (7B) 8K</item>
         <item>Qwen-Chat (7B)</item>
+        <item>Qwen 1.5 Chat (0.5B)</item>
+        <item>Qwen 1.5 Chat (1.8B)</item>
+        <item>Qwen 1.5 Chat (4B)</item>
+        <item>Qwen 1.5 Chat (7B)</item>
+        <item>Qwen 1.5 Chat (14B)</item>
+        <item>Qwen 1.5 Chat (72B)</item>
         <item>Snorkel Mistral PairRM DPO</item>
         <item>Alpaca (7B)</item>
         <item>Falcon Instruct (40B)</item>
@@ -75,6 +83,8 @@
     <string-array name="Models_values" translatable="false">
         <item>zero-one-ai/Yi-34B-Chat</item>
         <item>Austism/chronos-hermes-13b</item>
+        <item>deepseek-ai/deepseek-coder-33b-instruct</item>
+        <item>garage-bAInd/Platypus2-70B-instruct</item>
         <item>DiscoResearch/DiscoLM-mixtral-8x7b-v2</item>
         <item>Gryphe/MythoMax-L2-13b</item>
         <item>lmsys/vicuna-13b-v1.5</item>
@@ -97,6 +107,12 @@
         <item>openchat/openchat-3.5-1210</item>
         <item>Open-Orca/Mistral-7B-OpenOrca</item>
         <item>togethercomputer/Qwen-7B-Chat</item>
+        <item>Qwen/Qwen1.5-0.5B-Chat</item>
+        <item>Qwen/Qwen1.5-1.8B-Chat</item>
+        <item>Qwen/Qwen1.5-4B-Chat</item>
+        <item>Qwen/Qwen1.5-7B-Chat</item>
+        <item>Qwen/Qwen1.5-14B-Chat</item>
+        <item>Qwen/Qwen1.5-72B-Chat</item>
         <item>snorkelai/Snorkel-Mistral-PairRM-DPO</item>
         <item>togethercomputer/alpaca-7b</item>
         <item>togethercomputer/falcon-40b-instruct</item>
