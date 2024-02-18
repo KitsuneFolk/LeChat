@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/dropsy_white_space_margin">
+
+    <TextView
+        android:id="@+id/txt_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        tools:text="Label" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dropsy_ic_check"
+        android:visibility="gone"
+        tools:visibility="visible" />
+</LinearLayout>

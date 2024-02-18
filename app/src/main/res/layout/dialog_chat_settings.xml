@@ -84,37 +84,23 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/modelSpinnerCardView"
+    <com.pandacorp.dropspinner.DropDownView
+        android:id="@+id/modelSpinner"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="center"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:clickable="true"
-        android:focusable="true"
+        android:backgroundTint="?colorSurface"
+        android:minHeight="48dp"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="6dp"
+        app:dropsyItems="@array/Models"
+        app:dropsyLabelColor="?colorOnSurface"
+        app:dropsySelector="?android:textColor"
+        app:dropsyValueColor="?colorOnSurface"
         app:rippleColor="?rippleColor"
-        app:strokeColor="?inactiveStrokeColor">
-
-        <com.skydoves.powerspinner.PowerSpinnerView
-            android:id="@+id/modelSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:hint="@string/model"
-            android:textSize="14sp"
-            app:spinner_arrow_animate="true"
-            app:spinner_arrow_gravity="end"
-            app:spinner_divider_show="false"
-            app:spinner_item_height="46dp"
-            app:spinner_popup_background="@drawable/colorbackground_rounded_rectangle"
-            app:spinner_popup_elevation="14dp"
-            app:spinner_popup_max_height="300dp"
-            app:spinner_selected_item_background="@drawable/cpd_rounded_rectangle" />
-    </com.google.android.material.card.MaterialCardView>
+        app:strokeColor="?inactiveStrokeColor"
+        app:strokeWidth="1dp" />
 </LinearLayout>

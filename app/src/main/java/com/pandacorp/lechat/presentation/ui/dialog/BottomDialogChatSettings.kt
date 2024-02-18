@@ -9,16 +9,12 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.pandacorp.lechat.R
 import com.pandacorp.lechat.databinding.DialogChatSettingsBinding
-import com.pandacorp.lechat.presentation.ui.adapter.spinner.SpinnerAdapter
 import com.pandacorp.lechat.utils.PreferenceHandler
 import com.pandacorp.lechat.utils.getArray
 
 class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
     private val binding: DialogChatSettingsBinding by lazy {
         DialogChatSettingsBinding.inflate(layoutInflater)
-    }
-    private val modelsAdapter = SpinnerAdapter(binding.modelSpinner).apply {
-        setItems(getArray(R.array.Models).toList())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,13 +24,7 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
         binding.temperatureInputEditText.setText(PreferenceHandler.temperature.toString())
         binding.frequencyPenaltyInputEditText.setText(PreferenceHandler.frequencyPenalty.toString())
         binding.topPInputEditText.setText(PreferenceHandler.topP.toString())
-        binding.modelSpinnerCardView.setOnClickListener {
-            binding.modelSpinner.showOrDismiss()
-        }
-        binding.modelSpinner.isClickable = false
-        binding.modelSpinner.setSpinnerAdapter(modelsAdapter)
-        binding.modelSpinner.selectItemByIndex(getArray(R.array.Models_values).indexOf(PreferenceHandler.modelValue))
-        binding.modelSpinner.lifecycleOwner = this
+        binding.modelSpinner.setSelectedItem(getArray(R.array.Models_values).indexOf(PreferenceHandler.modelValue))
 
         setOnDismissListener {
             val temperature = binding.temperatureInputEditText.text.toString().toFloatOrNull()
@@ -58,7 +48,6 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
             val modelIndex = binding.modelSpinner.selectedIndex
             val modelValue = getArray(R.array.Models_values)[modelIndex]
             PreferenceHandler.modelValue = modelValue
-            binding.modelSpinner.dismiss()
         }
     }
 

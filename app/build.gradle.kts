@@ -59,4 +59,5 @@ dependencies {
     ksp("androidx.room:room-compiler:2.6.1")
 
     implementation(project(":openai-kotlin"))
+    implementation(project(":DropSpinner"))
 }
