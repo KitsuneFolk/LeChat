@@ -47,10 +47,11 @@
         app:el_parallax="0.5"
         tools:el_expanded="true">
 
-        <ListView
-            android:id="@+id/listView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/dropsy_item_drop_down" />
     </net.cachapa.expandablelayout.ExpandableLayout>
 </LinearLayout>

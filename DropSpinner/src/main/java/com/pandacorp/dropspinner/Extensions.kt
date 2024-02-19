@@ -3,24 +3,6 @@ package com.pandacorp.dropspinner
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
-import android.view.View
-import android.widget.ListView
-
-fun ListView.setHeightBasedOnChildren() {
-    val listAdapter = adapter ?: return
-    var totalHeight = 0
-    val desiredWidth = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.UNSPECIFIED)
-    val maxCount = if (listAdapter.count > 4) 4 else listAdapter.count
-    for (i in 0 until maxCount) {
-        val listItem = listAdapter.getView(i, null, this)
-        listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED)
-        totalHeight += listItem.measuredHeight
-    }
-    val params = layoutParams
-    params.height = totalHeight + dividerHeight * (listAdapter.count - 1)
-    layoutParams = params
-    requestLayout()
-}
 
 /**
  * A compatibility wrapper around Bundle's `getParcelableExtra()` method that allows
