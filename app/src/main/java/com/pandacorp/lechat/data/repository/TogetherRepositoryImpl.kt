@@ -7,12 +7,13 @@ import com.aallam.openai.client.OpenAI
 import com.aallam.openai.client.OpenAIConfig
 import com.aallam.openai.client.OpenAIHost
 import com.aallam.openai.client.RetryStrategy
-import com.pandacorp.lechat.client
 import com.pandacorp.lechat.data.mapper.MessagesMapper
 import com.pandacorp.lechat.domain.model.MessageItem
 import com.pandacorp.lechat.domain.repository.TogetherRepository
 import com.pandacorp.lechat.presentation.ui.adapter.suggestions.SuggestionItem
 import com.pandacorp.lechat.utils.Constants
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.okhttp.OkHttp
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
@@ -32,6 +33,14 @@ class TogetherRepositoryImpl(private val messagesMapper: MessagesMapper) : Toget
         topP: Float?
     ): Flow<ChatCompletionChunk> {
         val host = OpenAIHost(baseUrl = "https://api.together.xyz")
+        // Configuration needed to run openai-kotlin
+        val client = HttpClient(OkHttp) {
+            engine {
+                config {
+                    followRedirects(true)
+                }
+            }
+        }
         val config = OpenAIConfig(
             host = host,
             token = Constants.apiKey.value!!,
