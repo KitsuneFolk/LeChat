@@ -20,27 +20,27 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.maxTokensInputEditText.setText(PreferenceHandler.maxTokens.toString())
-        binding.temperatureInputEditText.setText(PreferenceHandler.temperature.toString())
-        binding.frequencyPenaltyInputEditText.setText(PreferenceHandler.frequencyPenalty.toString())
-        binding.topPInputEditText.setText(PreferenceHandler.topP.toString())
+        binding.maxTokensEditText.setText(PreferenceHandler.maxTokens.toString())
+        binding.temperatureEditText.setText(PreferenceHandler.temperature.toString())
+        binding.frequencyPenaltyEditText.setText(PreferenceHandler.frequencyPenalty.toString())
+        binding.topPEditText.setText(PreferenceHandler.topP.toString())
         binding.modelSpinner.setSelectedItem(getArray(R.array.Models_values).indexOf(PreferenceHandler.modelValue))
 
         setOnDismissListener {
-            val temperature = binding.temperatureInputEditText.text.toString().toFloatOrNull()
+            val temperature = binding.temperatureEditText.text.toString().toFloatOrNull()
             if (temperature != null) {
                 PreferenceHandler.temperature = temperature
             }
 
-            var maxTokens = binding.maxTokensInputEditText.text.toString().toIntOrNull()
+            var maxTokens = binding.maxTokensEditText.text.toString().toIntOrNull()
             maxTokens = maxOf(maxTokens ?: 0, 0)
             PreferenceHandler.maxTokens = maxTokens
 
-            val frequencyPenalty = binding.frequencyPenaltyInputEditText.text.toString().toFloatOrNull()
+            val frequencyPenalty = binding.frequencyPenaltyEditText.text.toString().toFloatOrNull()
             if (frequencyPenalty != null) {
                 PreferenceHandler.frequencyPenalty = frequencyPenalty
             }
-            val topP = binding.topPInputEditText.text.toString().toFloatOrNull()
+            val topP = binding.topPEditText.text.toString().toFloatOrNull()
             if (topP != null) {
                 PreferenceHandler.topP = topP
             }
