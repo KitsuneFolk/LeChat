@@ -39,7 +39,7 @@ internal class RecyclerViewAdapter : ListAdapter<DropDownItem, RecyclerViewAdapt
             }
 
             binding.root.setOnClickListener {
-                onItemClickListener(adapterPosition)
+                onItemClickListener(bindingAdapterPosition)
             }
 
             bindText(item.text)
