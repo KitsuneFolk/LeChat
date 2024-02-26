@@ -11,10 +11,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.pandacorp.lechat.dropspinner.R
@@ -31,6 +33,9 @@ class DropDownView @JvmOverloads constructor(
 
     private lateinit var items: List<DropDownItem>
     private lateinit var adapter: RecyclerViewAdapter
+    private val editText: EditText by lazy {
+        LayoutInflater.from(context).inflate(R.layout.edit_text_item, this, false) as EditText
+    }
     private val expandableLayout: ExpandableLayout
     private val recyclerView: RecyclerView
     private val imageArrow: AppCompatImageView
@@ -67,10 +72,19 @@ class DropDownView @JvmOverloads constructor(
         setOnClickListener(this)
     }
 
-    fun setSelectedItem(position: Int) {
-        val item = items[position]
-        value.text = item.text
-        adapter.setSelection(position, item)
+    fun setSelectedItem(value: String) {
+        val item = items.find { it.text == value }
+        if (item == null) { // The item is entered from the EditText
+            this.value.text = value
+        } else {
+            val position = items.indexOf(item)
+            adapter.setSelection(position, item)
+            this.value.text = item.text
+        }
+    }
+
+    fun getEditTextValue(): String {
+        return editText.text.toString()
     }
 
     override fun onClick(v: View?) {
@@ -184,11 +198,13 @@ class DropDownView @JvmOverloads constructor(
         adapter.onItemClickListener = { position ->
             val item = items[position]
             value.text = item.text
+            editText.setText("")
             adapter.setSelection(position, item)
             hideListView()
         }
         adapter.submitList(items)
-        recyclerView.adapter = adapter
+        // Use ConcatAdapter to show the EditText that's scrollable inside of the RecyclerView
+        recyclerView.adapter = ConcatAdapter(ViewAdapter(editText), adapter)
         // Fix inability to scroll from bottom to top
         recyclerView.setOnTouchListener { v, event ->
             when (event.action) {

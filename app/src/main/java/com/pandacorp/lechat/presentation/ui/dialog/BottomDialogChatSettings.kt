@@ -24,7 +24,7 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
         binding.temperatureEditText.setText(PreferenceHandler.temperature.toString())
         binding.frequencyPenaltyEditText.setText(PreferenceHandler.frequencyPenalty.toString())
         binding.topPEditText.setText(PreferenceHandler.topP.toString())
-        binding.modelSpinner.setSelectedItem(getArray(R.array.Models_values).indexOf(PreferenceHandler.modelValue))
+        binding.modelSpinner.setSelectedItem(PreferenceHandler.modelValue)
 
         setOnDismissListener {
             val temperature = binding.temperatureEditText.text.toString().toFloatOrNull()
@@ -45,8 +45,11 @@ class BottomDialogChatSettings(context: Context) : BottomSheetDialog(context) {
                 PreferenceHandler.topP = topP
             }
 
-            val modelIndex = binding.modelSpinner.selectedIndex
-            val modelValue = getArray(R.array.Models_values)[modelIndex]
+            var modelValue = binding.modelSpinner.getEditTextValue()
+            // If the EditText is empty, then the model is picked from the spinner
+            if (modelValue.isEmpty()) {
+                modelValue = getArray(R.array.Models_values)[binding.modelSpinner.selectedIndex]
+            }
             PreferenceHandler.modelValue = modelValue
         }
     }
